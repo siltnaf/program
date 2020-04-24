@@ -1,0 +1,69 @@
+C51 COMPILER V9.54   RS_232                                                                04/23/2020 20:27:48 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE RS_232
+OBJECT MODULE PLACED IN RS-232.obj
+COMPILER INVOKED BY: c:\Keil_v5\C51\BIN\C51.EXE Public\src\RS-232.c OMF2 ROM(COMPACT) OPTIMIZE(8,SPEED) BROWSE DEBUG PRI
+                    -NT(.\RS-232.lst) TABS(2) OBJECT(RS-232.obj)
+
+line level    source
+
+   1           #include "../../config.h"
+   2          #include "../inc/RS-232.h"
+   3          
+   4          // AT89S51中断
+   5          // 中断描述       中断号        中断入口地址       
+   6          // 外部中断0(INT0)    0         0003H
+   7          // 定时/计数器0(T1)   1         000BH
+   8          // 外部中断1(INT1)    2         0013H
+   9          // 定时/计数器1(T1)   3         001BH
+  10          // 串行口中断(RI/TI)  4           0023H
+  11          // AT89S52特有中断
+  12          // 定时/计数器2(T2)   5         002BH
+  13          
+  14          void uart_initial(void)
+  15          {
+  16   1        // SCON: 模式1, 8-bit UART, 使能接收  
+  17   1        SCON = SCON_UART_MODE_1 | SCON_UART_REN_ENABLE;
+  18   1      
+  19   1        // 波特率加倍
+  20   1        PCON |= PCON_UART_SMOD_ENABLE;
+  21   1        
+  22   1        // 定时器1工作于模式2
+  23   1        TMOD |= TMOD_TIMER1_MODE_2;
+  24   1      
+  25   1        // 波特率9600初值
+  26   1        TH1 = 0xFA; 
+  27   1        TL1 = 0xFF;
+  28   1          //AUXR |= 0x40;
+  29   1      
+  30   1        TI = 0;
+  31   1        // 启动定时器1
+  32   1        TR1 = 1;
+  33   1      
+  34   1        // 打开总中断
+  35   1        EA = 1; 
+  36   1      
+  37   1        // 打开串口中断
+  38   1        ES = 1; 
+  39   1      } 
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     24    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+   EDATA SIZE       =   ----    ----
+   HDATA SIZE       =   ----    ----
+   XDATA CONST SIZE =   ----    ----
+   FAR CONST SIZE   =   ----    ----
+END OF MODULE INFORMATION.
+
+C51 COMPILER V9.54   RS_232                                                                04/23/2020 20:27:48 PAGE 2   
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

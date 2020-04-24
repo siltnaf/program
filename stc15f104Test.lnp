@@ -1,0 +1,7 @@
+"Main.obj",
+"STARTUP.obj",
+"Timer.obj",
+"Delay.obj",
+"init.obj" 
+TO "stc15f104Test" 
+
