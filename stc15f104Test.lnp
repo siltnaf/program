@@ -1,7 +1,7 @@
 "Main.obj",
 "STARTUP.obj",
-"Timer.obj",
 "Delay.obj",
-"init.obj" 
+"init.obj",
+"process.obj" 
 TO "stc15f104Test" 
 

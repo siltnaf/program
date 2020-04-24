@@ -1,0 +1,73 @@
+C51 COMPILER V9.54   PROCESS                                                               04/25/2020 03:29:20 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE PROCESS
+OBJECT MODULE PLACED IN process.obj
+COMPILER INVOKED BY: c:\Keil_v5\C51\BIN\C51.EXE Public\src\process.c OMF2 ROM(COMPACT) OPTIMIZE(8,SPEED) BROWSE DEBUG PR
+                    -INT(.\process.lst) TABS(2) OBJECT(process.obj)
+
+line level    source
+
+   1          
+   2          #include "./public/inc/config.h"  
+   3          #include "./public/inc/delay.h"  
+   4          #include "./public/inc/init.h"
+   5          #include "./public/inc/process.h"
+   6          #include "STC15F104E.h"
+   7          
+   8          
+   9          
+  10          
+  11          
+  12          
+  13          
+  14          void Process_UV()
+  15          {
+  16   1        
+  17   1      
+  18   1      }
+  19          
+  20          void Process_O3()
+  21          {
+  22   1      
+  23   1      }
+  24          
+  25          void Process_BUZ()
+  26          {
+  27   1      
+  28   1      }
+  29          
+  30          
+  31          void Process_LED()
+  32          {
+  33   1      
+  34   1      }
+  35          
+  36          
+  37          void Process_FAN()
+  38            
+  39          {
+  40   1        if (Fan_on==1) FAN=1; else FAN=0;
+  41   1        
+  42   1      }
+  43          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     17    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+   EDATA SIZE       =   ----    ----
+C51 COMPILER V9.54   PROCESS                                                               04/25/2020 03:29:20 PAGE 2   
+
+   HDATA SIZE       =   ----    ----
+   XDATA CONST SIZE =   ----    ----
+   FAR CONST SIZE   =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

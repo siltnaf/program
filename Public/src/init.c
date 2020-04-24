@@ -1,26 +1,25 @@
 
 #include "./public/inc/config.h" 
-#include "./public/inc/Timer.h" 
 #include "./public/inc/delay.h"  
 #include "./public/inc/init.h"
-
+#include "./public/inc/process.h"
 #include "STC15F104E.h"
 
 
 void IO_Init(void)
 {
   
-	//                 P3M1   P3M0
-	//P30(BUZ)->CMOS     0      1
-	//P31(LED)->OUTPUT   0      0
-	//P32(SW)->INPUT     1      0
-	//P33(O3)->OUTPUT    0      0
-	//P34(UV)->CMOS      0      1
-	//P35(FAN)->OUTPUT   0      0
+	//               			  P3M1   P3M0
+	//P30(BUZ)->CMOS     			0      1
+	//P31(LED)->OUTPUT   			0      0
+	//P32(SW)->INPUT     			1      0
+	//P33(O3)->OUTPUT    			0      0
+	//P34(UV)->CMOS      			0      1
+	//P35(FAN)->open drain    1      1
 	
 	
-	P3M1 = 0x04;
-  P3M0 = 0x11;
+	P3M1 = 0x24;
+  P3M0 = 0x31;
 	
 }
 
@@ -63,5 +62,9 @@ void InitExtInterrupt (void)
 
 void InitParameter(void )
 {
-
+	UV=0;
+	state=standby_mode;
+	switch_state=0;
+	process_time=0;
+	buz_time=0;
 }

@@ -2,7 +2,7 @@
 #include "./public/inc/Timer.h" 
 #include "./public/inc/delay.h"  
 #include "./public/inc/init.h"
-
+#include "./public/inc/process.h"
 
 // AT89S51中断
 // 中断描述				中断号				中断入口地址			 
