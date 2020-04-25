@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   MAIN                                                                  04/26/2020 04:58:28 PAGE 1   
+C51 COMPILER V9.54   MAIN                                                                  04/26/2020 05:45:53 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
@@ -62,7 +62,7 @@ line level    source
   53   1      
   54   1      
   55   1        
-C51 COMPILER V9.54   MAIN                                                                  04/26/2020 04:58:28 PAGE 2   
+C51 COMPILER V9.54   MAIN                                                                  04/26/2020 05:45:53 PAGE 2   
 
   56   1      }
   57                
@@ -126,7 +126,7 @@ line level    source
  115   2                          O3_level=0;
  116   2                          UV_on=1;
  117   2                          Fan_on=1;
-C51 COMPILER V9.54   MAIN                                                                  04/26/2020 04:58:28 PAGE 3   
+C51 COMPILER V9.54   MAIN                                                                  04/26/2020 05:45:53 PAGE 3   
 
  118   2                          if (Time_min>time_5min) 
  119   2                          {
@@ -190,7 +190,7 @@ line level    source
  177   2          Process_BUZ();
  178   2          Process_O3();
  179   2          
-C51 COMPILER V9.54   MAIN                                                                  04/26/2020 04:58:28 PAGE 4   
+C51 COMPILER V9.54   MAIN                                                                  04/26/2020 05:45:53 PAGE 4   
 
  180   2        } 
  181   1      }
@@ -237,37 +237,39 @@ line level    source
  222   2        //P33(O3)->OUTPUT         0      0
  223   2        //P34(UV)->CMOS           0      1
  224   2        //P35(FAN)->INPUT         1      0
- 225   2        //P31 as CMOS
+ 225   2            
  226   2            
- 227   2            P3M1 &=0xfd;                //P3M1 &=0b11111101;          
- 228   2            P3M0 |=0x02;                //P3M0 |=0b00000010;
- 229   2            
- 230   2            BUZ=~BUZ;
- 231   2            LED=~BUZ;
- 232   2          }
- 233   1          else 
- 234   1          { 
- 235   2        //                      P3M1   P3M0
- 236   2        //P30(BUZ)->CMOS          0      1
- 237   2        //P31(LED/BUZ)->INPUT     1      0
- 238   2        //P32(SW)->INPUT          1      0
- 239   2        //P33(O3)->OUTPUT         0      0
- 240   2        //P34(UV)->CMOS           0      1
- 241   2        //P35(FAN)->INPUT         1      0
-C51 COMPILER V9.54   MAIN                                                                  04/26/2020 04:58:28 PAGE 5   
+ 227   2        //P30 as CMOS
+ 228   2            
+ 229   2            P3M1 &=0xfe;                //P3M1 &=0b11111110;          
+ 230   2            P3M0 |=0x01;                //P3M0 |=0b00000001;
+ 231   2            
+ 232   2            BUZ=~BUZ;
+ 233   2            if (BUZ==1) LED=0;else LED=1;
+ 234   2          }
+ 235   1          else 
+ 236   1          { 
+ 237   2        //                      P3M1   P3M0
+ 238   2        //P30(BUZ)->INPUT         1      0
+ 239   2        //P31(LED/BUZ)->CMOS      0      1
+ 240   2        //P32(SW)->INPUT          1      0
+ 241   2        //P33(O3)->OUTPUT         0      0
+C51 COMPILER V9.54   MAIN                                                                  04/26/2020 05:45:53 PAGE 5   
 
- 242   2            
- 243   2          //P31 as high-Z
+ 242   2        //P34(UV)->CMOS           0      1
+ 243   2        //P35(FAN)->INPUT         1      0
  244   2            
- 245   2          P3M1 |=0x02;                  //P3M1 |=0b00000010;           
- 246   2          P3M0 &=0xfd;                  //P3M0 &=0b11111101;
- 247   2      
- 248   2          }
- 249   1      }
+ 245   2          //P30 as high-Z
+ 246   2            
+ 247   2          P3M1 |=0x01;                  //P3M1 |=0b00000001;           
+ 248   2          P3M0 &=0xfe;                  //P3M0 &=0b11111110;
+ 249   2      
+ 250   2          }
+ 251   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    455    ----
+   CODE SIZE        =    459    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

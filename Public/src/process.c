@@ -78,8 +78,9 @@ void Process_BUZ()
 
 void Process_LED()
 {
-
-switch (LED_type)
+if (Beep==0)
+{
+	switch (LED_type)
 			{
 				case 0:			LED=0;
 										break;
@@ -89,7 +90,7 @@ switch (LED_type)
 										if (Time_sec%2==0) LED=1;else LED=0;
 										break;
 			}	
-	
+}
 }
 
 
@@ -99,7 +100,7 @@ void Process_FAN()
 
 		//P35 as output
 	//               			  P3M1   P3M0
-	//P30(BUZ)->CMOS     			0      1
+	//P30(BUZ)->INPUT    			1      1
 	//P31(LED/BUZ)->CMOS   		0      1
 	//P32(SW)->INPUT     			1      0
 	//P33(O3)->OUTPUT    			0      0
