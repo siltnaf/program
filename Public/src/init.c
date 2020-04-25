@@ -68,6 +68,8 @@ void InitParameter(void )
   Time_ms=0;
 	Time_sec=0;
 	Time_min=0;
+	switch_update=0;
+	key_holdtime=0;
 	Timer_update=0;
 	EA=1;
 }

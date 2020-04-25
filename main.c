@@ -7,30 +7,51 @@
 #include "./public/inc/process.h"
 
 volatile uint8 state,next_state,switch_state,switch_update;
-volatile uint8 BUZ_on, UV_on,Fan_on, LED_type, O3_level, USB_charge;
-volatile uint16 process_time,buz_time;
+volatile uint8 BUZ_on, UV_on,Fan_on, O3_level,LED_type;
+volatile uint16 process_time,buz_time,key_holdtime;
 volatile uint16 Time_ms,Time_sec,Time_min;
 volatile uint8 Timer_update;
 
-void Update_switch()
+
+void Check_switch()
 {
-	
-	if (switch_update==1)
-		switch (switch_state)
+		if (key_holdtime>press_time) 
+		{
+			switch_state++;
+			if (switch_state>2) switch_state=0;
+		 
+			
+			switch (switch_state)
 			{
-				case 0:			state=standby_mode;
+				case 0:			
+										
+										state=standby_mode;
 										break;
-				case 1:			state=O3_mode;
+				case 1:			
+										
+										state=O3_mode;
 										break;
 				case 2: 		
+									
 										Time_ms=0;
 										Time_sec=0;
 										Time_min=0;
 										state=UVO3_mode;
 										break;
 			}	
-	switch_update=0;
-	if (switch_state>2) switch_state=0;
+			
+			
+			
+			
+			
+			switch_update=0;
+			key_holdtime=0;
+		}		
+	
+ 
+		
+
+
 	
 }
 			
@@ -50,10 +71,10 @@ void State_process()
 											
 							
 										BUZ_on = 0;
-										LED_type = 0;
 										O3_level  = 0;
 										UV_on  = 0;
-										Fan_on = 0;				
+										Fan_on =0;
+										LED_type=0;
 										next_state=standby_mode;
 										break;
 	
@@ -62,7 +83,7 @@ void State_process()
 										LED_type=1;
 										O3_level=1;
 										UV_on=0;
-										if (USB_charge==1) Fan_on=1; else Fan_on=0;
+										if (USB_det==1) Fan_on=1; else Fan_on=0;
 										next_state=O3_mode;
 										break;
 	
@@ -121,16 +142,16 @@ void main(void)
 	InitParameter()	;
 	while(1) 
 	{ 
-	switch_state=2;
-		Update_switch();
+	
+	
+		Check_switch();
 		State_process();
 		
-		
-		
+
 		Process_Timer();
 		Process_FAN();
-		Process_UV();
-		Process_LED();
+//		Process_UV();
+//		Process_LED();
 		Process_BUZ();
 		Process_O3();
 		
@@ -139,9 +160,11 @@ void main(void)
 
 void int0() interrupt 0
 {
-   if ((switch_update==0) && (SW==1))
+
+   if ((switch_update==0)&&(SW==1)) 
 	 {
-			switch_state++;
+			
+			key_holdtime=0;
 			switch_update=1;
 	 }
 }
@@ -156,7 +179,11 @@ void int1() interrupt 2
 void timer0() interrupt 1
 {
 
-
+if (switch_update==1) 
+{
+	key_holdtime++;
+	
+}
 Timer_update=1;
 
 }

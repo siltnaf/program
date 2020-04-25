@@ -1,5 +1,4 @@
 #include "./public/inc/config.h" 
-#include "./public/inc/Timer.h" 
 #include "./public/inc/delay.h"  
 #include "./public/inc/init.h"
 #include "./public/inc/process.h"

@@ -31,11 +31,11 @@ sbit USB_det		=   P3^5;
 #define time_5min				5
 #define time_5s					5
 
-
+#define press_time     100
 
  
 extern volatile uint8 state,next_state,switch_state,switch_update;
-extern volatile uint16 process_time,buz_time;
+extern volatile uint16 process_time,buz_time,key_holdtime;
 extern volatile uint8 BUZ_on, UV_on,Fan_on, LED_type, O3_level, USB_charge;
 extern volatile uint16 Time_ms,Time_sec,Time_min;
 extern volatile uint8 Timer_update;

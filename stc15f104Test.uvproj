@@ -374,11 +374,6 @@
               <FilePath>.\STARTUP.A51</FilePath>
             </File>
             <File>
-              <FileName>Timer.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Public\src\Timer.c</FilePath>
-            </File>
-            <File>
               <FileName>Delay.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Public\src\Delay.c</FilePath>
@@ -387,6 +382,11 @@
               <FileName>init.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Public\src\init.c</FilePath>
+            </File>
+            <File>
+              <FileName>process.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Public\src\process.c</FilePath>
             </File>
           </Files>
         </Group>

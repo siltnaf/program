@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   INIT                                                                  04/25/2020 08:20:45 PAGE 1   
+C51 COMPILER V9.54   INIT                                                                  04/25/2020 18:17:34 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE INIT
@@ -25,11 +25,11 @@ line level    source
   15   1        //P32(SW)->INPUT          1      0
   16   1        //P33(O3)->OUTPUT         0      0
   17   1        //P34(UV)->CMOS           0      1
-  18   1        //P35(FAN)->open drain    1      1
+  18   1        //P35(FAN)->INPUT         1      0
   19   1        
   20   1        
   21   1        P3M1 = 0x24;
-  22   1        P3M0 = 0x31;
+  22   1        P3M0 = 0x11;
   23   1        
   24   1      }
   25          
@@ -62,7 +62,7 @@ line level    source
   52   1      //  EX1=1;    //enable INT1
   53   1      //  PX1=1;
   54   1      //  INT_CLKO |= 0x10;  //enable INT2, falling edge 
-C51 COMPILER V9.54   INIT                                                                  04/25/2020 08:20:45 PAGE 2   
+C51 COMPILER V9.54   INIT                                                                  04/25/2020 18:17:34 PAGE 2   
 
   55   1        
   56   1      }
@@ -80,13 +80,15 @@ line level    source
   68   1        Time_ms=0;
   69   1        Time_sec=0;
   70   1        Time_min=0;
-  71   1        Timer_update=0;
-  72   1        EA=1;
-  73   1      }
+  71   1        switch_update=0;
+  72   1        key_holdtime=0;
+  73   1        Timer_update=0;
+  74   1        EA=1;
+  75   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =     71    ----
+   CODE SIZE        =     79    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
