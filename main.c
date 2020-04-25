@@ -7,10 +7,10 @@
 #include "./public/inc/process.h"
 
 volatile uint8 state,next_state,switch_state,switch_update;
-volatile uint8 BUZ_on, UV_on,Fan_on, O3_level,LED_type;
+volatile uint8   UV_on,Fan_on, O3_level,LED_type;
 volatile uint16 process_time,buz_time,key_holdtime;
 volatile uint16 Time_ms,Time_sec,Time_min;
-volatile uint8 Timer_update;
+volatile uint8 Timer_update,Beep;
 
 
 void Check_switch()
@@ -69,26 +69,38 @@ void State_process()
 	
 	case standby_mode:    
 											
-							
-										BUZ_on = 0;
+	
+										Fan_on=0;
+	
+								
+								 
 										O3_level  = 0;
 										UV_on  = 0;
-										Fan_on =0;
+										 
 										LED_type=0;
 										next_state=standby_mode;
 										break;
 	
 	case O3_mode:				
-										BUZ_on=0;
+					
+
+//												//P35 as input
+//		
+											P3M1 |=0x20;                      	// P3M1 |= 0b00100000;
+											P3M0 &=0xdf;												// P3M0 &= 0b11011111;          
+											if (USB_det==1)	Fan_on=1; else Fan_on=0;
+							
+									
+											
 										LED_type=1;
 										O3_level=1;
 										UV_on=0;
-										if (USB_det==1) Fan_on=1; else Fan_on=0;
+										
 										next_state=O3_mode;
 										break;
 	
 	case UVO3_mode:			
-										BUZ_on=0;
+							 
 										LED_type=2;
 										O3_level=2;
 										UV_on=1;
@@ -98,7 +110,7 @@ void State_process()
 	
 	
 	case UV_mode:	
-										BUZ_on=0;
+								 
 										LED_type=2;
 										O3_level=0;
 										UV_on=1;
@@ -110,12 +122,21 @@ void State_process()
 											Time_sec=0;
 											next_state=BUZ_mode; 
 										}
-											else next_state=UV_mode;
+											else 	next_state=UV_mode;
+											
 										break;
 										
 	case BUZ_mode:
-										BUZ_on=1;
-										if (Time_sec>time_5s) next_state=standby_mode;
+ 
+										Beep=1;
+										delay_ms(250);
+										Beep=0;
+										delay_ms(250);
+										Beep=1;
+										delay_ms(250);
+										Beep=0;
+										next_state=standby_mode;
+											
 										break;
 	
 		}
@@ -137,6 +158,7 @@ void main(void)
 {
 	IO_Init();
 	InitTime0();
+	InitTime2();
 	InitExtInterrupt();
 
 	InitParameter()	;
@@ -175,10 +197,10 @@ void int1() interrupt 2
 }
 
 
-// 定时器0中断处理函数
+ 
 void timer0() interrupt 1
 {
-BUZ=~BUZ;
+
 if (switch_update==1) 
 {
 	key_holdtime++;
@@ -188,3 +210,40 @@ Timer_update=1;
 
 }
 
+void timer2() interrupt 12  
+{
+ if (Beep==1) 
+		{
+			
+	//               			  P3M1   P3M0
+	//P30(BUZ)->CMOS     			0      1
+	//P31(LED/BUZ)->CMOS  		0      1
+	//P32(SW)->INPUT     			1      0
+	//P33(O3)->OUTPUT    			0      0
+	//P34(UV)->CMOS      			0      1
+	//P35(FAN)->INPUT         1      0
+  //P31 as CMOS
+			
+			P3M1 &=0xfd;								//P3M1 &=0b11111101;          
+			P3M0 |=0x02;								//P3M0 |=0b00000010;
+			
+			BUZ=~BUZ;
+			LED=~BUZ;
+		}
+		else 
+		{	
+	//               			  P3M1   P3M0
+	//P30(BUZ)->CMOS     			0      1
+	//P31(LED/BUZ)->INPUT  		1      0
+	//P32(SW)->INPUT     			1      0
+	//P33(O3)->OUTPUT    			0      0
+	//P34(UV)->CMOS      			0      1
+	//P35(FAN)->INPUT         1      0
+			
+		//P31 as high-Z
+			
+		P3M1 |=0x02;									//P3M1 |=0b00000010;           
+		P3M0 &=0xfd;									//P3M0 &=0b11111101;
+
+		}
+}

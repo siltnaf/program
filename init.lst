@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   INIT                                                                  04/25/2020 19:42:31 PAGE 1   
+C51 COMPILER V9.54   INIT                                                                  04/26/2020 04:52:12 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE INIT
@@ -21,7 +21,7 @@ line level    source
   11   1        
   12   1        //                      P3M1   P3M0
   13   1        //P30(BUZ)->CMOS          0      1
-  14   1        //P31(LED)->OUTPUT        0      0
+  14   1        //P31(LED/BUZ)->CMOS      0      1
   15   1        //P32(SW)->INPUT          1      0
   16   1        //P33(O3)->OUTPUT         0      0
   17   1        //P34(UV)->CMOS           0      1
@@ -29,7 +29,7 @@ line level    source
   19   1        
   20   1        
   21   1        P3M1 = 0x24;
-  22   1        P3M0 = 0x11;
+  22   1        P3M0 = 0x13;
   23   1        
   24   1      }
   25          
@@ -46,47 +46,59 @@ line level    source
   36   1      
   37   1      }
   38              
-  39          
-  40          
-  41          
-  42          
-  43          void InitExtInterrupt (void)
-  44          {
-  45   1      
-  46   1        IT0=0;    //detect both falling and rising edge of signal (AC signal)
-  47   1        EX0=1;
-  48   1        PX0=1;
-  49   1      //  IT1=0;    //detect both falling and rising edge of signal  (H1 signal) only rising edge 
-  50   1      //  EX1=1;    //enable INT1
-  51   1      //  PX1=1;
-  52   1      //  INT_CLKO |= 0x10;  //enable INT2, falling edge 
-  53   1        
-  54   1      }
-C51 COMPILER V9.54   INIT                                                                  04/25/2020 19:42:31 PAGE 2   
+  39          void InitTime2(void)
+  40          {
+  41   1          T2L=T2KHZ;        
+  42   1          T2H=T2KHZ>>8;      
+  43   1      
+  44   1          AUXR|=0X10;     
+  45   1          IE2|=0X04;                                                                    
+  46   1              
+  47   1        
+  48   1        
+  49   1      }
+  50          
+  51          
+  52          
+  53          
+  54          void InitExtInterrupt (void)
+C51 COMPILER V9.54   INIT                                                                  04/26/2020 04:52:12 PAGE 2   
 
-  55          
-  56          
-  57          
-  58          
-  59          void InitParameter(void )
-  60          {
-  61   1        UV=0;
-  62   1        state=standby_mode;
-  63   1        switch_state=0;
-  64   1        process_time=0;
-  65   1        buz_time=0;
-  66   1        Time_ms=0;
-  67   1        Time_sec=0;
-  68   1        Time_min=0;
-  69   1        switch_update=0;
-  70   1        key_holdtime=0;
-  71   1        Timer_update=0;
-  72   1        EA=1;
-  73   1      }
+  55          {
+  56   1      
+  57   1        IT0=0;    //detect both falling and rising edge of signal (AC signal)
+  58   1        EX0=1;
+  59   1        PX0=1;
+  60   1      //  IT1=0;    //detect both falling and rising edge of signal  (H1 signal) only rising edge 
+  61   1      //  EX1=1;    //enable INT1
+  62   1      //  PX1=1;
+  63   1      //  INT_CLKO |= 0x10;  //enable INT2, falling edge 
+  64   1        
+  65   1      }
+  66          
+  67          
+  68          
+  69          
+  70          void InitParameter(void )
+  71          {
+  72   1        UV=0;
+  73   1        state=standby_mode;
+  74   1        switch_state=0;
+  75   1        process_time=0;
+  76   1        buz_time=0;
+  77   1        Time_ms=0;
+  78   1        Time_sec=0;
+  79   1        Time_min=0;
+  80   1      
+  81   1        switch_update=0;
+  82   1        key_holdtime=0;
+  83   1        Timer_update=0;
+  84   1        EA=1;
+  85   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =     79    ----
+   CODE SIZE        =     92    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

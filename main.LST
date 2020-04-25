@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   MAIN                                                                  04/25/2020 19:42:31 PAGE 1   
+C51 COMPILER V9.54   MAIN                                                                  04/26/2020 04:52:11 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
@@ -16,10 +16,10 @@ line level    source
    7          #include "./public/inc/process.h"
    8          
    9          volatile uint8 state,next_state,switch_state,switch_update;
-  10          volatile uint8 BUZ_on, UV_on,Fan_on, O3_level,LED_type;
+  10          volatile uint8   UV_on,Fan_on, O3_level,LED_type;
   11          volatile uint16 process_time,buz_time,key_holdtime;
   12          volatile uint16 Time_ms,Time_sec,Time_min;
-  13          volatile uint8 Timer_update;
+  13          volatile uint8 Timer_update,Beep;
   14          
   15          
   16          void Check_switch()
@@ -62,7 +62,7 @@ line level    source
   53   1      
   54   1      
   55   1        
-C51 COMPILER V9.54   MAIN                                                                  04/25/2020 19:42:31 PAGE 2   
+C51 COMPILER V9.54   MAIN                                                                  04/26/2020 04:52:11 PAGE 2   
 
   56   1      }
   57                
@@ -80,133 +80,194 @@ line level    source
   69   2        
   70   2        case standby_mode:    
   71   2                            
-  72   2                    
-  73   2                          BUZ_on = 0;
-  74   2                          O3_level  = 0;
-  75   2                          UV_on  = 0;
-  76   2                          Fan_on =0;
-  77   2                          LED_type=0;
-  78   2                          next_state=standby_mode;
-  79   2                          break;
-  80   2        
-  81   2        case O3_mode:       
-  82   2                          BUZ_on=0;
-  83   2                          LED_type=1;
-  84   2                          O3_level=1;
-  85   2                          UV_on=0;
-  86   2                          if (USB_det==1) Fan_on=1; else Fan_on=0;
-  87   2                          next_state=O3_mode;
-  88   2                          break;
-  89   2        
-  90   2        case UVO3_mode:     
-  91   2                          BUZ_on=0;
-  92   2                          LED_type=2;
-  93   2                          O3_level=2;
-  94   2                          UV_on=1;
-  95   2                          Fan_on=1;
-  96   2                          if (Time_min>time_4min) next_state=UV_mode; else next_state=UVO3_mode;
-  97   2                          break;
-  98   2        
-  99   2        
- 100   2        case UV_mode: 
- 101   2                          BUZ_on=0;
- 102   2                          LED_type=2;
- 103   2                          O3_level=0;
- 104   2                          UV_on=1;
- 105   2                          Fan_on=1;
- 106   2                          if (Time_min>time_5min) 
- 107   2                          {
- 108   3                            buz_time=0;
- 109   3                            Time_ms=0;
- 110   3                            Time_sec=0;
- 111   3                            next_state=BUZ_mode; 
- 112   3                          }
- 113   2                            else next_state=UV_mode;
- 114   2                          break;
- 115   2                          
- 116   2        case BUZ_mode:
- 117   2                          BUZ_on=1;
-C51 COMPILER V9.54   MAIN                                                                  04/25/2020 19:42:31 PAGE 3   
+  72   2        
+  73   2                          Fan_on=0;
+  74   2        
+  75   2                      
+  76   2                       
+  77   2                          O3_level  = 0;
+  78   2                          UV_on  = 0;
+  79   2                           
+  80   2                          LED_type=0;
+  81   2                          next_state=standby_mode;
+  82   2                          break;
+  83   2        
+  84   2        case O3_mode:       
+  85   2                
+  86   2      
+  87   2      //                        //P35 as input
+  88   2      //    
+  89   2                            P3M1 |=0x20;                        // P3M1 |= 0b00100000;
+  90   2                            P3M0 &=0xdf;                        // P3M0 &= 0b11011111;          
+  91   2                            if (USB_det==1) Fan_on=1; else Fan_on=0;
+  92   2                    
+  93   2                        
+  94   2                            
+  95   2                          LED_type=1;
+  96   2                          O3_level=1;
+  97   2                          UV_on=0;
+  98   2                          
+  99   2                          next_state=O3_mode;
+ 100   2                          break;
+ 101   2        
+ 102   2        case UVO3_mode:     
+ 103   2                     
+ 104   2                          LED_type=2;
+ 105   2                          O3_level=2;
+ 106   2                          UV_on=1;
+ 107   2                          Fan_on=1;
+ 108   2                          if (Time_min>time_4min) next_state=UV_mode; else next_state=UVO3_mode;
+ 109   2                          break;
+ 110   2        
+ 111   2        
+ 112   2        case UV_mode: 
+ 113   2                       
+ 114   2                          LED_type=2;
+ 115   2                          O3_level=0;
+ 116   2                          UV_on=1;
+ 117   2                          Fan_on=1;
+C51 COMPILER V9.54   MAIN                                                                  04/26/2020 04:52:11 PAGE 3   
 
- 118   2                          if (Time_sec>time_5s) next_state=standby_mode;
- 119   2                          break;
- 120   2        
- 121   2          }
- 122   1          
- 123   1      state=next_state;
- 124   1      
- 125   1      
- 126   1      }
- 127          
- 128          
- 129          
- 130          
- 131          
- 132          
- 133          
- 134          
- 135          
- 136          void main(void) 
- 137          {
- 138   1        IO_Init();
- 139   1        InitTime0();
- 140   1        InitExtInterrupt();
- 141   1      
- 142   1        InitParameter() ;
- 143   1        while(1) 
- 144   1        { 
- 145   2        
- 146   2        
- 147   2          Check_switch();
- 148   2          State_process();
- 149   2          
- 150   2      
- 151   2          Process_Timer();
- 152   2          Process_FAN();
- 153   2          Process_UV();
- 154   2          Process_LED();
- 155   2          Process_BUZ();
- 156   2          Process_O3();
- 157   2          
- 158   2        } 
- 159   1      }
- 160          
- 161          void int0() interrupt 0
- 162          {
+ 118   2                          if (Time_min>time_5min) 
+ 119   2                          {
+ 120   3                            buz_time=0;
+ 121   3                            Time_ms=0;
+ 122   3                            Time_sec=0;
+ 123   3                            next_state=BUZ_mode; 
+ 124   3                          }
+ 125   2                            else  next_state=UV_mode;
+ 126   2                            
+ 127   2                          break;
+ 128   2                          
+ 129   2        case BUZ_mode:
+ 130   2       
+ 131   2                          Beep=1;
+ 132   2                          delay_ms(250);
+ 133   2                          Beep=0;
+ 134   2                          delay_ms(250);
+ 135   2                          Beep=1;
+ 136   2                          delay_ms(250);
+ 137   2                          Beep=0;
+ 138   2                          next_state=standby_mode;
+ 139   2                            
+ 140   2                          break;
+ 141   2        
+ 142   2          }
+ 143   1          
+ 144   1      state=next_state;
+ 145   1      
+ 146   1      
+ 147   1      }
+ 148          
+ 149          
+ 150          
+ 151          
+ 152          
+ 153          
+ 154          
+ 155          
+ 156          
+ 157          void main(void) 
+ 158          {
+ 159   1        IO_Init();
+ 160   1        InitTime0();
+ 161   1        InitTime2();
+ 162   1        InitExtInterrupt();
  163   1      
- 164   1         if ((switch_update==0)&&(SW==1)) 
- 165   1         {
- 166   2            
- 167   2            key_holdtime=0;
- 168   2            switch_update=1;
- 169   2         }
- 170   1      }
- 171          
- 172          void int1() interrupt 2
- 173          {
- 174   1         
- 175   1      }
- 176          
- 177          
- 178          // 定时器0中断处理函数
- 179          void timer0() interrupt 1
-C51 COMPILER V9.54   MAIN                                                                  04/25/2020 19:42:31 PAGE 4   
+ 164   1        InitParameter() ;
+ 165   1        while(1) 
+ 166   1        { 
+ 167   2        
+ 168   2        
+ 169   2          Check_switch();
+ 170   2          State_process();
+ 171   2          
+ 172   2      
+ 173   2          Process_Timer();
+ 174   2          Process_FAN();
+ 175   2          Process_UV();
+ 176   2          Process_LED();
+ 177   2          Process_BUZ();
+ 178   2          Process_O3();
+ 179   2          
+C51 COMPILER V9.54   MAIN                                                                  04/26/2020 04:52:11 PAGE 4   
 
- 180          {
- 181   1      BUZ=~BUZ;
- 182   1      if (switch_update==1) 
- 183   1      {
- 184   2        key_holdtime++;
- 185   2        
- 186   2      }
- 187   1      Timer_update=1;
- 188   1      
- 189   1      }
- 190          
+ 180   2        } 
+ 181   1      }
+ 182          
+ 183          void int0() interrupt 0
+ 184          {
+ 185   1      
+ 186   1         if ((switch_update==0)&&(SW==1)) 
+ 187   1         {
+ 188   2            
+ 189   2            key_holdtime=0;
+ 190   2            switch_update=1;
+ 191   2         }
+ 192   1      }
+ 193          
+ 194          void int1() interrupt 2
+ 195          {
+ 196   1         
+ 197   1      }
+ 198          
+ 199          
+ 200           
+ 201          void timer0() interrupt 1
+ 202          {
+ 203   1      
+ 204   1      if (switch_update==1) 
+ 205   1      {
+ 206   2        key_holdtime++;
+ 207   2        
+ 208   2      }
+ 209   1      Timer_update=1;
+ 210   1      
+ 211   1      }
+ 212          
+ 213          void timer2() interrupt 12  
+ 214          {
+ 215   1       if (Beep==1) 
+ 216   1          {
+ 217   2            
+ 218   2        //                      P3M1   P3M0
+ 219   2        //P30(BUZ)->CMOS          0      1
+ 220   2        //P31(LED/BUZ)->CMOS      0      1
+ 221   2        //P32(SW)->INPUT          1      0
+ 222   2        //P33(O3)->OUTPUT         0      0
+ 223   2        //P34(UV)->CMOS           0      1
+ 224   2        //P35(FAN)->INPUT         1      0
+ 225   2        //P31 as CMOS
+ 226   2            
+ 227   2            P3M1 &=0xfd;                //P3M1 &=0b11111101;          
+ 228   2            P3M0 |=0x02;                //P3M0 |=0b00000010;
+ 229   2            
+ 230   2            BUZ=~BUZ;
+ 231   2            LED=~BUZ;
+ 232   2          }
+ 233   1          else 
+ 234   1          { 
+ 235   2        //                      P3M1   P3M0
+ 236   2        //P30(BUZ)->CMOS          0      1
+ 237   2        //P31(LED/BUZ)->INPUT     1      0
+ 238   2        //P32(SW)->INPUT          1      0
+ 239   2        //P33(O3)->OUTPUT         0      0
+ 240   2        //P34(UV)->CMOS           0      1
+ 241   2        //P35(FAN)->INPUT         1      0
+C51 COMPILER V9.54   MAIN                                                                  04/26/2020 04:52:11 PAGE 5   
+
+ 242   2            
+ 243   2          //P31 as high-Z
+ 244   2            
+ 245   2          P3M1 |=0x02;                  //P3M1 |=0b00000010;           
+ 246   2          P3M0 &=0xfd;                  //P3M0 &=0b11111101;
+ 247   2      
+ 248   2          }
+ 249   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    394    ----
+   CODE SIZE        =    455    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

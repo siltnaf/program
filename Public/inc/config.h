@@ -12,8 +12,8 @@ sbit FAN 			  =   P3^5;
 sbit USB_det		=   P3^5;
 
 #define MAIN_Fosc   12000000L
-#define T1MS        (65536- MAIN_Fosc/4000)     //1T mode
-
+#define T1MS        (65536- MAIN_Fosc/1000)     //1T mode Timer0
+#define T2KHZ       (65536- MAIN_Fosc/12/4000)     //Timer2
 
 
 #define uint8 unsigned char idata
@@ -32,14 +32,15 @@ sbit USB_det		=   P3^5;
 #define time_4min       4
 #define time_5min				5
 #define time_5s					5
+#define time_1s         1
 
-#define press_time     400
+#define press_time     200
 
  
 extern volatile uint8 state,next_state,switch_state,switch_update;
 extern volatile uint16 process_time,buz_time,key_holdtime;
-extern volatile uint8 BUZ_on, UV_on,Fan_on, LED_type, O3_level, USB_charge;
+extern volatile uint8  UV_on,Fan_on, LED_type, O3_level;
 extern volatile uint16 Time_ms,Time_sec,Time_min;
-extern volatile uint8 Timer_update;
+extern volatile uint8 Timer_update,Beep;
 
 #endif

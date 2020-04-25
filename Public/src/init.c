@@ -11,7 +11,7 @@ void IO_Init(void)
   
 	//               			  P3M1   P3M0
 	//P30(BUZ)->CMOS     			0      1
-	//P31(LED)->OUTPUT   			0      0
+	//P31(LED/BUZ)->CMOS  		0      1
 	//P32(SW)->INPUT     			1      0
 	//P33(O3)->OUTPUT    			0      0
 	//P34(UV)->CMOS      			0      1
@@ -19,7 +19,7 @@ void IO_Init(void)
 	
 	
 	P3M1 = 0x24;
-  P3M0 = 0x11;
+  P3M0 = 0x13;
 	
 }
 
@@ -36,6 +36,17 @@ void InitTime0(void)
 
 }
     
+void InitTime2(void)
+{
+		T2L=T2KHZ;			 	
+		T2H=T2KHZ>>8;      
+
+    AUXR|=0X10;			
+		IE2|=0X04;       	                                                            
+      	
+	
+	
+}
 
 
 
@@ -66,6 +77,7 @@ void InitParameter(void )
   Time_ms=0;
 	Time_sec=0;
 	Time_min=0;
+
 	switch_update=0;
 	key_holdtime=0;
 	Timer_update=0;
