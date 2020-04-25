@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   MAIN                                                                  04/26/2020 04:52:11 PAGE 1   
+C51 COMPILER V9.54   MAIN                                                                  04/26/2020 04:58:28 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
@@ -62,7 +62,7 @@ line level    source
   53   1      
   54   1      
   55   1        
-C51 COMPILER V9.54   MAIN                                                                  04/26/2020 04:52:11 PAGE 2   
+C51 COMPILER V9.54   MAIN                                                                  04/26/2020 04:58:28 PAGE 2   
 
   56   1      }
   57                
@@ -126,7 +126,7 @@ line level    source
  115   2                          O3_level=0;
  116   2                          UV_on=1;
  117   2                          Fan_on=1;
-C51 COMPILER V9.54   MAIN                                                                  04/26/2020 04:52:11 PAGE 3   
+C51 COMPILER V9.54   MAIN                                                                  04/26/2020 04:58:28 PAGE 3   
 
  118   2                          if (Time_min>time_5min) 
  119   2                          {
@@ -190,7 +190,7 @@ line level    source
  177   2          Process_BUZ();
  178   2          Process_O3();
  179   2          
-C51 COMPILER V9.54   MAIN                                                                  04/26/2020 04:52:11 PAGE 4   
+C51 COMPILER V9.54   MAIN                                                                  04/26/2020 04:58:28 PAGE 4   
 
  180   2        } 
  181   1      }
@@ -254,7 +254,7 @@ line level    source
  239   2        //P33(O3)->OUTPUT         0      0
  240   2        //P34(UV)->CMOS           0      1
  241   2        //P35(FAN)->INPUT         1      0
-C51 COMPILER V9.54   MAIN                                                                  04/26/2020 04:52:11 PAGE 5   
+C51 COMPILER V9.54   MAIN                                                                  04/26/2020 04:58:28 PAGE 5   
 
  242   2            
  243   2          //P31 as high-Z

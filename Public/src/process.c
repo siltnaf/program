@@ -56,7 +56,7 @@ void Process_O3()
 		case 0:      O3=0;
 									break;
 		case 1:			 
-									if ((Time_sec%3)==0) O3=~O3;			//enable every 1 out of 3sec
+									if ((Time_sec%3)==0) O3=1;	else O3=0;		//enable every 1 out of 3sec
 			
 									break;
 		case 2:				O3=1;
