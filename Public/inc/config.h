@@ -8,15 +8,16 @@ sbit LED        =   P3^1;
 sbit SW        	=   P3^2;
 sbit O3      		=   P3^3;
 sbit UV       	=   P3^4;
-sbit FAN        =   P3^5;
+sbit FAN 			  =   P3^5;
+sbit USB_det		=   P3^5;
 
-#define MAIN_Fosc   12000000UL
-#define counter_us  1000
+#define MAIN_Fosc   12000000L
+#define T1MS        (65536- MAIN_Fosc/1000)     //1T mode
 
-#define uint8 unsigned char xdata
-#define uint16 unsigned int xdata
-#define uint32 unsigned long xdata
-#define int16 signed int xdata
+#define uint8 unsigned char idata
+#define uint16 unsigned int idata
+#define uint32 unsigned long idata
+#define int16 signed int idata
 
 
 #define standby_mode 	0
@@ -36,7 +37,7 @@ sbit FAN        =   P3^5;
 extern volatile uint8 state,next_state,switch_state,switch_update;
 extern volatile uint16 process_time,buz_time;
 extern volatile uint8 BUZ_on, UV_on,Fan_on, LED_type, O3_level, USB_charge;
-
-
+extern volatile uint16 Time_ms,Time_sec,Time_min;
+extern volatile uint8 Timer_update;
 
 #endif

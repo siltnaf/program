@@ -15,28 +15,26 @@ void IO_Init(void)
 	//P32(SW)->INPUT     			1      0
 	//P33(O3)->OUTPUT    			0      0
 	//P34(UV)->CMOS      			0      1
-	//P35(FAN)->open drain    1      1
+	//P35(FAN)->INPUT         1      0
 	
 	
 	P3M1 = 0x24;
-  P3M0 = 0x31;
+  P3M0 = 0x11;
 	
 }
 
 
 void InitTime0(void)
 {
-	
-	TMOD &= 0xf0;              //clear timer0 mode 
+	TMOD &= 0x00;              //clear timer0 mode 
+	AUXR =0x80 ;           			//1T mode
+	TL0 =T1MS;
+  TH0 =T1MS>>8;
+	TR0 =1;			  
+	ET0 =1;		 
 
 	
-	AUXR =0x00 ;           //timer 0 as 12T mode
-	
-	TH0 =(65536-counter_us)/256;
-  TL0 = (65536-counter_us)%256;
-	
-	TR0 =1;			
-	ET0 =1;			 
+
 	
 	
 	
@@ -50,10 +48,10 @@ void InitExtInterrupt (void)
 	IT0=0;  	//detect both falling and rising edge of signal (AC signal)
 	EX0=1;
 	PX0=1;
-	IT1=0;  	//detect both falling and rising edge of signal  (H1 signal) only rising edge 
-	EX1=1;	  //enable INT1
-	PX1=1;
-	INT_CLKO |= 0x10;  //enable INT2, falling edge 
+//	IT1=0;  	//detect both falling and rising edge of signal  (H1 signal) only rising edge 
+//	EX1=1;	  //enable INT1
+//	PX1=1;
+//	INT_CLKO |= 0x10;  //enable INT2, falling edge 
 	
 }
 
@@ -67,4 +65,9 @@ void InitParameter(void )
 	switch_state=0;
 	process_time=0;
 	buz_time=0;
+  Time_ms=0;
+	Time_sec=0;
+	Time_min=0;
+	Timer_update=0;
+	EA=1;
 }
