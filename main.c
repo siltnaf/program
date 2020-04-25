@@ -215,37 +215,14 @@ void timer2() interrupt 12
  if (Beep==1) 
 		{
 			
-	//               			  P3M1   P3M0
-	//P30(BUZ)->CMOS     			0      1
-	//P31(LED/BUZ)->CMOS  		0      1
-	//P32(SW)->INPUT     			1      0
-	//P33(O3)->OUTPUT    			0      0
-	//P34(UV)->CMOS      			0      1
-	//P35(FAN)->INPUT         1      0
-			
-			
-  //P30 as CMOS
-			
-			P3M1 &=0xfe;								//P3M1 &=0b11111110;          
-			P3M0 |=0x01;								//P3M0 |=0b00000001;
+	
 			
 			BUZ=~BUZ;
 			if (BUZ==1) LED=0;else LED=1;
 		}
 		else 
 		{	
-	//               			  P3M1   P3M0
-	//P30(BUZ)->INPUT    			1      0
-	//P31(LED/BUZ)->CMOS  		0      1
-	//P32(SW)->INPUT     			1      0
-	//P33(O3)->OUTPUT    			0      0
-	//P34(UV)->CMOS      			0      1
-	//P35(FAN)->INPUT         1      0
-			
-		//P30 as high-Z
-			
-		P3M1 |=0x01;									//P3M1 |=0b00000001;           
-		P3M0 &=0xfe;									//P3M0 &=0b11111110;
+			BUZ=0;
 
 		}
 }
