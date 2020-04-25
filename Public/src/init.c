@@ -30,16 +30,14 @@ void InitTime0(void)
 	AUXR =0x80 ;           			//1T mode
 	TL0 =T1MS;
   TH0 =T1MS>>8;
+
 	TR0 =1;			  
 	ET0 =1;		 
 
-	
-
-	
-	
-	
 }
-     
+    
+
+
 
 
 void InitExtInterrupt (void)

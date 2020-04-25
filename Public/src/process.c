@@ -11,8 +11,7 @@
 
 void Process_Timer()
 {
-	
-	
+
 	if (Timer_update==1)
 	{
 		Time_ms++;
@@ -100,7 +99,7 @@ void Process_FAN()
 	{	
 			P3M1 = 0x24;
 			P3M0 = 0x11;
-			UV=0;
+			
 	}
 else 	
 	{
@@ -115,7 +114,7 @@ else
 			
 				P3M1=0x04;
 				P3M0=0x11;
-				UV=1;
+				FAN=1;
 				}
 
 	

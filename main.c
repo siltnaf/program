@@ -150,8 +150,8 @@ void main(void)
 
 		Process_Timer();
 		Process_FAN();
-//		Process_UV();
-//		Process_LED();
+		Process_UV();
+		Process_LED();
 		Process_BUZ();
 		Process_O3();
 		
@@ -178,7 +178,7 @@ void int1() interrupt 2
 // 定时器0中断处理函数
 void timer0() interrupt 1
 {
-
+BUZ=~BUZ;
 if (switch_update==1) 
 {
 	key_holdtime++;

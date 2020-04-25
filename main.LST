@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   MAIN                                                                  04/25/2020 18:17:34 PAGE 1   
+C51 COMPILER V9.54   MAIN                                                                  04/25/2020 19:42:31 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
@@ -62,7 +62,7 @@ line level    source
   53   1      
   54   1      
   55   1        
-C51 COMPILER V9.54   MAIN                                                                  04/25/2020 18:17:34 PAGE 2   
+C51 COMPILER V9.54   MAIN                                                                  04/25/2020 19:42:31 PAGE 2   
 
   56   1      }
   57                
@@ -126,7 +126,7 @@ line level    source
  115   2                          
  116   2        case BUZ_mode:
  117   2                          BUZ_on=1;
-C51 COMPILER V9.54   MAIN                                                                  04/25/2020 18:17:34 PAGE 3   
+C51 COMPILER V9.54   MAIN                                                                  04/25/2020 19:42:31 PAGE 3   
 
  118   2                          if (Time_sec>time_5s) next_state=standby_mode;
  119   2                          break;
@@ -163,8 +163,8 @@ line level    source
  150   2      
  151   2          Process_Timer();
  152   2          Process_FAN();
- 153   2      //    Process_UV();
- 154   2      //    Process_LED();
+ 153   2          Process_UV();
+ 154   2          Process_LED();
  155   2          Process_BUZ();
  156   2          Process_O3();
  157   2          
@@ -190,10 +190,10 @@ line level    source
  177          
  178          // 定时器0中断处理函数
  179          void timer0() interrupt 1
-C51 COMPILER V9.54   MAIN                                                                  04/25/2020 18:17:34 PAGE 4   
+C51 COMPILER V9.54   MAIN                                                                  04/25/2020 19:42:31 PAGE 4   
 
  180          {
- 181   1      
+ 181   1      BUZ=~BUZ;
  182   1      if (switch_update==1) 
  183   1      {
  184   2        key_holdtime++;
@@ -206,7 +206,7 @@ line level    source
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    386    ----
+   CODE SIZE        =    394    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
