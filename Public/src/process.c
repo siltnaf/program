@@ -14,6 +14,12 @@ void Process_Timer()
 
 	if (Timer_update==1)
 	{
+		
+		
+		
+	
+		
+		
 		Time_ms++;
 		Timer_update=0;	
 		if (Time_ms>=1000) 
@@ -53,26 +59,55 @@ void Process_O3()
 {
 	switch (O3_level)
 	{
-		case 0:      O3=0;
+		case 0:      
+									
+									O3=0;
 									break;
 		case 1:			 
-									if ((Time_sec%3)==0) O3=1;	else O3=0;		//enable every 1 out of 3sec
-			
+									switch (Time_sec%4)
+									{
+										case 0,1:						
+																				O3=1;
+																				break;
+										
+										case 2:							
+																				O3=1;	           	//enable every 1 out of 3sec				
+																				break;
+										
+										case 3:						 
+																				O3=0;
+																				break;
+									}									
 									break;
-		case 2:				O3=1;
+		case 2:				
+								
+									O3=1;
 									break;
 	}
 }
 
 void Process_BUZ()
 {
-	if ((key_holdtime>0)&&(key_holdtime<press_time))	Beep=1; else Beep=0;
+//	if ((key_holdtime>0)&&(key_holdtime<press_time))	Beep=1; else Beep=0;
+if (Beep==0) 
+{
+		//P32 as input
+	//               			  P3M1   P3M0
+	//P30(BUZ)->INPUT    			1      1
+	//P31(LED)->CMOS   	    	0      1
+	//P32(SW/BUZ)->INPUT   		1      0
+	//P33(O3)->OUTPUT    			0      0
+	//P34(UV)->CMOS      			0      1
+	//P35(FAN)->OUTPUT        0      0
+				
 
-
-
+	//P3M1 |=0b0000 0100;
+	//P3M0 &=0b1111 1011;
 	
 	
-
+		P3M1 |= 0x04;               //P32 as input  
+		P3M0 &= 0xfb;
+}
 }
 
 
@@ -108,8 +143,8 @@ void Process_FAN()
 	//P35(FAN)->OUTPUT        0      0
 				
 			
-				 P3M1 &=0xdf;                      //P3M1 &=0b11011111;
-				 P3M0 &=0xdf;                      //P3M0 &=0b11011111;
+//				 P3M1 &=0xdf;                      //P3M1 &=0b11011111;
+//				 P3M0 &=0xdf;                      //P3M0 &=0b11011111;
 	
 	
 	

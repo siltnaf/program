@@ -3,17 +3,18 @@
 
 #include "STC15F104E.h"
 
-sbit BUZ       	=   P3^0;
-sbit LED        =   P3^1;
-sbit SW        	=   P3^2;
-sbit O3      		=   P3^3;
-sbit UV       	=   P3^4;
-sbit FAN 			  =   P3^5;
-sbit USB_det		=   P3^5;
+#define VCC_EN		    (P30)           //relay normal open 
+#define BUZ       		(P32)						//AC output for BUZ
+#define LED       		(P31)           //DC output for LED
+#define SW 						(P32)
+#define O3    				(P33)
+#define UV       			(P34)
+#define FAN 					(P35)          //output for FAN
+#define VCC_det	  		(P35)          //input for USB detect
 
 #define MAIN_Fosc   12000000L
 #define T1MS        (65536- MAIN_Fosc/1000)     //1T mode Timer0
-#define T2KHZ       (65536- MAIN_Fosc/12/4000)     //Timer2
+#define T2KHZ       (65536- MAIN_Fosc/12/6000)     //Timer2
 
 
 #define uint8 unsigned char idata
@@ -35,7 +36,8 @@ sbit USB_det		=   P3^5;
 #define time_1s         1
 
 #define press_time     200
-
+#define O3_SEL					1
+#define ION_SEL         0
  
 extern volatile uint8 state,next_state,switch_state,switch_update;
 extern volatile uint16 process_time,buz_time,key_holdtime;

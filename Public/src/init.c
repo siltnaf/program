@@ -10,15 +10,15 @@ void IO_Init(void)
 {
   
 	//               			  P3M1   P3M0
-	//P30(BUZ)->CMOS        	0      1
-	//P31(LED/BUZ)->CMOS  		0      1
-	//P32(SW)->INPUT     			1      0
+	//P30(VCC_EN)->OD        	1      1
+	//P31(LED)->CMOS  				0      1
+	//P32(SW/BUZ)->I/O	   		1/0    0/1        
 	//P33(O3)->OUTPUT    			0      0
 	//P34(UV)->CMOS      			0      1
 	//P35(FAN)->OUTPUT        0      0
 	
 	
-	P3M1 = 0x04;
+	P3M1 = 0x05;
   P3M0 = 0x13;
 	
 }

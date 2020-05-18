@@ -20,11 +20,13 @@ void Check_switch()
 			switch_state++;
 			if (switch_state>2) switch_state=0;
 		 
-			
+			Time_ms=0;
+			Time_sec=0;
+			Time_min=0;
 			switch (switch_state)
 			{
 				case 0:			
-										
+									
 										state=standby_mode;
 										break;
 				case 1:			
@@ -33,9 +35,7 @@ void Check_switch()
 										break;
 				case 2: 		
 									
-										Time_ms=0;
-										Time_sec=0;
-										Time_min=0;
+									
 										state=UVO3_mode;
 										break;
 			}	
@@ -68,12 +68,13 @@ void State_process()
 		{
 	
 	case standby_mode:    
-											
+										
+				
+										VCC_EN=1;
 	
 										Fan_on=0;
 	
-								
-								 
+										
 										O3_level  = 0;
 										UV_on  = 0;
 										 
@@ -82,17 +83,16 @@ void State_process()
 										break;
 	
 	case O3_mode:				
-					
+										
 
 //												//P35 as input
 //		
-											P3M1 |=0x20;                      	// P3M1 |= 0b00100000;
-											P3M0 &=0xdf;												// P3M0 &= 0b11011111;          
-											if (USB_det==1)	Fan_on=1; else Fan_on=0;
-							
-									
+//											P3M1 |=0x20;                      	// P3M1 |= 0b00100000;
+//											P3M0 &=0xdf;												// P3M0 &= 0b11011111;          
+//											if ((VCC_det==0) &&(Time_ms<500)) VCC_EN=0;else VCC_EN=1;
+									  
 											
-										LED_type=1;
+									 LED_type=1;
 										O3_level=1;
 										UV_on=0;
 										
@@ -100,22 +100,38 @@ void State_process()
 										break;
 	
 	case UVO3_mode:			
-							 
-										LED_type=2;
+										
+//												//P35 as input
+//		
+//											P3M1 |=0x20;                      	// P3M1 |= 0b00100000;
+//											P3M0 &=0xdf;												// P3M0 &= 0b11011111;          
+//											if ((VCC_det==0) &&(Time_ms<500)) VCC_EN=0;else VCC_EN=1;
+//	
+									 LED_type=2;
 										O3_level=2;
 										UV_on=1;
 										Fan_on=1;
-										if (Time_min>time_4min) next_state=UV_mode; else next_state=UVO3_mode;
+										if (Time_min>=time_4min) next_state=UV_mode; else next_state=UVO3_mode;
 										break;
 	
 	
 	case UV_mode:	
-								 
-										LED_type=2;
+											
+////												//P35 as input
+////		
+//											P3M1 |=0x20;                      	// P3M1 |= 0b00100000;
+//											P3M0 &=0xdf;												// P3M0 &= 0b11011111;          
+//											if ((VCC_det==0) &&(Time_ms<500)) VCC_EN=0;else VCC_EN=1;
+	
+									LED_type=2;
 										O3_level=0;
 										UV_on=1;
+	
+										
+	
+	
 										Fan_on=1;
-										if (Time_min>time_5min) 
+										if (Time_min>=time_5min) 
 										{
 											buz_time=0;
 											Time_ms=0;
@@ -127,7 +143,8 @@ void State_process()
 										break;
 										
 	case BUZ_mode:
- 
+										
+										 
 										Beep=1;
 										delay_ms(250);
 										Beep=0;
@@ -136,7 +153,7 @@ void State_process()
 										delay_ms(250);
 										Beep=0;
 										next_state=standby_mode;
-											
+							
 										break;
 	
 		}
@@ -165,7 +182,8 @@ void main(void)
 	while(1) 
 	{ 
 	
-	
+
+
 		Check_switch();
 		State_process();
 		
@@ -205,24 +223,39 @@ if (switch_update==1)
 {
 	key_holdtime++;
 	
+	
+	
+		
+		}
+	 
+	Timer_update=1;
 }
-Timer_update=1;
 
-}
+
+
 
 void timer2() interrupt 12  
 {
  if (Beep==1) 
 		{
-			
-	
-			
-			BUZ=~BUZ;
-			if (BUZ==1) LED=0;else LED=1;
-		}
-		else 
-		{	
-			BUZ=0;
+		
+		//P32 as output
+	//               			  P3M1   P3M0
+	//P30(BUZ)->INPUT    			1      1
+	//P31(LED)->CMOS   	    	0      1
+	//P32(SW/BUZ)->INPUT   		0      1
+	//P33(O3)->OUTPUT    			0      0
+	//P34(UV)->CMOS      			0      1
+	//P35(FAN)->OUTPUT        0      0
+				
 
-		}
+	//P3M1 &=0b1111 1011;
+	//P3M0 |=0b0000 0100;
+	
+	
+		P3M1 &= 0xfb;               //P32 as CMOS output  
+		P3M0 |= 0x04;
+			
+		BUZ=~BUZ;
+}
 }
