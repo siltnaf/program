@@ -5,7 +5,7 @@
 
 
 extern void Process_UV(void);
-extern void Process_FAN(void);
+extern void Process_ION(void);
 extern void Process_BUZ(void);
 extern void Process_LED(void);
 extern void Process_O3(void);

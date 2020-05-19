@@ -7,10 +7,29 @@
 #include "./public/inc/process.h"
 
 volatile uint8 state,next_state,switch_state,switch_update;
-volatile uint8   UV_on,Fan_on, O3_level,LED_type;
+volatile uint8   UV_on,ION_on, O3_level,LED_type;
 volatile uint16 process_time,buz_time,key_holdtime;
 volatile uint16 Time_ms,Time_sec,Time_min;
 volatile uint8 Timer_update,Beep;
+
+
+
+void DCDC_enable(void)
+{
+
+	
+	
+	
+												//P35 as input
+		
+											P3M1 |=0x20;                      	// P3M1 |= 0b00100000;
+											P3M0 &=0xdf;												// P3M0 &= 0b11011111;          
+
+//	if (VCC_det==0) UV=1; else UV=0;
+	if ((VCC_det==0)&&((Time_ms<500)==0)) VCC_EN=0; else VCC_EN=1;
+	
+}
+
 
 
 void Check_switch()
@@ -31,12 +50,12 @@ void Check_switch()
 										break;
 				case 1:			
 										
-										state=O3_mode;
+										state=ION_mode;
 										break;
 				case 2: 		
 									
 									
-										state=UVO3_mode;
+										state=UVION_mode;
 										break;
 			}	
 			
@@ -72,7 +91,7 @@ void State_process()
 				
 										VCC_EN=1;
 	
-										Fan_on=0;
+										ION_on=0;
 	
 										
 										O3_level  = 0;
@@ -82,47 +101,32 @@ void State_process()
 										next_state=standby_mode;
 										break;
 	
-	case O3_mode:				
+	case ION_mode:				
 										
-
-//												//P35 as input
-//		
-//											P3M1 |=0x20;                      	// P3M1 |= 0b00100000;
-//											P3M0 &=0xdf;												// P3M0 &= 0b11011111;          
-//											if ((VCC_det==0) &&(Time_ms<500)) VCC_EN=0;else VCC_EN=1;
-									  
+									DCDC_enable();
 											
 									 LED_type=1;
-										O3_level=1;
+									 O3_level=0;
 										UV_on=0;
-										
-										next_state=O3_mode;
+										ION_on=1;
+										next_state=ION_mode;
 										break;
 	
-	case UVO3_mode:			
+	case UVION_mode:			
 										
-//												//P35 as input
-//		
-//											P3M1 |=0x20;                      	// P3M1 |= 0b00100000;
-//											P3M0 &=0xdf;												// P3M0 &= 0b11011111;          
-//											if ((VCC_det==0) &&(Time_ms<500)) VCC_EN=0;else VCC_EN=1;
-//	
+									DCDC_enable();
+	
 									 LED_type=2;
 										O3_level=2;
 										UV_on=1;
-										Fan_on=1;
-										if (Time_min>=time_4min) next_state=UV_mode; else next_state=UVO3_mode;
+										ION_on=1;
+										if (Time_min>=time_4min) next_state=UV_mode; else next_state=UVION_mode;
 										break;
 	
 	
 	case UV_mode:	
 											
-////												//P35 as input
-////		
-//											P3M1 |=0x20;                      	// P3M1 |= 0b00100000;
-//											P3M0 &=0xdf;												// P3M0 &= 0b11011111;          
-//											if ((VCC_det==0) &&(Time_ms<500)) VCC_EN=0;else VCC_EN=1;
-	
+									DCDC_enable();
 									LED_type=2;
 										O3_level=0;
 										UV_on=1;
@@ -130,7 +134,7 @@ void State_process()
 										
 	
 	
-										Fan_on=1;
+										ION_on=1;
 										if (Time_min>=time_5min) 
 										{
 											buz_time=0;
@@ -170,7 +174,6 @@ state=next_state;
 
 
 
-
 void main(void) 
 {
 	IO_Init();
@@ -183,13 +186,13 @@ void main(void)
 	{ 
 	
 
-
+		
 		Check_switch();
 		State_process();
 		
 
 		Process_Timer();
-		Process_FAN();
+		Process_ION();
 		Process_UV();
 		Process_LED();
 		Process_BUZ();
@@ -246,7 +249,7 @@ void timer2() interrupt 12
 	//P32(SW/BUZ)->INPUT   		0      1
 	//P33(O3)->OUTPUT    			0      0
 	//P34(UV)->CMOS      			0      1
-	//P35(FAN)->OUTPUT        0      0
+	//P35(ION)->OUTPUT        0      0
 				
 
 	//P3M1 &=0b1111 1011;

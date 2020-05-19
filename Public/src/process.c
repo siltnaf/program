@@ -88,7 +88,8 @@ void Process_O3()
 
 void Process_BUZ()
 {
-//	if ((key_holdtime>0)&&(key_holdtime<press_time))	Beep=1; else Beep=0;
+ 
+	
 if (Beep==0) 
 {
 		//P32 as input
@@ -98,7 +99,7 @@ if (Beep==0)
 	//P32(SW/BUZ)->INPUT   		1      0
 	//P33(O3)->OUTPUT    			0      0
 	//P34(UV)->CMOS      			0      1
-	//P35(FAN)->OUTPUT        0      0
+	//P35(ION)->OUTPUT        0      0
 				
 
 	//P3M1 |=0b0000 0100;
@@ -108,6 +109,11 @@ if (Beep==0)
 		P3M1 |= 0x04;               //P32 as input  
 		P3M0 &= 0xfb;
 }
+
+	
+
+
+
 }
 
 
@@ -129,7 +135,7 @@ if (Beep==0)
 }
 
 
-void Process_FAN()
+void Process_ION()
 	
 {
 
@@ -140,17 +146,17 @@ void Process_FAN()
 	//P32(SW)->INPUT     			1      0
 	//P33(O3)->OUTPUT    			0      0
 	//P34(UV)->CMOS      			0      1
-	//P35(FAN)->OUTPUT        0      0
+	//P35(ION)->OUTPUT        0      0
 				
 			
-//				 P3M1 &=0xdf;                      //P3M1 &=0b11011111;
-//				 P3M0 &=0xdf;                      //P3M0 &=0b11011111;
+				 P3M1 &=0xdf;                      //P3M1 &=0b11011111;
+				 P3M0 &=0xdf;                      //P3M0 &=0b11011111;
 	
 	
 	
 	
 	
-	if (Fan_on==1) FAN=1;else FAN=0;
+	if (ION_on==1) ION=1;else ION=0;
 				
 
 	
