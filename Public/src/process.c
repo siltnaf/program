@@ -92,6 +92,8 @@ void Process_BUZ()
 	
 if (Beep==0) 
 {
+	
+	
 		//P32 as input
 	//               			  P3M1   P3M0
 	//P30(BUZ)->INPUT    			1      1

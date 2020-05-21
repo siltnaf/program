@@ -31,8 +31,8 @@
 
 
 
-#define time_4min       4
-#define time_5min				5
+#define time_4min       1
+#define time_5min				2
 #define time_5s					5
 #define time_1s         1
 

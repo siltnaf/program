@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   PROCESS                                                               05/19/2020 06:25:09 PAGE 1   
+C51 COMPILER V9.54   PROCESS                                                               05/21/2020 17:26:53 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE PROCESS
@@ -62,7 +62,7 @@ line level    source
   52   2             else UV=1;
   53   2        }
   54   1        else UV=0;
-C51 COMPILER V9.54   PROCESS                                                               05/19/2020 06:25:09 PAGE 2   
+C51 COMPILER V9.54   PROCESS                                                               05/21/2020 17:26:53 PAGE 2   
 
   55   1      
   56   1      }
@@ -104,79 +104,81 @@ line level    source
   92   1        
   93   1      if (Beep==0) 
   94   1      {
-  95   2          //P32 as input
-  96   2        //                      P3M1   P3M0
-  97   2        //P30(BUZ)->INPUT         1      1
-  98   2        //P31(LED)->CMOS          0      1
-  99   2        //P32(SW/BUZ)->INPUT      1      0
- 100   2        //P33(O3)->OUTPUT         0      0
- 101   2        //P34(UV)->CMOS           0      1
- 102   2        //P35(ION)->OUTPUT        0      0
- 103   2              
- 104   2      
- 105   2        //P3M1 |=0b0000 0100;
- 106   2        //P3M0 &=0b1111 1011;
- 107   2        
- 108   2        
- 109   2          P3M1 |= 0x04;               //P32 as input  
- 110   2          P3M0 &= 0xfb;
- 111   2      }
- 112   1      
- 113   1        
+  95   2        
+  96   2        
+  97   2          //P32 as input
+  98   2        //                      P3M1   P3M0
+  99   2        //P30(BUZ)->INPUT         1      1
+ 100   2        //P31(LED)->CMOS          0      1
+ 101   2        //P32(SW/BUZ)->INPUT      1      0
+ 102   2        //P33(O3)->OUTPUT         0      0
+ 103   2        //P34(UV)->CMOS           0      1
+ 104   2        //P35(ION)->OUTPUT        0      0
+ 105   2              
+ 106   2      
+ 107   2        //P3M1 |=0b0000 0100;
+ 108   2        //P3M0 &=0b1111 1011;
+ 109   2        
+ 110   2        
+ 111   2          P3M1 |= 0x04;               //P32 as input  
+ 112   2          P3M0 &= 0xfb;
+ 113   2      }
  114   1      
- 115   1      
+ 115   1        
  116   1      
-C51 COMPILER V9.54   PROCESS                                                               05/19/2020 06:25:09 PAGE 3   
+C51 COMPILER V9.54   PROCESS                                                               05/21/2020 17:26:53 PAGE 3   
 
- 117   1      }
- 118          
- 119          
- 120          void Process_LED()
- 121          {
- 122   1      if (Beep==0)
- 123   1      {
- 124   2        switch (LED_type)
- 125   2            {
- 126   3              case 0:     LED=0;
- 127   3                          break;
- 128   3              case 1:     LED=1;
+ 117   1      
+ 118   1      
+ 119   1      }
+ 120          
+ 121          
+ 122          void Process_LED()
+ 123          {
+ 124   1      if (Beep==0)
+ 125   1      {
+ 126   2        switch (LED_type)
+ 127   2            {
+ 128   3              case 0:     LED=0;
  129   3                          break;
- 130   3              case 2:     
- 131   3                          if (Time_sec%2==0) LED=1;else LED=0;
- 132   3                          break;
- 133   3            } 
- 134   2      }
- 135   1      }
- 136          
- 137          
- 138          void Process_ION()
- 139            
- 140          {
- 141   1      
- 142   1          //P35 as output
- 143   1        //                      P3M1   P3M0
- 144   1        //P30(BUZ)->INPUT         1      1
- 145   1        //P31(LED/BUZ)->CMOS      0      1
- 146   1        //P32(SW)->INPUT          1      0
- 147   1        //P33(O3)->OUTPUT         0      0
- 148   1        //P34(UV)->CMOS           0      1
- 149   1        //P35(ION)->OUTPUT        0      0
- 150   1              
- 151   1            
- 152   1               P3M1 &=0xdf;                      //P3M1 &=0b11011111;
- 153   1               P3M0 &=0xdf;                      //P3M0 &=0b11011111;
- 154   1        
- 155   1        
+ 130   3              case 1:     LED=1;
+ 131   3                          break;
+ 132   3              case 2:     
+ 133   3                          if (Time_sec%2==0) LED=1;else LED=0;
+ 134   3                          break;
+ 135   3            } 
+ 136   2      }
+ 137   1      }
+ 138          
+ 139          
+ 140          void Process_ION()
+ 141            
+ 142          {
+ 143   1      
+ 144   1          //P35 as output
+ 145   1        //                      P3M1   P3M0
+ 146   1        //P30(BUZ)->INPUT         1      1
+ 147   1        //P31(LED/BUZ)->CMOS      0      1
+ 148   1        //P32(SW)->INPUT          1      0
+ 149   1        //P33(O3)->OUTPUT         0      0
+ 150   1        //P34(UV)->CMOS           0      1
+ 151   1        //P35(ION)->OUTPUT        0      0
+ 152   1              
+ 153   1            
+ 154   1               P3M1 &=0xdf;                      //P3M1 &=0b11011111;
+ 155   1               P3M0 &=0xdf;                      //P3M0 &=0b11011111;
  156   1        
  157   1        
  158   1        
- 159   1        if (ION_on==1) ION=1;else ION=0;
- 160   1              
- 161   1      
- 162   1        
- 163   1        
- 164   1      }
- 165          
+ 159   1        
+ 160   1        
+ 161   1        if (ION_on==1) ION=1;else ION=0;
+ 162   1              
+ 163   1      
+ 164   1        
+ 165   1        
+ 166   1      }
+ 167          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
@@ -188,10 +190,10 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
    EDATA SIZE       =   ----    ----
+C51 COMPILER V9.54   PROCESS                                                               05/21/2020 17:26:53 PAGE 4   
+
    HDATA SIZE       =   ----    ----
    XDATA CONST SIZE =   ----    ----
-C51 COMPILER V9.54   PROCESS                                                               05/19/2020 06:25:09 PAGE 4   
-
    FAR CONST SIZE   =   ----    ----
 END OF MODULE INFORMATION.
 

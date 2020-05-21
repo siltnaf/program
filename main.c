@@ -25,7 +25,7 @@ void DCDC_enable(void)
 											P3M1 |=0x20;                      	// P3M1 |= 0b00100000;
 											P3M0 &=0xdf;												// P3M0 &= 0b11011111;          
 
-//	if (VCC_det==0) UV=1; else UV=0;
+//
 	if ((VCC_det==0)&&((Time_ms<500)==0)) VCC_EN=0; else VCC_EN=1;
 	
 }
@@ -59,8 +59,10 @@ void Check_switch()
 										break;
 			}	
 			
-			
-			
+//			if (state==standby_mode) state=ION_mode;
+//			if (state==ION_mode) state=UVION_mode;
+//			if (state==UVION_mode) state=standby_mode;
+//			
 			
 			
 			switch_update=0;
@@ -130,13 +132,18 @@ void State_process()
 									LED_type=2;
 										O3_level=0;
 										UV_on=1;
-	
+										ION_on=1;
 										
 	
 	
 										ION_on=1;
 										if (Time_min>=time_5min) 
 										{
+											ION_on=0;
+											UV_on=0;
+											LED_type=0;
+											O3_level=0;
+											
 											buz_time=0;
 											Time_ms=0;
 											Time_sec=0;
@@ -147,8 +154,7 @@ void State_process()
 										break;
 										
 	case BUZ_mode:
-										
-										 
+									
 										Beep=1;
 										delay_ms(250);
 										Beep=0;
@@ -156,7 +162,9 @@ void State_process()
 										Beep=1;
 										delay_ms(250);
 										Beep=0;
-										next_state=standby_mode;
+										BUZ=0;
+										delay_ms(500);
+										next_state=  standby_mode;
 							
 										break;
 	
@@ -182,6 +190,7 @@ void main(void)
 	InitExtInterrupt();
 
 	InitParameter()	;
+state=UVION_mode;
 	while(1) 
 	{ 
 	
@@ -261,4 +270,6 @@ void timer2() interrupt 12
 			
 		BUZ=~BUZ;
 }
+		else BUZ=0;
 }
+
