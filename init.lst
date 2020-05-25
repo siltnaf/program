@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   INIT                                                                  05/21/2020 17:26:52 PAGE 1   
+C51 COMPILER V9.54   INIT                                                                  05/25/2020 18:52:25 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE INIT
@@ -62,7 +62,7 @@ line level    source
   52          
   53          
   54          void InitExtInterrupt (void)
-C51 COMPILER V9.54   INIT                                                                  05/21/2020 17:26:52 PAGE 2   
+C51 COMPILER V9.54   INIT                                                                  05/25/2020 18:52:25 PAGE 2   
 
   55          {
   56   1      
@@ -98,7 +98,7 @@ line level    source
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =     92    ----
+   CODE SIZE        =     90    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

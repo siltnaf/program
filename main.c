@@ -1,16 +1,17 @@
 
 #include "STC15F104E.h"
 
+ 
 #include "./public/inc/config.h" 
 #include "./public/inc/delay.h"  
 #include "./public/inc/init.h"
 #include "./public/inc/process.h"
 
-volatile uint8 state,next_state,switch_state,switch_update;
-volatile uint8   UV_on,ION_on, O3_level,LED_type;
+volatile uint8 state,next_state,switch_state;
+volatile uint8   O3_level,LED_type;
 volatile uint16 process_time,buz_time,key_holdtime;
 volatile uint16 Time_ms,Time_sec,Time_min;
-volatile uint8 Timer_update,Beep;
+volatile bit Timer_update,Beep, UV_on,ION_on,switch_update;
 
 
 
@@ -39,9 +40,7 @@ void Check_switch()
 			switch_state++;
 			if (switch_state>2) switch_state=0;
 		 
-			Time_ms=0;
-			Time_sec=0;
-			Time_min=0;
+			
 			switch (switch_state)
 			{
 				case 0:			
@@ -67,6 +66,7 @@ void Check_switch()
 			
 			switch_update=0;
 			key_holdtime=0;
+			delay_ms(250);
 		}		
 	
  
@@ -90,17 +90,17 @@ void State_process()
 	
 	case standby_mode:    
 										
-				
 										VCC_EN=1;
-	
 										ION_on=0;
-	
-										
 										O3_level  = 0;
 										UV_on  = 0;
 										 
 										LED_type=0;
 										next_state=standby_mode;
+	
+										 
+	
+	
 										break;
 	
 	case ION_mode:				
@@ -206,6 +206,9 @@ state=UVION_mode;
 		Process_LED();
 		Process_BUZ();
 		Process_O3();
+		Process_sleep();
+
+
 		
 	} 
 }
@@ -215,6 +218,9 @@ void int0() interrupt 0
 
    if ((switch_update==0)&&(SW==1)) 
 	 {
+			Time_ms=0;
+			Time_sec=0;
+			Time_min=0;
 			
 			key_holdtime=0;
 			switch_update=1;

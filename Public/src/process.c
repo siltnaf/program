@@ -4,7 +4,7 @@
 #include "./public/inc/init.h"
 #include "./public/inc/process.h"
 #include "STC15F104E.h"
-
+#include <intrins.h>
 
 
 
@@ -148,20 +148,53 @@ void Process_ION()
 	//P32(SW)->INPUT     			1      0
 	//P33(O3)->OUTPUT    			0      0
 	//P34(UV)->CMOS      			0      1
-	//P35(ION)->OUTPUT        0      0
+	//P35(ION)->OUTPUT         0     0
 				
 			
 				 P3M1 &=0xdf;                      //P3M1 &=0b11011111;
-				 P3M0 &=0xdf;                      //P3M0 &=0b11011111;
+				 P3M0 &=0xdf;                      //P3M0 |=0b00100000;
 	
 	
 	
 	
 	
-	if (ION_on==1) ION=1;else ION=0;
+	if (ION_on==1) ION=1; else ION=0;
 				
 
 	
 	
 }
+
+
+void Process_sleep()
+	
+{
+
+	
+	if ((Time_min>=time_1min) && (state==standby_mode))
+	{
+		PCON|=0x02;
+		_nop_ ();
+		
+		
+		_nop_ ();
+		_nop_ ();
+		_nop_ ();
+		_nop_ ();
+		_nop_ ();
+		_nop_ ();
+		_nop_ ();
+		_nop_ ();
+		_nop_ ();
+		_nop_ ();
+		
+		
+		
+	}
+
+	
+	
+}
+
+
 
