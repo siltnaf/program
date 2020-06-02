@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   MAIN                                                                  05/25/2020 18:52:25 PAGE 1   
+C51 COMPILER V9.54   MAIN                                                                  05/31/2020 01:41:49 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
@@ -62,7 +62,7 @@ line level    source
   53   3                          break;
   54   3              case 2:     
   55   3                        
-C51 COMPILER V9.54   MAIN                                                                  05/25/2020 18:52:25 PAGE 2   
+C51 COMPILER V9.54   MAIN                                                                  05/31/2020 01:41:49 PAGE 2   
 
   56   3                        
   57   3                          state=UVION_mode;
@@ -126,7 +126,7 @@ line level    source
  115   2                          break;
  116   2        
  117   2        case UVION_mode:      
-C51 COMPILER V9.54   MAIN                                                                  05/25/2020 18:52:25 PAGE 3   
+C51 COMPILER V9.54   MAIN                                                                  05/31/2020 01:41:49 PAGE 3   
 
  118   2                          
  119   2                        DCDC_enable();
@@ -190,7 +190,7 @@ line level    source
  177          
  178          
  179          
-C51 COMPILER V9.54   MAIN                                                                  05/25/2020 18:52:25 PAGE 4   
+C51 COMPILER V9.54   MAIN                                                                  05/31/2020 01:41:49 PAGE 4   
 
  180          
  181          
@@ -254,7 +254,7 @@ line level    source
  239   1      
  240   1      if (switch_update==1) 
  241   1      {
-C51 COMPILER V9.54   MAIN                                                                  05/25/2020 18:52:25 PAGE 5   
+C51 COMPILER V9.54   MAIN                                                                  05/31/2020 01:41:49 PAGE 5   
 
  242   2        key_holdtime++;
  243   2        
