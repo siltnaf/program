@@ -28,8 +28,8 @@ void InitTime0(void)
 {
 	TMOD &= 0x00;              //clear timer0 mode 
 	AUXR =0x80 ;           			//1T mode
-	TL0 =T1MS;
-  TH0 =T1MS>>8;
+	TL0 =T0_25MS;
+  TH0 =T0_25MS>>8;
 
 	TR0 =1;			  
 	ET0 =1;		 
@@ -74,6 +74,7 @@ void InitParameter(void )
 	switch_state=0;
 	process_time=0;
 	buz_time=0;
+	Time_us=0;
   Time_ms=0;
 	Time_sec=0;
 	Time_min=0;

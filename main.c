@@ -10,7 +10,7 @@
 volatile uint8 state,next_state,switch_state;
 volatile uint8   O3_level,LED_type;
 volatile uint16 process_time,buz_time,key_holdtime;
-volatile uint16 Time_ms,Time_sec,Time_min;
+volatile uint16 Time_us, Time_ms,Time_sec,Time_min;
 volatile bit Timer_update,Beep, UV_on,ION_on,switch_update;
 
 
@@ -218,6 +218,7 @@ void int0() interrupt 0
 
    if ((switch_update==0)&&(SW==1)) 
 	 {
+			Time_us=0;
 			Time_ms=0;
 			Time_sec=0;
 			Time_min=0;

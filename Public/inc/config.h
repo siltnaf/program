@@ -13,7 +13,7 @@
 #define VCC_det	  		(P35)          //input for USB detect
 
 #define MAIN_Fosc   12000000L
-#define T1MS        (65536- MAIN_Fosc/1000)     //1T mode Timer0
+#define T0_25MS        (65536- MAIN_Fosc/4000)     //1T mode Timer0
 #define T2KHZ       (65536- MAIN_Fosc/12/6000)     //Timer2
 
 
@@ -43,7 +43,7 @@
 extern volatile uint8 state,next_state,switch_state ;
 extern volatile uint16 process_time,buz_time,key_holdtime;
 extern volatile uint8  LED_type, O3_level;
-extern volatile uint16 Time_ms,Time_sec,Time_min;
+extern volatile uint16 Time_us,Time_ms,Time_sec,Time_min;
 extern volatile bit Timer_update,Beep, UV_on,ION_on,switch_update;
 
 #endif

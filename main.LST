@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   MAIN                                                                  05/31/2020 01:41:49 PAGE 1   
+C51 COMPILER V9.54   MAIN                                                                  06/02/2020 20:08:49 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
@@ -19,7 +19,7 @@ line level    source
   10          volatile uint8 state,next_state,switch_state;
   11          volatile uint8   O3_level,LED_type;
   12          volatile uint16 process_time,buz_time,key_holdtime;
-  13          volatile uint16 Time_ms,Time_sec,Time_min;
+  13          volatile uint16 Time_us, Time_ms,Time_sec,Time_min;
   14          volatile bit Timer_update,Beep, UV_on,ION_on,switch_update;
   15          
   16          
@@ -62,7 +62,7 @@ line level    source
   53   3                          break;
   54   3              case 2:     
   55   3                        
-C51 COMPILER V9.54   MAIN                                                                  05/31/2020 01:41:49 PAGE 2   
+C51 COMPILER V9.54   MAIN                                                                  06/02/2020 20:08:49 PAGE 2   
 
   56   3                        
   57   3                          state=UVION_mode;
@@ -126,7 +126,7 @@ line level    source
  115   2                          break;
  116   2        
  117   2        case UVION_mode:      
-C51 COMPILER V9.54   MAIN                                                                  05/31/2020 01:41:49 PAGE 3   
+C51 COMPILER V9.54   MAIN                                                                  06/02/2020 20:08:49 PAGE 3   
 
  118   2                          
  119   2                        DCDC_enable();
@@ -190,7 +190,7 @@ line level    source
  177          
  178          
  179          
-C51 COMPILER V9.54   MAIN                                                                  05/31/2020 01:41:49 PAGE 4   
+C51 COMPILER V9.54   MAIN                                                                  06/02/2020 20:08:49 PAGE 4   
 
  180          
  181          
@@ -233,78 +233,79 @@ line level    source
  218   1      
  219   1         if ((switch_update==0)&&(SW==1)) 
  220   1         {
- 221   2            Time_ms=0;
- 222   2            Time_sec=0;
- 223   2            Time_min=0;
- 224   2            
- 225   2            key_holdtime=0;
- 226   2            switch_update=1;
- 227   2         }
- 228   1      }
- 229          
- 230          void int1() interrupt 2
- 231          {
- 232   1         
- 233   1      }
- 234          
+ 221   2            Time_us=0;
+ 222   2            Time_ms=0;
+ 223   2            Time_sec=0;
+ 224   2            Time_min=0;
+ 225   2            
+ 226   2            key_holdtime=0;
+ 227   2            switch_update=1;
+ 228   2         }
+ 229   1      }
+ 230          
+ 231          void int1() interrupt 2
+ 232          {
+ 233   1         
+ 234   1      }
  235          
- 236           
- 237          void timer0() interrupt 1
- 238          {
- 239   1      
- 240   1      if (switch_update==1) 
- 241   1      {
-C51 COMPILER V9.54   MAIN                                                                  05/31/2020 01:41:49 PAGE 5   
+ 236          
+ 237           
+ 238          void timer0() interrupt 1
+ 239          {
+ 240   1      
+ 241   1      if (switch_update==1) 
+C51 COMPILER V9.54   MAIN                                                                  06/02/2020 20:08:49 PAGE 5   
 
- 242   2        key_holdtime++;
- 243   2        
+ 242   1      {
+ 243   2        key_holdtime++;
  244   2        
  245   2        
- 246   2          
- 247   2          }
- 248   1         
- 249   1        Timer_update=1;
- 250   1      }
- 251          
+ 246   2        
+ 247   2          
+ 248   2          }
+ 249   1         
+ 250   1        Timer_update=1;
+ 251   1      }
  252          
  253          
  254          
- 255          void timer2() interrupt 12  
- 256          {
- 257   1       if (Beep==1) 
- 258   1          {
- 259   2          
- 260   2          //P32 as output
- 261   2        //                      P3M1   P3M0
- 262   2        //P30(BUZ)->INPUT         1      1
- 263   2        //P31(LED)->CMOS          0      1
- 264   2        //P32(SW/BUZ)->INPUT      0      1
- 265   2        //P33(O3)->OUTPUT         0      0
- 266   2        //P34(UV)->CMOS           0      1
- 267   2        //P35(ION)->OUTPUT        0      0
- 268   2              
- 269   2      
- 270   2        //P3M1 &=0b1111 1011;
- 271   2        //P3M0 |=0b0000 0100;
- 272   2        
+ 255          
+ 256          void timer2() interrupt 12  
+ 257          {
+ 258   1       if (Beep==1) 
+ 259   1          {
+ 260   2          
+ 261   2          //P32 as output
+ 262   2        //                      P3M1   P3M0
+ 263   2        //P30(BUZ)->INPUT         1      1
+ 264   2        //P31(LED)->CMOS          0      1
+ 265   2        //P32(SW/BUZ)->INPUT      0      1
+ 266   2        //P33(O3)->OUTPUT         0      0
+ 267   2        //P34(UV)->CMOS           0      1
+ 268   2        //P35(ION)->OUTPUT        0      0
+ 269   2              
+ 270   2      
+ 271   2        //P3M1 &=0b1111 1011;
+ 272   2        //P3M0 |=0b0000 0100;
  273   2        
- 274   2          P3M1 &= 0xfb;               //P32 as CMOS output  
- 275   2          P3M0 |= 0x04;
- 276   2            
- 277   2          BUZ=~BUZ;
- 278   2      }
- 279   1          else BUZ=0;
- 280   1      }
- 281          
+ 274   2        
+ 275   2          P3M1 &= 0xfb;               //P32 as CMOS output  
+ 276   2          P3M0 |= 0x04;
+ 277   2            
+ 278   2          BUZ=~BUZ;
+ 279   2      }
+ 280   1          else BUZ=0;
+ 281   1      }
+ 282          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    460    ----
+   CODE SIZE        =    467    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
    DATA SIZE        =   ----    ----
-   IDATA SIZE       =     17    ----
+   IDATA SIZE       =     19    ----
    BIT SIZE         =      5    ----
    EDATA SIZE       =   ----    ----
    HDATA SIZE       =   ----    ----

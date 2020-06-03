@@ -15,13 +15,15 @@ void Process_Timer()
 	if (Timer_update==1)
 	{
 		
-		
-		
-	
-		
-		
-		Time_ms++;
+		Time_us++;		
 		Timer_update=0;	
+		if (Time_us>=4)
+			{
+				Time_us=0;
+				Time_ms++;
+			}
+		
+
 		if (Time_ms>=1000) 
 			{
 				
@@ -48,7 +50,7 @@ void Process_UV()
 	if (UV_on==1)
 	{
 	
-		if((Time_ms%2)==0) UV=0;
+		if((Time_us%2)==0) UV=0;
 		   else UV=1;
 	}
 	else UV=0;
