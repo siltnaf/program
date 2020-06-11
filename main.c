@@ -190,7 +190,7 @@ void main(void)
 	InitExtInterrupt();
 
 	InitParameter()	;
-state=UVION_mode;
+
 	while(1) 
 	{ 
 	
