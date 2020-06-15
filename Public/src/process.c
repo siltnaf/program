@@ -127,9 +127,9 @@ if (Beep==0)
 {
 	switch (LED_type)
 			{
-				case 0:			LED=0;
+				case 0:			LED=1;
 										break;
-				case 1:			LED=1;
+				case 1:			LED=0;
 										break;
 				case 2: 		
 										if (Time_sec%2==0) LED=1;else LED=0;
