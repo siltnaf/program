@@ -19,15 +19,19 @@ void DCDC_enable(void)
 {
 
 	
-	
-	
-												//P35 as input
-		
-											P3M1 |=0x20;                      	// P3M1 |= 0b00100000;
-											P3M0 &=0xdf;												// P3M0 &= 0b11011111;          
+//	
+//	
+//												//P35 as input
+//		
+//											P3M1 |=0x20;                      	// P3M1 |= 0b00100000;
+//											P3M0 &=0xdf;												// P3M0 &= 0b11011111;          
 
-//
-	if ((VCC_det==0)&&((Time_ms<500)==0)) VCC_EN=0; else VCC_EN=1;
+////
+//	if ((VCC_det==0)&&((Time_ms<500)==0)) VCC_EN=0; else VCC_EN=1;
+	
+	if ((Time_sec%10)==0) VCC_EN=0;else VCC_EN=1;
+	
+	
 	
 }
 
