@@ -11,7 +11,7 @@ volatile uint8 state,next_state,SW1_state,SW2_state;
 volatile uint8   O3_level,LED_type;
 volatile uint16 process_time,buz_time,key_holdtime;
 volatile uint16 Time_us, Time_ms,Time_sec,Time_min;
-volatile bit Timer_update,Beep, UV_on,ION_on,switch_update,SW1_pressed,SW2_pressed;
+volatile bit Timer_update,Beep, UV_on,ION_on,O3_on,switch_update,SW1_pressed,SW2_pressed;
 
 
 
@@ -69,10 +69,27 @@ void Check_switch()
 			SW2_pressed=0;
 			switch_update=0;
 			key_holdtime=0;
-			delay_ms(500);
+			delay_ms(250);
 		}		
 	
-   
+   if ((Time_ms%100)<10)
+	 {
+		 SW2=0;
+		 SET_INPUT(IO_SW2);
+		 if ((Time_ms%100)>5) 
+		 {
+			 EX1=1;
+			 EX0=1;
+		 }
+	 }
+	 else 
+	 {
+		 EX1=0;
+		 EX0=0;
+		 SET_CMOS(IO_SW2);
+		 if (O3_on==1) SW2=1; else SW2=0;
+	 }
+		 
 		
 
 
@@ -223,7 +240,7 @@ void main(void)
 		Process_UV();
 		Process_LED();
 		Process_BUZ();
-//		Process_O3();
+		Process_O3();
 		Process_sleep();
 
 

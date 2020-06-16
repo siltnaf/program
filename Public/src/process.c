@@ -63,27 +63,27 @@ void Process_O3()
 	{
 		case 0:      
 									
-									O3=0;
+									O3_on=0;
 									break;
 		case 1:			 
 									switch (Time_sec%4)
 									{
 										case 0,1:						
-																				O3=1;
+																				O3_on=1;
 																				break;
 										
 										case 2:							
-																				O3=1;	           	//enable every 1 out of 3sec				
+																				O3_on=1;	           	//enable every 1 out of 3sec				
 																				break;
 										
 										case 3:						 
-																				O3=0;
+																				O3_on=0;
 																				break;
 									}									
 									break;
 		case 2:				
 								
-									O3=1;
+									O3_on=1;
 									break;
 	}
 }

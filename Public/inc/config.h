@@ -16,8 +16,9 @@
 
 #define IO_LED          P3_1
 #define IO_BUZ          P3_2
-#define IO_SW						P3_2
+#define IO_SW1					P3_2
 #define IO_O3           P3_3
+#define IO_SW2					P3_3
 #define IO_UV           P3_4
 #define IO_ION          P3_5
 
@@ -71,6 +72,6 @@ extern volatile uint8 state,next_state,SW1_state,SW2_state ;
 extern volatile uint16 process_time,buz_time,key_holdtime;
 extern volatile uint8  LED_type, O3_level;
 extern volatile uint16 Time_us,Time_ms,Time_sec,Time_min;
-extern volatile bit Timer_update,Beep, UV_on,ION_on,switch_update,SW1_pressed,SW2_pressed;
+extern volatile bit Timer_update,Beep, UV_on,ION_on,O3_on,switch_update,SW1_pressed,SW2_pressed;
 
 #endif
