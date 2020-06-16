@@ -96,22 +96,10 @@ if (Beep==0)
 {
 	
 	
-		//P32 as input
-	//               			  P3M1   P3M0
-	//P30(BUZ)->INPUT    			1      1
-	//P31(LED)->CMOS   	    	0      1
-	//P32(SW/BUZ)->INPUT   		1      0
-	//P33(O3)->OUTPUT    			0      0
-	//P34(UV)->CMOS      			0      1
-	//P35(ION)->OUTPUT        0      0
-				
-
-	//P3M1 |=0b0000 0100;
-	//P3M0 &=0b1111 1011;
 	
 	
-		P3M1 |= 0x04;               //P32 as input  
-		P3M0 &= 0xfb;
+	 SET_INPUT(IO_BUZ);
+		
 }
 
 	
@@ -143,19 +131,9 @@ void Process_ION()
 	
 {
 
-		//P35 as output
-	//               			  P3M1   P3M0
-	//P30(BUZ)->INPUT    			1      1
-	//P31(LED/BUZ)->CMOS   		0      1
-	//P32(SW)->INPUT     			1      0
-	//P33(O3)->OUTPUT    			0      0
-	//P34(UV)->CMOS      			0      1
-	//P35(ION)->OUTPUT         0     0
+	SET_OUTPUT(IO_ION);
 				
 			
-				 P3M1 &=0xdf;                      //P3M1 &=0b11011111;
-				 P3M0 &=0xdf;                      //P3M0 |=0b00100000;
-	
 	
 	
 	

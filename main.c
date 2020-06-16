@@ -69,7 +69,7 @@ void Check_switch()
 			delay_ms(250);
 		}		
 	
- 
+   
 		
 
 
@@ -122,36 +122,51 @@ void State_process()
 										O3_level=2;
 										UV_on=1;
 										ION_on=1;
-										if (Time_min>=time_4min) next_state=UV_mode; else next_state=UVION_mode;
+										
+										if (Time_min>=time_T1) next_state=ozone_mode; else next_state=UVION_mode;
 										break;
 	
 	
-	case UV_mode:	
+	case ozone_mode:	
 											
 									DCDC_enable();
 									LED_type=2;
+										O3_level=2;
+										UV_on=0;
+										ION_on=1;
+										
+	
+	 
+										if (Time_min>=time_T2) next_state=wait_mode; else 	next_state=ozone_mode;
+											
+										break;
+			
+
+
+	case wait_mode:	
+											
+									DCDC_enable();
+								   	LED_type=2;
 										O3_level=0;
-										UV_on=1;
+										UV_on=0;
 										ION_on=1;
 										
 	
 	
-										ION_on=1;
-										if (Time_min>=time_5min) 
+					 
+										if (Time_min>=time_T3) 
 										{
-											ION_on=0;
-											UV_on=0;
-											LED_type=0;
-											O3_level=0;
+											
 											
 											buz_time=0;
 											Time_ms=0;
 											Time_sec=0;
 											next_state=BUZ_mode; 
 										}
-											else 	next_state=UV_mode;
+											else 	next_state=wait_mode;
 											
 										break;
+
 										
 	case BUZ_mode:
 									
