@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   PROCESS                                                               06/16/2020 16:45:39 PAGE 1   
+C51 COMPILER V9.54   PROCESS                                                               06/16/2020 16:59:21 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE PROCESS
@@ -62,7 +62,7 @@ line level    source
   52   2        
   53   2          if((Time_us%2)==0) UV=0;
   54   2             else UV=1;
-C51 COMPILER V9.54   PROCESS                                                               06/16/2020 16:45:39 PAGE 2   
+C51 COMPILER V9.54   PROCESS                                                               06/16/2020 16:59:21 PAGE 2   
 
   55   2        }
   56   1        else UV=0;
@@ -126,7 +126,7 @@ line level    source
  114   1      if (Beep==0)
  115   1      {
  116   2        switch (LED_type)
-C51 COMPILER V9.54   PROCESS                                                               06/16/2020 16:45:39 PAGE 3   
+C51 COMPILER V9.54   PROCESS                                                               06/16/2020 16:59:21 PAGE 3   
 
  117   2            {
  118   3              case 0:     LED=1;
@@ -167,48 +167,37 @@ line level    source
  153   1        
  154   1        if ((Time_min>=time_1min) && (state==standby_mode))
  155   1        {
- 156   2          PCON|=0x02;
- 157   2          _nop_ ();
- 158   2          
- 159   2          
- 160   2          _nop_ ();
+ 156   2          EX1=1;
+ 157   2          EX0=1;
+ 158   2          SET_INPUT(SW2);
+*** ERROR C193 IN LINE 158 OF Public\src\process.c: '<<': bad operand type
+ 159   2          SET_INPUT(SW1);
+ 160   2          PCON|=0x02;
  161   2          _nop_ ();
- 162   2          _nop_ ();
- 163   2          _nop_ ();
+ 162   2          
+ 163   2          
  164   2          _nop_ ();
  165   2          _nop_ ();
  166   2          _nop_ ();
  167   2          _nop_ ();
  168   2          _nop_ ();
  169   2          _nop_ ();
- 170   2          
- 171   2          
- 172   2          
- 173   2        }
- 174   1      
- 175   1        
- 176   1        
- 177   1      }
- 178          
-C51 COMPILER V9.54   PROCESS                                                               06/16/2020 16:45:39 PAGE 4   
+ 170   2          _nop_ ();
+ 171   2          _nop_ ();
+ 172   2          _nop_ ();
+ 173   2          _nop_ ();
+ 174   2          
+ 175   2          
+ 176   2          
+ 177   2        }
+C51 COMPILER V9.54   PROCESS                                                               06/16/2020 16:59:21 PAGE 4   
 
- 179          
- 180          
+ 178   1      
+ 179   1        
+ 180   1        
+ 181   1      }
+ 182          
+ 183          
+ 184          
 
-
-MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    239    ----
-   CONSTANT SIZE    =   ----    ----
-   XDATA SIZE       =   ----    ----
-   PDATA SIZE       =   ----    ----
-   DATA SIZE        =   ----    ----
-   IDATA SIZE       =   ----    ----
-   BIT SIZE         =   ----    ----
-   EDATA SIZE       =   ----    ----
-   HDATA SIZE       =   ----    ----
-   XDATA CONST SIZE =   ----    ----
-   FAR CONST SIZE   =   ----    ----
-END OF MODULE INFORMATION.
-
-
-C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
+C51 COMPILATION COMPLETE.  0 WARNING(S),  1 ERROR(S)

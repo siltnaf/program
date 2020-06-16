@@ -153,6 +153,10 @@ void Process_sleep()
 	
 	if ((Time_min>=time_1min) && (state==standby_mode))
 	{
+		EX1=1;
+		EX0=1;
+		SET_INPUT(SW2);
+		SET_INPUT(SW1);
 		PCON|=0x02;
 		_nop_ ();
 		
