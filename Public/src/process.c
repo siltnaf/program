@@ -155,8 +155,12 @@ void Process_sleep()
 	{
 		EX1=1;
 		EX0=1;
-		SET_INPUT(SW2);
-		SET_INPUT(SW1);
+		SW1=0;
+		SW2=0;
+		SET_INPUT(IO_SW2);
+		SET_INPUT(IO_SW1);
+		
+	 
 		PCON|=0x02;
 		_nop_ ();
 		
