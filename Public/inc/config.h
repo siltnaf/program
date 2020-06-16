@@ -6,8 +6,9 @@
 #define VCC_EN		    (P30)           //relay normal open 
 #define BUZ       		(P32)						//AC output for BUZ
 #define LED       		(P31)           //DC output for LED
-#define SW 						(P32)
+#define SW1 						(P32)
 #define O3    				(P33)
+#define SW2 						(P33)
 #define UV       			(P34)
 #define ION 					(P35)          //output for ION
 #define VCC_det	  		(P35)          //input for USB detect
@@ -66,10 +67,10 @@
  #define P3_0 0
  
  
-extern volatile uint8 state,next_state,switch_state ;
+extern volatile uint8 state,next_state,SW1_state,SW2_state ;
 extern volatile uint16 process_time,buz_time,key_holdtime;
 extern volatile uint8  LED_type, O3_level;
 extern volatile uint16 Time_us,Time_ms,Time_sec,Time_min;
-extern volatile bit Timer_update,Beep, UV_on,ION_on,switch_update;
+extern volatile bit Timer_update,Beep, UV_on,ION_on,switch_update,SW1_pressed,SW2_pressed;
 
 #endif

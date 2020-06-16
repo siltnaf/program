@@ -7,11 +7,11 @@
 #include "./public/inc/init.h"
 #include "./public/inc/process.h"
 
-volatile uint8 state,next_state,switch_state;
+volatile uint8 state,next_state,SW1_state,SW2_state;
 volatile uint8   O3_level,LED_type;
 volatile uint16 process_time,buz_time,key_holdtime;
 volatile uint16 Time_us, Time_ms,Time_sec,Time_min;
-volatile bit Timer_update,Beep, UV_on,ION_on,switch_update;
+volatile bit Timer_update,Beep, UV_on,ION_on,switch_update,SW1_pressed,SW2_pressed;
 
 
 
@@ -35,38 +35,41 @@ void DCDC_enable(void)
 
 void Check_switch()
 {
-		if (key_holdtime>press_time) 
+		if ((switch_update==1) &&(key_holdtime>press_time))
 		{
-			switch_state++;
-			if (switch_state>2) switch_state=0;
-		 
-			
-			switch (switch_state)
-			{
-				case 0:			
-									
-										state=standby_mode;
-										break;
-				case 1:			
-										
-										state=ION_mode;
-										break;
-				case 2: 		
-									
-									
-										state=UVION_mode;
-										break;
-			}	
-			
-//			if (state==standby_mode) state=ION_mode;
-//			if (state==ION_mode) state=UVION_mode;
-//			if (state==UVION_mode) state=standby_mode;
-//			
-			
-			
+		 if (SW1_pressed)
+		 {
+			 SW1_state++;
+			 if (SW1_state>1) SW1_state=0;
+			 switch (SW1_state)
+			 {
+				 case 0:  state=standby_mode;
+									break;
+				 case 1:  state=ION_mode;
+									break;
+			 }
+			 SW2_state=0;
+			}
+			 if (SW2_pressed)
+		 {
+			 SW2_state++;
+			 if (SW2_state>1) SW2_state=0;
+			 switch (SW2_state)
+			 {
+				 case 0:  state=standby_mode;
+									break;
+				 case 1:  state=UVION_mode;
+									break;
+			 }
+			 SW1_state=0;
+			}
+			 
+
+			SW1_pressed=0;
+			SW2_pressed=0;
 			switch_update=0;
 			key_holdtime=0;
-			delay_ms(250);
+			delay_ms(500);
 		}		
 	
    
@@ -118,7 +121,7 @@ void State_process()
 										
 									DCDC_enable();
 	
-									 LED_type=2;
+									 LED_type=0;
 										O3_level=2;
 										UV_on=1;
 										ION_on=1;
@@ -220,7 +223,7 @@ void main(void)
 		Process_UV();
 		Process_LED();
 		Process_BUZ();
-		Process_O3();
+//		Process_O3();
 		Process_sleep();
 
 
@@ -231,13 +234,13 @@ void main(void)
 void int0() interrupt 0
 {
 
-   if ((switch_update==0)&&(SW==1)) 
+   if ((switch_update==0)&&(SW1==1)) 
 	 {
 			Time_us=0;
 			Time_ms=0;
 			Time_sec=0;
 			Time_min=0;
-			
+			SW1_pressed=1;
 			key_holdtime=0;
 			switch_update=1;
 	 }
@@ -245,7 +248,18 @@ void int0() interrupt 0
 
 void int1() interrupt 2
 {
-   
+
+    if ((switch_update==0)&&(SW2==1)) 
+	 {
+		 
+			Time_us=0;
+			Time_ms=0;
+			Time_sec=0;
+			Time_min=0;
+			SW2_pressed=1;
+			key_holdtime=0;
+			switch_update=1;
+	 }
 }
 
 
@@ -277,7 +291,7 @@ void timer2() interrupt 12
 	//               			  P3M1   P3M0
 	//P30(BUZ)->INPUT    			1      1
 	//P31(LED)->CMOS   	    	0      1
-	//P32(SW/BUZ)->INPUT   		0      1
+	//P32(SW1/BUZ)->INPUT   		0      1
 	//P33(O3)->OUTPUT    			0      0
 	//P34(UV)->CMOS      			0      1
 	//P35(ION)->OUTPUT        0      0
