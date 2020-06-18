@@ -115,11 +115,22 @@ if (Beep==0)
 {
 	switch (LED_type)
 			{
-				case 0:			LED=1;
+				case 0:			
+					
+										
+										SET_INPUT(IO_LED);
+										
 										break;
-				case 1:			LED=0;
+				case 1:			
+										SET_CMOS(IO_LED);
+										LED=0;
 										break;
-				case 2: 		
+				case 2:			
+										SET_CMOS(IO_LED);
+										LED=1;
+										break;
+				case 3: 		
+										SET_CMOS(IO_LED); 
 										if (Time_sec%2==0) LED=1;else LED=0;
 										break;
 			}	

@@ -38,7 +38,7 @@ void Check_switch()
 		if (key_holdtime>press_time) 
 		{
 			switch_state++;
-			if (switch_state>2) switch_state=0;
+			if (switch_state>3) switch_state=0;
 		 
 			
 			switch (switch_state)
@@ -54,8 +54,15 @@ void Check_switch()
 				case 2: 		
 									
 									
+										state=O3_mode;
+										break;
+				case 3: 		
+									
+									
 										state=UVION_mode;
 										break;
+				
+				
 			}	
 			
 //			if (state==standby_mode) state=ION_mode;
@@ -112,6 +119,18 @@ void State_process()
 										UV_on=0;
 										ION_on=1;
 										next_state=ION_mode;
+										break;
+	
+	
+		case O3_mode:				
+										
+									DCDC_enable();
+											
+									 LED_type=2;
+									 O3_level=0;
+										UV_on=0;
+										ION_on=1;
+										next_state=O3_mode;
 										break;
 	
 	case UVION_mode:			
