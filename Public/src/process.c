@@ -36,7 +36,11 @@ void Process_Timer()
 				Time_sec=0;
 				Time_min++;
 			}
-		
+		 if (Time_min>=60)
+			{
+				Time_min=0;
+			}
+			
 	}	
 
 
@@ -65,21 +69,9 @@ void Process_O3()
 									
 									O3=0;
 									break;
-		case 1:			 
-									switch (Time_sec%4)
-									{
-										case 0,1:						
-																				O3=1;
-																				break;
-										
-										case 2:							
-																				O3=1;	           	//enable every 1 out of 3sec				
-																				break;
-										
-										case 3:						 
-																				O3=0;
-																				break;
-									}									
+		case 1:			 if (Time_min<=5) O3=1;
+									else O3=0;
+																		
 									break;
 		case 2:				
 								
@@ -130,9 +122,30 @@ if (Beep==0)
 										LED=1;
 										break;
 				case 3: 		
-										SET_CMOS(IO_LED); 
-										if (Time_sec%2==0) LED=1;else LED=0;
+										 
+										if (Time_sec%2==0) 
+										{
+											SET_CMOS(IO_LED);
+											LED=0;
+										}
+										else 
+										{
+											SET_INPUT(IO_LED);
+										}
 										break;
+				case 4: 		
+										 
+										if (((Time_us%512)==0) && ((Time_sec%4)==0))
+										{
+											SET_CMOS(IO_LED);
+											LED=1;
+										}
+										else 
+										{
+											SET_INPUT(IO_LED);
+										}
+										break;			
+										
 			}	
 }
 }

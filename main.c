@@ -124,20 +124,35 @@ void State_process()
 	
 		case O3_mode:				
 										
-									DCDC_enable();
-											
-									 LED_type=2;
-									 O3_level=0;
+										DCDC_enable();	
+										LED_type=2;
+										O3_level=2;
 										UV_on=0;
-										ION_on=1;
-										next_state=O3_mode;
+										ION_on=0;
+										if (Time_min>=59) 
+										{
+											Time_min=0;
+											next_state=O3_saving_mode; 
+										}else next_state=O3_mode;
 										break;
+		
+		case O3_saving_mode:
+										
+										DCDC_enable();
+										LED_type=4;
+										O3_level=1;
+										UV_on=0;
+										ION_on=0;
+										next_state=O3_saving_mode;
+										break;
+										
+		
 	
 	case UVION_mode:			
 										
 									DCDC_enable();
 	
-									 LED_type=2;
+									 LED_type=1;
 										O3_level=2;
 										UV_on=1;
 										ION_on=1;
@@ -149,7 +164,7 @@ void State_process()
 	case ozone_mode:	
 											
 									DCDC_enable();
-									LED_type=2;
+									LED_type=3;
 										O3_level=2;
 										UV_on=0;
 										ION_on=1;
@@ -165,7 +180,7 @@ void State_process()
 	case wait_mode:	
 											
 									DCDC_enable();
-								   	LED_type=2;
+								   	LED_type=3;
 										O3_level=0;
 										UV_on=0;
 										ION_on=1;

@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   PROCESS                                                               06/19/2020 02:24:17 PAGE 1   
+C51 COMPILER V9.54   PROCESS                                                               06/19/2020 23:00:55 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE PROCESS
@@ -46,169 +46,182 @@ line level    source
   36   3              Time_sec=0;
   37   3              Time_min++;
   38   3            }
-  39   2          
-  40   2        } 
-  41   1      
-  42   1      
-  43   1      }
-  44          
-  45          
-  46          
-  47          
-  48          void Process_UV()
-  49          {
-  50   1        if (UV_on==1)
-  51   1        {
-  52   2        
-  53   2          if((Time_us%2)==0) UV=0;
-  54   2             else UV=1;
-C51 COMPILER V9.54   PROCESS                                                               06/19/2020 02:24:17 PAGE 2   
+  39   2           if (Time_min>=60)
+  40   2            {
+  41   3              Time_min=0;
+  42   3            }
+  43   2            
+  44   2        } 
+  45   1      
+  46   1      
+  47   1      }
+  48          
+  49          
+  50          
+  51          
+  52          void Process_UV()
+  53          {
+  54   1        if (UV_on==1)
+C51 COMPILER V9.54   PROCESS                                                               06/19/2020 23:00:55 PAGE 2   
 
-  55   2        }
-  56   1        else UV=0;
-  57   1      
-  58   1      }
-  59          
-  60          void Process_O3()
-  61          {
-  62   1        switch (O3_level)
-  63   1        {
-  64   2          case 0:      
-  65   2                        
-  66   2                        O3=0;
-  67   2                        break;
-  68   2          case 1:      
-  69   2                        switch (Time_sec%4)
-  70   2                        {
-  71   3                          case 0,1:           
-  72   3                                              O3=1;
-  73   3                                              break;
-  74   3                          
-  75   3                          case 2:             
-  76   3                                              O3=1;             //enable every 1 out of 3sec        
-  77   3                                              break;
-  78   3                          
-  79   3                          case 3:            
-  80   3                                              O3=0;
-  81   3                                              break;
-  82   3                        }                 
-  83   2                        break;
-  84   2          case 2:       
-  85   2                      
-  86   2                        O3=1;
-  87   2                        break;
-  88   2        }
-  89   1      }
-  90          
-  91          void Process_BUZ()
-  92          {
-  93   1       
-  94   1        
-  95   1      if (Beep==0) 
-  96   1      {
-  97   2        
-  98   2        
-  99   2        
- 100   2        
- 101   2         SET_INPUT(IO_BUZ);
- 102   2          
- 103   2      }
- 104   1      
- 105   1        
- 106   1      
- 107   1      
- 108   1      
- 109   1      }
- 110          
- 111          
- 112          void Process_LED()
- 113          {
- 114   1      if (Beep==0)
- 115   1      {
- 116   2        switch (LED_type)
-C51 COMPILER V9.54   PROCESS                                                               06/19/2020 02:24:17 PAGE 3   
+  55   1        {
+  56   2        
+  57   2          if((Time_us%2)==0) UV=0;
+  58   2             else UV=1;
+  59   2        }
+  60   1        else UV=0;
+  61   1      
+  62   1      }
+  63          
+  64          void Process_O3()
+  65          {
+  66   1        switch (O3_level)
+  67   1        {
+  68   2          case 0:      
+  69   2                        
+  70   2                        O3=0;
+  71   2                        break;
+  72   2          case 1:      if (Time_min<=5) O3=1;
+  73   2                        else O3=0;
+  74   2                                          
+  75   2                        break;
+  76   2          case 2:       
+  77   2                      
+  78   2                        O3=1;
+  79   2                        break;
+  80   2        }
+  81   1      }
+  82          
+  83          void Process_BUZ()
+  84          {
+  85   1       
+  86   1        
+  87   1      if (Beep==0) 
+  88   1      {
+  89   2        
+  90   2        
+  91   2        
+  92   2        
+  93   2         SET_INPUT(IO_BUZ);
+  94   2          
+  95   2      }
+  96   1      
+  97   1        
+  98   1      
+  99   1      
+ 100   1      
+ 101   1      }
+ 102          
+ 103          
+ 104          void Process_LED()
+ 105          {
+ 106   1      if (Beep==0)
+ 107   1      {
+ 108   2        switch (LED_type)
+ 109   2            {
+ 110   3              case 0:     
+ 111   3                
+ 112   3                          
+ 113   3                          SET_INPUT(IO_LED);
+ 114   3                          
+ 115   3                          break;
+ 116   3              case 1:     
+C51 COMPILER V9.54   PROCESS                                                               06/19/2020 23:00:55 PAGE 3   
 
- 117   2            {
- 118   3              case 0:     
- 119   3                
- 120   3                          
- 121   3                          SET_INPUT(IO_LED);
- 122   3                          
+ 117   3                          SET_CMOS(IO_LED);
+ 118   3                          LED=0;
+ 119   3                          break;
+ 120   3              case 2:     
+ 121   3                          SET_CMOS(IO_LED);
+ 122   3                          LED=1;
  123   3                          break;
- 124   3              case 1:     
- 125   3                          SET_CMOS(IO_LED);
- 126   3                          LED=0;
- 127   3                          break;
- 128   3              case 2:     
- 129   3                          SET_CMOS(IO_LED);
- 130   3                          LED=1;
- 131   3                          break;
- 132   3              case 3:     
- 133   3                          SET_CMOS(IO_LED); 
- 134   3                          if (Time_sec%2==0) LED=1;else LED=0;
+ 124   3              case 3:     
+ 125   3                           
+ 126   3                          if (Time_sec%2==0) 
+ 127   3                          {
+ 128   4                            SET_CMOS(IO_LED);
+ 129   4                            LED=0;
+ 130   4                          }
+ 131   3                          else 
+ 132   3                          {
+ 133   4                            SET_INPUT(IO_LED);
+ 134   4                          }
  135   3                          break;
- 136   3            } 
- 137   2      }
- 138   1      }
- 139          
- 140          
- 141          void Process_ION()
- 142            
- 143          {
- 144   1      
- 145   1        SET_OUTPUT(IO_ION);
- 146   1              
- 147   1            
- 148   1        
- 149   1        
- 150   1        
- 151   1        
- 152   1        if (ION_on==1) ION=1; else ION=0;
- 153   1              
- 154   1      
- 155   1        
- 156   1        
- 157   1      }
- 158          
- 159          
- 160          void Process_sleep()
- 161            
- 162          {
- 163   1      
+ 136   3              case 4:     
+ 137   3                           
+ 138   3                          if (((Time_us%512)==0) && ((Time_sec%4)==0))
+ 139   3                          {
+ 140   4                            SET_CMOS(IO_LED);
+ 141   4                            LED=1;
+ 142   4                          }
+ 143   3                          else 
+ 144   3                          {
+ 145   4                            SET_INPUT(IO_LED);
+ 146   4                          }
+ 147   3                          break;      
+ 148   3                          
+ 149   3            } 
+ 150   2      }
+ 151   1      }
+ 152          
+ 153          
+ 154          void Process_ION()
+ 155            
+ 156          {
+ 157   1      
+ 158   1        SET_OUTPUT(IO_ION);
+ 159   1              
+ 160   1            
+ 161   1        
+ 162   1        
+ 163   1        
  164   1        
- 165   1        if ((Time_min>=time_1min) && (state==standby_mode))
- 166   1        {
- 167   2          PCON|=0x02;
- 168   2          _nop_ ();
- 169   2          
- 170   2          
- 171   2          _nop_ ();
- 172   2          _nop_ ();
- 173   2          _nop_ ();
- 174   2          _nop_ ();
- 175   2          _nop_ ();
- 176   2          _nop_ ();
- 177   2          _nop_ ();
- 178   2          _nop_ ();
-C51 COMPILER V9.54   PROCESS                                                               06/19/2020 02:24:17 PAGE 4   
+ 165   1        if (ION_on==1) ION=1; else ION=0;
+ 166   1              
+ 167   1      
+ 168   1        
+ 169   1        
+ 170   1      }
+ 171          
+ 172          
+ 173          void Process_sleep()
+ 174            
+ 175          {
+ 176   1      
+ 177   1        
+ 178   1        if ((Time_min>=time_1min) && (state==standby_mode))
+C51 COMPILER V9.54   PROCESS                                                               06/19/2020 23:00:55 PAGE 4   
 
- 179   2          _nop_ ();
- 180   2          _nop_ ();
- 181   2          
+ 179   1        {
+ 180   2          PCON|=0x02;
+ 181   2          _nop_ ();
  182   2          
  183   2          
- 184   2        }
- 185   1      
- 186   1        
- 187   1        
- 188   1      }
- 189          
- 190          
- 191          
+ 184   2          _nop_ ();
+ 185   2          _nop_ ();
+ 186   2          _nop_ ();
+ 187   2          _nop_ ();
+ 188   2          _nop_ ();
+ 189   2          _nop_ ();
+ 190   2          _nop_ ();
+ 191   2          _nop_ ();
+ 192   2          _nop_ ();
+ 193   2          _nop_ ();
+ 194   2          
+ 195   2          
+ 196   2          
+ 197   2        }
+ 198   1      
+ 199   1        
+ 200   1        
+ 201   1      }
+ 202          
+ 203          
+ 204          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    267    ----
+   CODE SIZE        =    293    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

@@ -33,13 +33,15 @@
 #define int16 signed int idata
 
 
-#define standby_mode 	0
-#define ION_mode  		1
-#define UVION_mode 		2
-#define ozone_mode		3
-#define O3_mode				4
-#define wait_mode     5
-#define BUZ_mode  		6
+#define standby_mode 		0
+#define ION_mode  			1
+#define UVION_mode 			2
+#define ozone_mode			3
+
+#define O3_mode					4
+#define O3_saving_mode 	5
+#define wait_mode     	6
+#define BUZ_mode  			7
 
 
 #define time_1min       1
