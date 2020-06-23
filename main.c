@@ -38,7 +38,7 @@ void Check_switch()
 		if (key_holdtime>press_time) 
 		{
 			switch_state++;
-			if (switch_state>3) switch_state=0;
+			if (switch_state>1) switch_state=0;
 		 
 			
 			switch (switch_state)
@@ -49,26 +49,12 @@ void Check_switch()
 										break;
 				case 1:			
 										
-										state=ION_mode;
-										break;
-				case 2: 		
-									
-									
 										state=O3_mode;
 										break;
-				case 3: 		
-									
-									
-										state=UVION_mode;
-										break;
-				
+		
 				
 			}	
-			
-//			if (state==standby_mode) state=ION_mode;
-//			if (state==ION_mode) state=UVION_mode;
-//			if (state==UVION_mode) state=standby_mode;
-//			
+	
 			
 			
 			switch_update=0;
@@ -98,7 +84,7 @@ void State_process()
 	case standby_mode:    
 										
 										VCC_EN=1;
-										ION_on=0;
+								 
 										O3_level  = 0;
 										UV_on  = 0;
 										 
@@ -110,16 +96,7 @@ void State_process()
 	
 										break;
 	
-	case ION_mode:				
-										
-									DCDC_enable();
-											
-									 LED_type=1;
-									 O3_level=0;
-										UV_on=0;
-										ION_on=1;
-										next_state=ION_mode;
-										break;
+	 
 	
 	
 		case O3_mode:				
@@ -146,76 +123,7 @@ void State_process()
 										next_state=O3_saving_mode;
 										break;
 										
-		
-	
-	case UVION_mode:			
-										
-									DCDC_enable();
-	
-									 LED_type=1;
-										O3_level=2;
-										UV_on=1;
-										ION_on=1;
-										
-										if (Time_min>=time_T1) next_state=ozone_mode; else next_state=UVION_mode;
-										break;
-	
-	
-	case ozone_mode:	
-											
-									DCDC_enable();
-									LED_type=3;
-										O3_level=2;
-										UV_on=0;
-										ION_on=1;
-										
-	
-	 
-										if (Time_min>=time_T2) next_state=wait_mode; else 	next_state=ozone_mode;
-											
-										break;
-			
-
-
-	case wait_mode:	
-											
-									DCDC_enable();
-								   	LED_type=3;
-										O3_level=0;
-										UV_on=0;
-										ION_on=1;
-										
-	
-	
-					 
-										if (Time_min>=time_T3) 
-										{
-											
-											
-											buz_time=0;
-											Time_ms=0;
-											Time_sec=0;
-											next_state=BUZ_mode; 
-										}
-											else 	next_state=wait_mode;
-											
-										break;
-
-										
-	case BUZ_mode:
-									
-										Beep=1;
-										delay_ms(250);
-										Beep=0;
-										delay_ms(250);
-										Beep=1;
-										delay_ms(250);
-										Beep=0;
-										BUZ=0;
-										delay_ms(500);
-										next_state=  standby_mode;
-							
-										break;
+		 
 	
 		}
 		
@@ -235,7 +143,7 @@ void main(void)
 {
 	IO_Init();
 	InitTime0();
-	InitTime2();
+	 
 	InitExtInterrupt();
 
 	InitParameter()	;
@@ -250,10 +158,10 @@ void main(void)
 		
 
 		Process_Timer();
-		Process_ION();
+	 
 		Process_UV();
 		Process_LED();
-		Process_BUZ();
+	 
 		Process_O3();
 		Process_sleep();
 
@@ -304,28 +212,6 @@ if (switch_update==1)
 
 void timer2() interrupt 12  
 {
- if (Beep==1) 
-		{
-		
-		//P32 as output
-	//               			  P3M1   P3M0
-	//P30(BUZ)->INPUT    			1      1
-	//P31(LED)->CMOS   	    	0      1
-	//P32(SW/BUZ)->INPUT   		0      1
-	//P33(O3)->OUTPUT    			0      0
-	//P34(UV)->CMOS      			0      1
-	//P35(ION)->OUTPUT        0      0
-				
-
-	//P3M1 &=0b1111 1011;
-	//P3M0 |=0b0000 0100;
-	
-	
-		P3M1 &= 0xfb;               //P32 as CMOS output  
-		P3M0 |= 0x04;
-			
-		BUZ=~BUZ;
-}
-		else BUZ=0;
+  
 }
 

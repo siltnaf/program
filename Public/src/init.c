@@ -36,17 +36,7 @@ void InitTime0(void)
 
 }
     
-void InitTime2(void)
-{
-		T2L=T2KHZ;			 	
-		T2H=T2KHZ>>8;      
-
-    AUXR|=0X10;			
-		IE2|=0X04;       	                                                            
-      	
-	
-	
-}
+ 
 
 
 

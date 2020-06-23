@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   INIT                                                                  06/19/2020 23:00:54 PAGE 1   
+C51 COMPILER V9.54   INIT                                                                  06/24/2020 04:46:12 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE INIT
@@ -46,60 +46,50 @@ line level    source
   36   1      
   37   1      }
   38              
-  39          void InitTime2(void)
-  40          {
-  41   1          T2L=T2KHZ;        
-  42   1          T2H=T2KHZ>>8;      
-  43   1      
-  44   1          AUXR|=0X10;     
-  45   1          IE2|=0X04;                                                                    
-  46   1              
-  47   1        
-  48   1        
-  49   1      }
-  50          
-  51          
-  52          
-  53          
-  54          void InitExtInterrupt (void)
-C51 COMPILER V9.54   INIT                                                                  06/19/2020 23:00:54 PAGE 2   
+  39           
+  40          
+  41          
+  42          
+  43          
+  44          void InitExtInterrupt (void)
+  45          {
+  46   1      
+  47   1        IT0=0;    //detect both falling and rising edge of signal (AC signal)
+  48   1        EX0=1;
+  49   1        PX0=1;
+  50   1      //  IT1=0;    //detect both falling and rising edge of signal  (H1 signal) only rising edge 
+  51   1      //  EX1=1;    //enable INT1
+  52   1      //  PX1=1;
+  53   1      //  INT_CLKO |= 0x10;  //enable INT2, falling edge 
+  54   1        
+C51 COMPILER V9.54   INIT                                                                  06/24/2020 04:46:12 PAGE 2   
 
-  55          {
-  56   1      
-  57   1        IT0=0;    //detect both falling and rising edge of signal (AC signal)
-  58   1        EX0=1;
-  59   1        PX0=1;
-  60   1      //  IT1=0;    //detect both falling and rising edge of signal  (H1 signal) only rising edge 
-  61   1      //  EX1=1;    //enable INT1
-  62   1      //  PX1=1;
-  63   1      //  INT_CLKO |= 0x10;  //enable INT2, falling edge 
-  64   1        
-  65   1      }
-  66          
-  67          
-  68          
-  69          
-  70          void InitParameter(void )
-  71          {
-  72   1        UV=0;
-  73   1        state=standby_mode;
-  74   1        switch_state=0;
-  75   1        process_time=0;
-  76   1        buz_time=0;
-  77   1        Time_us=0;
-  78   1        Time_ms=0;
-  79   1        Time_sec=0;
-  80   1        Time_min=0;
-  81   1      
-  82   1        switch_update=0;
-  83   1        key_holdtime=0;
-  84   1        Timer_update=0;
-  85   1        EA=1;
-  86   1      }
+  55   1      }
+  56          
+  57          
+  58          
+  59          
+  60          void InitParameter(void )
+  61          {
+  62   1        UV=0;
+  63   1        state=standby_mode;
+  64   1        switch_state=0;
+  65   1        process_time=0;
+  66   1        buz_time=0;
+  67   1        Time_us=0;
+  68   1        Time_ms=0;
+  69   1        Time_sec=0;
+  70   1        Time_min=0;
+  71   1      
+  72   1        switch_update=0;
+  73   1        key_holdtime=0;
+  74   1        Timer_update=0;
+  75   1        EA=1;
+  76   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =     95    ----
+   CODE SIZE        =     82    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

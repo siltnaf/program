@@ -53,6 +53,7 @@ void Process_UV()
 {
 	if (UV_on==1)
 	{
+//		UV=1;
 	
 		if((Time_us%2)==0) UV=0;
 		   else UV=1;
@@ -80,26 +81,7 @@ void Process_O3()
 	}
 }
 
-void Process_BUZ()
-{
  
-	
-if (Beep==0) 
-{
-	
-	
-	
-	
-	 SET_INPUT(IO_BUZ);
-		
-}
-
-	
-
-
-
-}
-
 
 void Process_LED()
 {
@@ -151,23 +133,7 @@ if (Beep==0)
 }
 
 
-void Process_ION()
-	
-{
-
-	SET_OUTPUT(IO_ION);
-				
-			
-	
-	
-	
-	
-	if (ION_on==1) ION=1; else ION=0;
-				
-
-	
-	
-}
+ 
 
 
 void Process_sleep()
