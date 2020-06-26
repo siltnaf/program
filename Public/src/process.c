@@ -53,10 +53,9 @@ void Process_UV()
 {
 	if (UV_on==1)
 	{
-//		UV=1;
+		UV=1;
 	
-		if((Time_us%2)==0) UV=0;
-		   else UV=1;
+	
 	}
 	else UV=0;
 
@@ -64,20 +63,19 @@ void Process_UV()
 
 void Process_O3()
 {
+	SET_CMOS(IO_O3);
 	switch (O3_level)
 	{
 		case 0:      
 									
 									O3=0;
 									break;
-		case 1:			 if (Time_min<=5) O3=1;
-									else O3=0;
+		case 1:			 
+									
+									O3=1;
 																		
 									break;
-		case 2:				
-								
-									O3=1;
-									break;
+		
 	}
 }
 
@@ -162,6 +160,36 @@ void Process_sleep()
 		
 	}
 
+	
+//	
+	if  ((state==O3_off_mode))
+	{
+		SET_CMOS(IO_RC);
+		RC=1;
+		delay_ms(10);
+		
+		SET_INPUT(IO_RC);
+		
+		PCON|=0x02;
+		_nop_ ();
+		_nop_ ();
+		_nop_ ();
+		_nop_ ();
+		_nop_ ();
+		_nop_ ();
+		_nop_ ();
+		_nop_ ();
+		_nop_ ();
+		_nop_ ();
+		_nop_ ();
+		Time_ms=0;
+		Time_sec=0;
+		state=O3_LED_mode;
+		SET_CMOS(IO_RC);
+		RC=1;
+		
+		
+	}
 	
 	
 }

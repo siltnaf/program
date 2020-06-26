@@ -4,22 +4,21 @@
 #include "STC15F104E.h"
 
 #define VCC_EN		    (P30)           //relay normal open 
-
 #define LED       		(P31)           //DC output for LED
-
 #define SW 						(P32)
-#define VCC_det    		(P33)
+#define RC            (P33)
 #define UV       			(P34)
-
 #define O3	  				(P35)          //input for USB detect
+#define VCC_det    		(P35)
 
 
+#define IO_VCC_EN       P3_0
 #define IO_LED          P3_1
 #define IO_SW						P3_2
-#define IO_VCC_det      P3_3
+#define IO_RC						P3_3
 #define IO_UV           P3_4
 #define IO_O3           P3_5
-
+#define IO_VCC_det      P3_5
 
 
 #define MAIN_Fosc   12000000L
@@ -34,20 +33,21 @@
 
 
 #define standby_mode 		0
-#define ION_mode  			1
-#define UVION_mode 			2
-#define ozone_mode			3
+#define uv_mode					1
+#define O3_mode					2
+#define O3_saving_mode 	3
+#define O3_off_mode     4
+#define O3_LED_mode     5
 
-#define O3_mode					4
-#define O3_saving_mode 	5
-#define wait_mode     	6
-#define BUZ_mode  			7
 
 
 #define time_1min       1
-#define time_T1         5
-#define time_T2			    10
-#define time_T3				  15
+#define time_T0         1
+#define time_T1         59
+#define time_T2			    5
+#define time_T3				  188   //every 17.5 s for 0necycle 188 cycle =55 min
+
+
 #define time_5s					5
 #define time_1s         1
 
@@ -73,6 +73,6 @@ extern volatile uint8 state,next_state,switch_state ;
 extern volatile uint16 process_time,buz_time,key_holdtime;
 extern volatile uint8  LED_type, O3_level;
 extern volatile uint16 Time_us,Time_ms,Time_sec,Time_min;
-extern volatile bit Timer_update,Beep, UV_on,ION_on,switch_update;
+extern volatile bit Timer_update,Beep, UV_on,sleep_on,switch_update;
 
 #endif

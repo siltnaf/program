@@ -11,7 +11,7 @@ volatile uint8 state,next_state,switch_state;
 volatile uint8   O3_level,LED_type;
 volatile uint16 process_time,buz_time,key_holdtime;
 volatile uint16 Time_us, Time_ms,Time_sec,Time_min;
-volatile bit Timer_update,Beep, UV_on,ION_on,switch_update;
+volatile bit Timer_update,Beep, UV_on, sleep_on,switch_update;
 
 
 
@@ -21,13 +21,9 @@ void DCDC_enable(void)
 	
 	
 	
-												//P35 as input
+	SET_INPUT(IO_VCC_det);								
+	if ((VCC_det==0)&&(Time_ms<500)==0) VCC_EN=0; else 	VCC_EN=1;
 		
-											P3M1 |=0x20;                      	// P3M1 |= 0b00100000;
-											P3M0 &=0xdf;												// P3M0 &= 0b11011111;          
-
-//
-	if ((VCC_det==0)&&((Time_ms<500)==0)) VCC_EN=0; else VCC_EN=1;
 	
 }
 
@@ -49,7 +45,7 @@ void Check_switch()
 										break;
 				case 1:			
 										
-										state=O3_mode;
+										state=uv_mode;
 										break;
 		
 				
@@ -96,17 +92,29 @@ void State_process()
 	
 										break;
 	
-	 
+	 	case uv_mode:				
+										
+										DCDC_enable();	
+										LED_type=2;
+										O3_level=1;
+										UV_on=1;
+										
+										if (Time_min>=time_T0) 
+										{
+											Time_min=0;
+											next_state=O3_saving_mode; 
+										}else next_state=O3_mode;
+										break;
 	
 	
 		case O3_mode:				
 										
 										DCDC_enable();	
 										LED_type=2;
-										O3_level=2;
-										UV_on=0;
-										ION_on=0;
-										if (Time_min>=59) 
+										O3_level=1;
+										UV_on=1;
+										
+										if (Time_min>=time_T1) 
 										{
 											Time_min=0;
 											next_state=O3_saving_mode; 
@@ -119,12 +127,43 @@ void State_process()
 										LED_type=4;
 										O3_level=1;
 										UV_on=0;
-										ION_on=0;
-										next_state=O3_saving_mode;
-										break;
 										
+										if (Time_min>=time_T2) 
+										{
+											LED_type=0;
+											Time_min=0;
+											next_state=O3_off_mode; 
+										}else next_state=O3_saving_mode;
+										
+										break;
+			
+		
+		
+		
+		case O3_off_mode:
+										UV_on=0;
+										LED_type=0;
+										O3_level=0;
+									 next_state=O3_off_mode;
+										
+										break;								
 		 
 	
+		case O3_LED_mode:
+										UV_on=0;
+										LED_type=2;
+										O3_level=0;
+										
+										if (Time_sec>=1)
+											{
+											LED_type=0;
+											next_state=O3_off_mode;
+											} else next_state=O3_LED_mode;
+										if (Time_min>=time_T3) 
+											{
+											Time_min=0;
+											next_state=O3_saving_mode; 
+											}
 		}
 		
 state=next_state;
@@ -147,13 +186,15 @@ void main(void)
 	InitExtInterrupt();
 
 	InitParameter()	;
+	
+
 
 	while(1) 
 	{ 
 	
 
-		
-		Check_switch();
+	
+  	Check_switch();
 		State_process();
 		
 
@@ -187,10 +228,9 @@ void int0() interrupt 0
 
 void int1() interrupt 2
 {
-   
+ if (RC==0) Time_min++;
+
 }
-
-
  
 void timer0() interrupt 1
 {
