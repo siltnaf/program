@@ -10,8 +10,8 @@
 volatile uint8 state,next_state,switch_state;
 volatile uint8   O3_level,LED_type;
 volatile uint16 process_time,buz_time,key_holdtime;
-volatile uint16 Time_us, Time_ms,Time_sec,Time_min;
-volatile bit Timer_update,Beep, UV_on, sleep_on,switch_update;
+volatile uint16 Time_us, Time_ms,Time_sec,Time_min,Time_cnt;
+volatile bit Timer_update,Beep, UV_on, O3_on,switch_update;
 
 
 
@@ -102,8 +102,8 @@ void State_process()
 										if (Time_min>=time_T0) 
 										{
 											Time_min=0;
-											next_state=O3_saving_mode; 
-										}else next_state=O3_mode;
+											next_state=O3_mode; 
+										}else next_state=uv_mode;
 										break;
 	
 	
@@ -112,7 +112,7 @@ void State_process()
 										DCDC_enable();	
 										LED_type=2;
 										O3_level=1;
-										UV_on=1;
+										UV_on=0;
 										
 										if (Time_min>=time_T1) 
 										{
@@ -228,7 +228,15 @@ void int0() interrupt 0
 
 void int1() interrupt 2
 {
- if (RC==0) Time_min++;
+ if (RC==0) 
+ {
+	 Time_cnt++;
+	 if (Time_cnt>=3)
+		{
+			Time_cnt=0;
+			Time_min++;
+		}
+ }
 
 }
  

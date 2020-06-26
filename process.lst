@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   PROCESS                                                               06/26/2020 07:54:38 PAGE 1   
+C51 COMPILER V9.54   PROCESS                                                               06/26/2020 23:54:11 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE PROCESS
@@ -62,7 +62,7 @@ line level    source
   52          void Process_UV()
   53          {
   54   1        if (UV_on==1)
-C51 COMPILER V9.54   PROCESS                                                               06/26/2020 07:54:38 PAGE 2   
+C51 COMPILER V9.54   PROCESS                                                               06/26/2020 23:54:11 PAGE 2   
 
   55   1        {
   56   2          UV=1;
@@ -75,147 +75,153 @@ line level    source
   63          
   64          void Process_O3()
   65          {
-  66   1        SET_CMOS(IO_O3);
+  66   1        
   67   1        switch (O3_level)
   68   1        {
   69   2          case 0:      
   70   2                        
-  71   2                        O3=0;
+  71   2                        O3_on=0;
   72   2                        break;
   73   2          case 1:      
   74   2                        
-  75   2                        O3=1;
+  75   2                        O3_on=1;
   76   2                                          
   77   2                        break;
   78   2          
   79   2        }
-  80   1      }
-  81          
-  82           
-  83          
-  84          void Process_LED()
-  85          {
-  86   1      if (Beep==0)
-  87   1      {
-  88   2        switch (LED_type)
-  89   2            {
-  90   3              case 0:     
-  91   3                
-  92   3                          
-  93   3                          SET_INPUT(IO_LED);
-  94   3                          
-  95   3                          break;
-  96   3              case 1:     
-  97   3                          SET_CMOS(IO_LED);
-  98   3                          LED=0;
-  99   3                          break;
- 100   3              case 2:     
- 101   3                          SET_CMOS(IO_LED);
- 102   3                          LED=1;
- 103   3                          break;
- 104   3              case 3:     
- 105   3                           
- 106   3                          if (Time_sec%2==0) 
- 107   3                          {
- 108   4                            SET_CMOS(IO_LED);
- 109   4                            LED=0;
- 110   4                          }
- 111   3                          else 
- 112   3                          {
- 113   4                            SET_INPUT(IO_LED);
- 114   4                          }
- 115   3                          break;
- 116   3              case 4:     
-C51 COMPILER V9.54   PROCESS                                                               06/26/2020 07:54:38 PAGE 3   
+  80   1        
+  81   1        SET_OUTPUT(IO_O3);
+  82   1        if (O3_on==1) O3=1; else O3=0; 
+  83   1        
+  84   1        
+  85   1        
+  86   1      }
+  87          
+  88           
+  89          
+  90          void Process_LED()
+  91          {
+  92   1      if (Beep==0)
+  93   1      {
+  94   2        switch (LED_type)
+  95   2            {
+  96   3              case 0:     
+  97   3                
+  98   3                          
+  99   3                          SET_INPUT(IO_LED);
+ 100   3                          
+ 101   3                          break;
+ 102   3              case 1:     
+ 103   3                          SET_CMOS(IO_LED);
+ 104   3                          LED=0;
+ 105   3                          break;
+ 106   3              case 2:     
+ 107   3                          SET_CMOS(IO_LED);
+ 108   3                          LED=1;
+ 109   3                          break;
+ 110   3              case 3:     
+ 111   3                           
+ 112   3                          if (Time_sec%2==0) 
+ 113   3                          {
+ 114   4                            SET_CMOS(IO_LED);
+ 115   4                            LED=0;
+ 116   4                          }
+C51 COMPILER V9.54   PROCESS                                                               06/26/2020 23:54:11 PAGE 3   
 
- 117   3                           
- 118   3                          if (((Time_us%512)==0) && ((Time_sec%4)==0))
- 119   3                          {
- 120   4                            SET_CMOS(IO_LED);
- 121   4                            LED=1;
- 122   4                          }
- 123   3                          else 
- 124   3                          {
- 125   4                            SET_INPUT(IO_LED);
- 126   4                          }
- 127   3                          break;      
- 128   3                          
- 129   3            } 
- 130   2      }
- 131   1      }
- 132          
- 133          
- 134           
- 135          
- 136          
- 137          void Process_sleep()
- 138            
- 139          {
- 140   1      
- 141   1        
- 142   1        if ((Time_min>=time_1min) && (state==standby_mode))
- 143   1        {
- 144   2          PCON|=0x02;
- 145   2          _nop_ ();
- 146   2          
- 147   2          
- 148   2          _nop_ ();
- 149   2          _nop_ ();
- 150   2          _nop_ ();
+ 117   3                          else 
+ 118   3                          {
+ 119   4                            SET_INPUT(IO_LED);
+ 120   4                          }
+ 121   3                          break;
+ 122   3              case 4:     
+ 123   3                           
+ 124   3                          if (((Time_us%512)==0) && ((Time_sec%4)==0))
+ 125   3                          {
+ 126   4                            SET_CMOS(IO_LED);
+ 127   4                            LED=1;
+ 128   4                          }
+ 129   3                          else 
+ 130   3                          {
+ 131   4                            SET_INPUT(IO_LED);
+ 132   4                          }
+ 133   3                          break;      
+ 134   3                          
+ 135   3            } 
+ 136   2      }
+ 137   1      }
+ 138          
+ 139          
+ 140           
+ 141          
+ 142          
+ 143          void Process_sleep()
+ 144            
+ 145          {
+ 146   1      
+ 147   1        
+ 148   1        if ((Time_min>=time_1min) && (state==standby_mode))
+ 149   1        {
+ 150   2          PCON|=0x02;
  151   2          _nop_ ();
- 152   2          _nop_ ();
- 153   2          _nop_ ();
+ 152   2          
+ 153   2          
  154   2          _nop_ ();
  155   2          _nop_ ();
  156   2          _nop_ ();
  157   2          _nop_ ();
- 158   2          
- 159   2          
- 160   2          
- 161   2        }
- 162   1      
- 163   1        
- 164   1      //  
- 165   1        if  ((state==O3_off_mode))
- 166   1        {
- 167   2          SET_CMOS(IO_RC);
- 168   2          RC=1;
- 169   2          delay_ms(10);
- 170   2          
- 171   2          SET_INPUT(IO_RC);
- 172   2          
- 173   2          PCON|=0x02;
- 174   2          _nop_ ();
- 175   2          _nop_ ();
- 176   2          _nop_ ();
- 177   2          _nop_ ();
- 178   2          _nop_ ();
-C51 COMPILER V9.54   PROCESS                                                               06/26/2020 07:54:38 PAGE 4   
+ 158   2          _nop_ ();
+ 159   2          _nop_ ();
+ 160   2          _nop_ ();
+ 161   2          _nop_ ();
+ 162   2          _nop_ ();
+ 163   2          _nop_ ();
+ 164   2          
+ 165   2          
+ 166   2          
+ 167   2        }
+ 168   1      
+ 169   1        
+ 170   1      //  
+ 171   1        if  ((state==O3_off_mode))
+ 172   1        {
+ 173   2          SET_CMOS(IO_RC);
+ 174   2          RC=1;
+ 175   2          delay_ms(10);
+ 176   2          
+ 177   2          SET_INPUT(IO_RC);
+ 178   2          
+C51 COMPILER V9.54   PROCESS                                                               06/26/2020 23:54:11 PAGE 4   
 
- 179   2          _nop_ ();
+ 179   2          PCON|=0x02;
  180   2          _nop_ ();
  181   2          _nop_ ();
  182   2          _nop_ ();
  183   2          _nop_ ();
  184   2          _nop_ ();
- 185   2          Time_ms=0;
- 186   2          Time_sec=0;
- 187   2          state=O3_LED_mode;
- 188   2          SET_CMOS(IO_RC);
- 189   2          RC=1;
- 190   2          
- 191   2          
- 192   2        }
- 193   1        
- 194   1        
- 195   1      }
- 196          
- 197          
- 198          
+ 185   2          _nop_ ();
+ 186   2          _nop_ ();
+ 187   2          _nop_ ();
+ 188   2          _nop_ ();
+ 189   2          _nop_ ();
+ 190   2          _nop_ ();
+ 191   2          Time_ms=0;
+ 192   2          Time_sec=0;
+ 193   2          state=O3_LED_mode;
+ 194   2          SET_CMOS(IO_RC);
+ 195   2          RC=1;
+ 196   2          
+ 197   2          
+ 198   2        }
+ 199   1        
+ 200   1        
+ 201   1      }
+ 202          
+ 203          
+ 204          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    307    ----
+   CODE SIZE        =    316    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

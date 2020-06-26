@@ -63,20 +63,26 @@ void Process_UV()
 
 void Process_O3()
 {
-	SET_CMOS(IO_O3);
+	
 	switch (O3_level)
 	{
 		case 0:      
 									
-									O3=0;
+									O3_on=0;
 									break;
 		case 1:			 
 									
-									O3=1;
+									O3_on=1;
 																		
 									break;
 		
 	}
+	
+	SET_OUTPUT(IO_O3);
+	if (O3_on==1) O3=1; else O3=0; 
+	
+	
+	
 }
 
  

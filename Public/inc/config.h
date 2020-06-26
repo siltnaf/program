@@ -42,10 +42,10 @@
 
 
 #define time_1min       1
-#define time_T0         1
-#define time_T1         59
+#define time_T0         5
+#define time_T1         50
 #define time_T2			    5
-#define time_T3				  188   //every 17.5 s for 0necycle 188 cycle =55 min
+#define time_T3				  53   //every 17.5 s for 0necycle so every 3 Time_cnt will account for 1 min
 
 
 #define time_5s					5
@@ -72,7 +72,7 @@
 extern volatile uint8 state,next_state,switch_state ;
 extern volatile uint16 process_time,buz_time,key_holdtime;
 extern volatile uint8  LED_type, O3_level;
-extern volatile uint16 Time_us,Time_ms,Time_sec,Time_min;
-extern volatile bit Timer_update,Beep, UV_on,sleep_on,switch_update;
+extern volatile uint16 Time_us,Time_ms,Time_sec,Time_min,Time_cnt;
+extern volatile bit Timer_update,Beep, UV_on,O3_on,switch_update;
 
 #endif
