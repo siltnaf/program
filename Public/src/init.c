@@ -10,15 +10,15 @@ void IO_Init(void)
 {
   
 	//               			  P3M1   P3M0
-	//P30(VCC_EN)->OD         1      1
+	//P30(UV)->CMOS        		0      1
 	//P31(LED)->CMOS  				0      1
-	//P32(SW/BUZ)->I/O	   		1/0    0/1        
-	//P33(O3)->CMOS	    			0      1
-	//P34(UV)->CMOS      			0      1
-	//P35(ION)->OUTPUT        0      0
+	//P32(SW)->I	   					1			 0       
+	//P33(FAN)->CMOS	    		0      1
+	//P34(SPEED1)->CMOS      	0      1
+	//P35(SPEED2)->CMOS       0      0
 	
 	
-	P3M1 = 0x05;
+	P3M1 = 0x04;
   P3M0 = 0x1b;
 	
 }
@@ -73,7 +73,7 @@ void InitParameter(void )
 	state=standby_mode;
 	switch_state=0;
 	process_time=0;
-	buz_time=0;
+	
 	Time_us=0;
   Time_ms=0;
 	Time_sec=0;

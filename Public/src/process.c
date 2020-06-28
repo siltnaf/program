@@ -50,100 +50,42 @@ void Process_UV()
 	if (UV_on==1)
 	{
 	
-		if((Time_us%2)==0) UV=0;
-		   else UV=1;
+		UV=1;
 	}
 	else UV=0;
 
 }
 
-void Process_O3()
-{
-	switch (O3_level)
-	{
-		case 0:      
-									
-									O3=0;
-									break;
-		case 1:			 
-									switch (Time_sec%4)
-									{
-										case 0,1:						
-																				O3=1;
-																				break;
-										
-										case 2:							
-																				O3=1;	           	//enable every 1 out of 3sec				
-																				break;
-										
-										case 3:						 
-																				O3=0;
-																				break;
-									}									
-									break;
-		case 2:				
-								
-									O3=1;
-									break;
-	}
-}
 
-void Process_BUZ()
-{
  
-	
-if (Beep==0) 
-{
-	
-	
-	
-	
-	 SET_INPUT(IO_BUZ);
-		
-}
-
-	
-
-
-
-}
 
 
 void Process_LED()
 {
-if (Beep==0)
-{
+
 	switch (LED_type)
 			{
-				case 0:			LED=1;
+				case 0:			LED=0;
 										break;
-				case 1:			LED=0;
+
+				case 1: 		
+										if (Time_sec%4==0) LED=1;else LED=0;
 										break;
+				
 				case 2: 		
+										if (Time_sec%3==0) LED=1;else LED=0;
+										break;
+				case 3: 		
 										if (Time_sec%2==0) LED=1;else LED=0;
 										break;
-			}	
-}
-}
-
-
-void Process_ION()
-	
-{
-
-	SET_OUTPUT(IO_ION);
 				
-			
-	
-	
-	
-	
-	if (ION_on==1) ION=1; else ION=0;
-				
-
-	
-	
+				case 4: 		
+									LED=1;
+										break;
+			}
 }
+
+
 
 
 void Process_sleep()
