@@ -32,25 +32,41 @@ void Check_switch()
 									
 										state=standby_mode;
 										break;
-				case 1:			
-										
-										state=speed0_mode;
+//				case 1:			
+//										
+//										state=speed0_mode;
+//										break;
+				case 1: 		
+									
+										UV_on=0;
+										state=speed1_mode;
 										break;
 				case 2: 		
 									
-									
+										UV_on=1;
+				
 										state=speed1_mode;
 										break;
+				
 				case 3: 		
 									
-									
+										UV_on=0;
 										state=speed2_mode;
 										break;
+				
+				
 				case 4: 		
 									
-									
-										state=speed3_mode;
+										UV_on=1;
+										state=speed2_mode;
 										break;
+				
+				
+//				case 4: 		
+//									
+//									
+//										state=speed3_mode;
+//										break;
 				
 			}	
 			
@@ -111,9 +127,9 @@ void State_process()
 	
 	case speed1_mode:			
 										
-										
-										LED_type=2;
-										UV_on=1;
+//										LED_type=2;
+										LED_type=3;
+//										UV_on=1;
 										SET_INPUT(IO_SPEED2);
 										SET_CMOS(IO_SPEED1);
 										SPEED1=0;
@@ -126,9 +142,9 @@ void State_process()
 	
 	case speed2_mode:	
 											
-									
-										LED_type=3;
-										UV_on=1;
+//										LED_type=3;
+										LED_type=4;
+//										UV_on=1;
 										SET_INPUT(IO_SPEED1);
 										SET_CMOS(IO_SPEED2);
 										SPEED2=0;

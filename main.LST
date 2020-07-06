@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   MAIN                                                                  06/29/2020 02:37:14 PAGE 1   
+C51 COMPILER V9.54   MAIN                                                                  07/03/2020 04:46:04 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
@@ -41,232 +41,248 @@ line level    source
   32   3                        
   33   3                          state=standby_mode;
   34   3                          break;
-  35   3              case 1:     
-  36   3                          
-  37   3                          state=speed0_mode;
-  38   3                          break;
-  39   3              case 2:     
+  35   3      //        case 1:     
+  36   3      //                    
+  37   3      //                    state=speed0_mode;
+  38   3      //                    break;
+  39   3              case 1:     
   40   3                        
-  41   3                        
+  41   3                          UV_on=0;
   42   3                          state=speed1_mode;
   43   3                          break;
-  44   3              case 3:     
+  44   3              case 2:     
   45   3                        
-  46   3                        
-  47   3                          state=speed2_mode;
-  48   3                          break;
-  49   3              case 4:     
-  50   3                        
-  51   3                        
-  52   3                          state=speed3_mode;
-  53   3                          break;
-  54   3              
-  55   3            } 
-C51 COMPILER V9.54   MAIN                                                                  06/29/2020 02:37:14 PAGE 2   
+  46   3                          UV_on=1;
+  47   3              
+  48   3                          state=speed1_mode;
+  49   3                          break;
+  50   3              
+  51   3              case 3:     
+  52   3                        
+  53   3                          UV_on=0;
+  54   3                          state=speed2_mode;
+  55   3                          break;
+C51 COMPILER V9.54   MAIN                                                                  07/03/2020 04:46:04 PAGE 2   
 
-  56   2            
-  57   2        
-  58   2            Time_ms=0;
-  59   2            Time_sec=0;
-  60   2            Time_min=0;
-  61   2            switch_update=0;
-  62   2            key_holdtime=0;
-  63   2            delay_ms(250);
-  64   2          }   
-  65   1        
-  66   1         
-  67   1          
-  68   1      
-  69   1      
-  70   1        
-  71   1      }
-  72                
-  73              
-  74              
-  75              
-  76            
-  77            
-  78            
-  79          
-  80          void State_process()
-  81          {
-  82   1          switch (state)
-  83   1          {
-  84   2        
-  85   2        case standby_mode:    
-  86   2                          
-  87   2                       
-  88   2                          UV_on  = 0;
-  89   2                          LED_type=0;
-  90   2                          FAN=0;
-  91   2                          SET_INPUT(IO_SPEED1);
-  92   2                          SET_INPUT(IO_SPEED2);
-  93   2                          next_state=standby_mode;
-  94   2        
-  95   2                           
-  96   2        
-  97   2        
-  98   2                          break;
-  99   2        
- 100   2        case speed0_mode:       
- 101   2                          
+  56   3              
+  57   3              
+  58   3              case 4:     
+  59   3                        
+  60   3                          UV_on=1;
+  61   3                          state=speed2_mode;
+  62   3                          break;
+  63   3              
+  64   3              
+  65   3      //        case 4:     
+  66   3      //                  
+  67   3      //                  
+  68   3      //                    state=speed3_mode;
+  69   3      //                    break;
+  70   3              
+  71   3            } 
+  72   2            
+  73   2        
+  74   2            Time_ms=0;
+  75   2            Time_sec=0;
+  76   2            Time_min=0;
+  77   2            switch_update=0;
+  78   2            key_holdtime=0;
+  79   2            delay_ms(250);
+  80   2          }   
+  81   1        
+  82   1         
+  83   1          
+  84   1      
+  85   1      
+  86   1        
+  87   1      }
+  88                
+  89              
+  90              
+  91              
+  92            
+  93            
+  94            
+  95          
+  96          void State_process()
+  97          {
+  98   1          switch (state)
+  99   1          {
+ 100   2        
+ 101   2        case standby_mode:    
  102   2                          
- 103   2                          LED_type=1;
- 104   2                          UV_on=1;
- 105   2                          SET_INPUT(IO_SPEED1);
- 106   2                          SET_INPUT(IO_SPEED2);
- 107   2                          
- 108   2                          FAN=1;
- 109   2                          next_state=speed0_mode;
- 110   2                          break;
- 111   2        
- 112   2        case speed1_mode:     
- 113   2                          
- 114   2                          
- 115   2                          LED_type=2;
- 116   2                          UV_on=1;
- 117   2                          SET_INPUT(IO_SPEED2);
-C51 COMPILER V9.54   MAIN                                                                  06/29/2020 02:37:14 PAGE 3   
+ 103   2                       
+ 104   2                          UV_on  = 0;
+ 105   2                          LED_type=0;
+ 106   2                          FAN=0;
+ 107   2                          SET_INPUT(IO_SPEED1);
+ 108   2                          SET_INPUT(IO_SPEED2);
+ 109   2                          next_state=standby_mode;
+ 110   2        
+ 111   2                           
+ 112   2        
+ 113   2        
+ 114   2                          break;
+ 115   2        
+ 116   2        case speed0_mode:       
+ 117   2                          
+C51 COMPILER V9.54   MAIN                                                                  07/03/2020 04:46:04 PAGE 3   
 
- 118   2                          SET_CMOS(IO_SPEED1);
- 119   2                          SPEED1=0;
- 120   2      
- 121   2                         FAN=1;
- 122   2                          
- 123   2                         next_state=speed1_mode;
- 124   2                          break;
- 125   2        
- 126   2        
- 127   2        case speed2_mode: 
- 128   2                            
- 129   2                        
- 130   2                          LED_type=3;
- 131   2                          UV_on=1;
- 132   2                          SET_INPUT(IO_SPEED1);
- 133   2                          SET_CMOS(IO_SPEED2);
- 134   2                          SPEED2=0;
- 135   2                          FAN=1;
- 136   2                          next_state= speed2_mode;
- 137   2      
- 138   2                          break;
- 139   2        case speed3_mode: 
- 140   2                            
- 141   2                          
- 142   2                          LED_type=4;
- 143   2                          UV_on=1;
- 144   2                          SET_CMOS(IO_SPEED1);
- 145   2                          SET_CMOS(IO_SPEED2);
- 146   2                          SPEED1=0;
- 147   2                          SPEED2=0;
- 148   2                          FAN=1;
- 149   2                         
- 150   2                          next_state= speed3_mode;
- 151   2      
- 152   2                          break;
- 153   2            
- 154   2      
- 155   2      
- 156   2      
- 157   2        
- 158   2          }
- 159   1          
- 160   1      state=next_state;
- 161   1      
- 162   1      
- 163   1      }
- 164          
- 165          
- 166          
- 167          
- 168          
- 169          
- 170          
- 171          
- 172          void main(void) 
- 173          {
- 174   1        IO_Init();
- 175   1        InitTime0();
- 176   1        InitTime2();
- 177   1        InitExtInterrupt();
+ 118   2                          
+ 119   2                          LED_type=1;
+ 120   2                          UV_on=1;
+ 121   2                          SET_INPUT(IO_SPEED1);
+ 122   2                          SET_INPUT(IO_SPEED2);
+ 123   2                          
+ 124   2                          FAN=1;
+ 125   2                          next_state=speed0_mode;
+ 126   2                          break;
+ 127   2        
+ 128   2        case speed1_mode:     
+ 129   2                          
+ 130   2      //                    LED_type=2;
+ 131   2                          LED_type=3;
+ 132   2      //                    UV_on=1;
+ 133   2                          SET_INPUT(IO_SPEED2);
+ 134   2                          SET_CMOS(IO_SPEED1);
+ 135   2                          SPEED1=0;
+ 136   2      
+ 137   2                         FAN=1;
+ 138   2                          
+ 139   2                         next_state=speed1_mode;
+ 140   2                          break;
+ 141   2        
+ 142   2        
+ 143   2        case speed2_mode: 
+ 144   2                            
+ 145   2      //                    LED_type=3;
+ 146   2                          LED_type=4;
+ 147   2      //                    UV_on=1;
+ 148   2                          SET_INPUT(IO_SPEED1);
+ 149   2                          SET_CMOS(IO_SPEED2);
+ 150   2                          SPEED2=0;
+ 151   2                          FAN=1;
+ 152   2                          next_state= speed2_mode;
+ 153   2      
+ 154   2                          break;
+ 155   2        case speed3_mode: 
+ 156   2                            
+ 157   2                          
+ 158   2                          LED_type=4;
+ 159   2                          UV_on=1;
+ 160   2                          SET_CMOS(IO_SPEED1);
+ 161   2                          SET_CMOS(IO_SPEED2);
+ 162   2                          SPEED1=0;
+ 163   2                          SPEED2=0;
+ 164   2                          FAN=1;
+ 165   2                         
+ 166   2                          next_state= speed3_mode;
+ 167   2      
+ 168   2                          break;
+ 169   2            
+ 170   2      
+ 171   2      
+ 172   2      
+ 173   2        
+ 174   2          }
+ 175   1          
+ 176   1      state=next_state;
+ 177   1      
  178   1      
- 179   1        InitParameter() ;
-C51 COMPILER V9.54   MAIN                                                                  06/29/2020 02:37:14 PAGE 4   
+ 179   1      }
+C51 COMPILER V9.54   MAIN                                                                  07/03/2020 04:46:04 PAGE 4   
 
- 180   1      
- 181   1        while(1) 
- 182   1        { 
- 183   2        
- 184   2      
- 185   2          
- 186   2          Check_switch();
- 187   2          State_process();
- 188   2          
- 189   2      
- 190   2          Process_Timer();
- 191   2      
- 192   2          Process_UV();
- 193   2          Process_LED();
- 194   2         
- 195   2        
- 196   2          Process_sleep();
- 197   2      
- 198   2      
- 199   2          
- 200   2        } 
- 201   1      }
- 202          
- 203          void int0() interrupt 0
- 204          {
- 205   1      
- 206   1         if ((switch_update==0)&&(SW==1)) 
- 207   1         {
- 208   2            Time_us=0;
- 209   2            Time_ms=0;
- 210   2            Time_sec=0;
- 211   2            Time_min=0;
- 212   2            
- 213   2            key_holdtime=0;
- 214   2            switch_update=1;
- 215   2         }
- 216   1      }
- 217          
- 218          void int1() interrupt 2
- 219          {
- 220   1         
- 221   1      }
- 222          
- 223          
- 224           
- 225          void timer0() interrupt 1
- 226          {
- 227   1      
- 228   1      if (switch_update==1) 
- 229   1      {
- 230   2        key_holdtime++;
- 231   2        
- 232   2        
- 233   2        
- 234   2          
- 235   2          }
+ 180          
+ 181          
+ 182          
+ 183          
+ 184          
+ 185          
+ 186          
+ 187          
+ 188          void main(void) 
+ 189          {
+ 190   1        IO_Init();
+ 191   1        InitTime0();
+ 192   1        InitTime2();
+ 193   1        InitExtInterrupt();
+ 194   1      
+ 195   1        InitParameter() ;
+ 196   1      
+ 197   1        while(1) 
+ 198   1        { 
+ 199   2        
+ 200   2      
+ 201   2          
+ 202   2          Check_switch();
+ 203   2          State_process();
+ 204   2          
+ 205   2      
+ 206   2          Process_Timer();
+ 207   2      
+ 208   2          Process_UV();
+ 209   2          Process_LED();
+ 210   2         
+ 211   2        
+ 212   2          Process_sleep();
+ 213   2      
+ 214   2      
+ 215   2          
+ 216   2        } 
+ 217   1      }
+ 218          
+ 219          void int0() interrupt 0
+ 220          {
+ 221   1      
+ 222   1         if ((switch_update==0)&&(SW==1)) 
+ 223   1         {
+ 224   2            Time_us=0;
+ 225   2            Time_ms=0;
+ 226   2            Time_sec=0;
+ 227   2            Time_min=0;
+ 228   2            
+ 229   2            key_holdtime=0;
+ 230   2            switch_update=1;
+ 231   2         }
+ 232   1      }
+ 233          
+ 234          void int1() interrupt 2
+ 235          {
  236   1         
- 237   1        Timer_update=1;
- 238   1      }
+ 237   1      }
+ 238          
  239          
- 240          
- 241          
-C51 COMPILER V9.54   MAIN                                                                  06/29/2020 02:37:14 PAGE 5   
+ 240           
+ 241          void timer0() interrupt 1
+C51 COMPILER V9.54   MAIN                                                                  07/03/2020 04:46:04 PAGE 5   
 
- 242          
- 243          void timer2() interrupt 12  
- 244          {
- 245   1      
- 246   1           
- 247   1      }
- 248          
+ 242          {
+ 243   1      
+ 244   1      if (switch_update==1) 
+ 245   1      {
+ 246   2        key_holdtime++;
+ 247   2        
+ 248   2        
+ 249   2        
+ 250   2          
+ 251   2          }
+ 252   1         
+ 253   1        Timer_update=1;
+ 254   1      }
+ 255          
+ 256          
+ 257          
+ 258          
+ 259          void timer2() interrupt 12  
+ 260          {
+ 261   1      
+ 262   1           
+ 263   1      }
+ 264          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    396    ----
+   CODE SIZE        =    392    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
