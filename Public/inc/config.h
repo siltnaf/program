@@ -50,7 +50,8 @@
 #define time_5s					5
 #define time_1s         1
 
-#define press_time     200
+#define press_200ms     200
+#define press_3s        3000
 #define O3_SEL					1
 #define ION_SEL         0
  

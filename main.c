@@ -34,8 +34,13 @@ void DCDC_enable(void)
 
 
 void Check_switch()
+	
+
+
 {
-		if ((switch_update==1) &&(key_holdtime>press_time))
+	  
+
+		if ((switch_update==1) &&(key_holdtime>press_200ms))
 		{
 		 if (SW1_pressed)
 		 {
@@ -49,6 +54,11 @@ void Check_switch()
 									break;
 			 }
 			 SW2_state=0;
+			 key_holdtime=0;
+			 SW1_pressed=0;
+			SW2_pressed=0;
+			switch_update=0;
+			
 			}
 			 if (SW2_pressed)
 		 {
@@ -62,13 +72,15 @@ void Check_switch()
 									break;
 			 }
 			 SW1_state=0;
-			}
+			 key_holdtime=0;
+			 SW1_pressed=0;
+				SW2_pressed=0;
+				switch_update=0;
+			
+			} 
 			 
-
-			SW1_pressed=0;
-			SW2_pressed=0;
-			switch_update=0;
-			key_holdtime=0;
+			
+			
 			delay_ms(250);
 		}		
 	
@@ -138,7 +150,7 @@ void State_process()
 										
 									DCDC_enable();
 	
-									 LED_type=0;
+									 LED_type=1;
 										O3_level=2;
 										UV_on=1;
 										ION_on=1;
