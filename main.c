@@ -62,21 +62,46 @@ void Check_switch()
 			}
 			 if (SW2_pressed)
 		 {
-			 SW2_state++;
-			 if (SW2_state>1) SW2_state=0;
-			 switch (SW2_state)
-			 {
+				UV=1;
+			  LED=0;
+				if ((key_holdtime>press_3s)&&(SW2==1))
+				{
+					SW2_state++;
+					if (SW2_state>1) SW2_state=0;
+					switch (SW2_state)
+					{
 				 case 0:  state=standby_mode;
 									break;
 				 case 1:  state=UVION_mode;
 									break;
-			 }
-			 SW1_state=0;
-			 key_holdtime=0;
-			 SW1_pressed=0;
+					}
+				SW1_state=0;
+				key_holdtime=0;
+				SW1_pressed=0;
 				SW2_pressed=0;
 				switch_update=0;
-			
+				}
+				else
+				{
+					if (state==UVION_mode)
+					{
+						state=standby_mode;
+					  SW2_state=0;
+						SW1_state=0;
+						key_holdtime=0;
+						SW1_pressed=0;
+						SW2_pressed=0;
+						switch_update=0;
+					}
+					if (SW2==0)
+					{
+						key_holdtime=0;
+						SW1_pressed=0;
+						SW2_pressed=0;
+						switch_update=0;
+					}
+				}
+				
 			} 
 			 
 			
