@@ -35,12 +35,14 @@
 #define int16 signed int idata
 
 
-#define standby_mode 	0
-#define ION_mode  		1
-#define UVION_mode 		2
-#define ozone_mode				3
-#define wait_mode     4
-#define BUZ_mode  		5
+#define standby_mode 		0
+#define ION_mode	  		1
+#define O3_mode					2	
+#define O3_saving_mode 	3
+#define UVION_mode 			4
+#define ozone_mode			5
+#define wait_mode     	6
+#define BUZ_mode  			7
 
 
 #define time_1min       1
@@ -52,6 +54,7 @@
 
 #define press_200ms     200
 #define press_3s        3000
+#define scan_3s         300
 #define O3_SEL					1
 #define ION_SEL         0
  
@@ -69,10 +72,10 @@
  #define P3_0 0
  
  
-extern volatile uint8 state,next_state,SW1_state,SW2_state ;
+extern volatile uint8 state,next_state,SW1_state;
 extern volatile uint16 process_time,buz_time,key_holdtime;
 extern volatile uint8  LED_type, O3_level;
-extern volatile uint16 Time_us,Time_ms,Time_sec,Time_min;
-extern volatile bit Timer_update,Beep, UV_on,ION_on,O3_on,switch_update,SW1_pressed,SW2_pressed;
+extern volatile uint16 Time_us,Time_ms,Time_sec,Time_min,scan_sec;
+extern volatile bit Timer_update,Beep, UV_on,ION_on,O3_on,switch_update,SW1_pressed,SW2_pressed,scan;
 
 #endif

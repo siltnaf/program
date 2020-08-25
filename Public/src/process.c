@@ -28,6 +28,7 @@ void Process_Timer()
 			{
 				
 				Time_ms=0;
+				if (scan==1) scan_sec++;
 				Time_sec++;
 			}
 		if (Time_sec>=60)
@@ -37,6 +38,12 @@ void Process_Timer()
 				Time_min++;
 			}
 		
+		if (Time_min>=60)
+			{
+				Time_min=0;
+			}
+			
+			
 	}	
 
 
@@ -47,7 +54,7 @@ void Process_Timer()
 
 void Process_UV()
 {
-	if (UV_on==1)
+	if ((UV_on==1)&&(scan==0))
 	{
 	
 		if((Time_us%2)==0) UV=0;
@@ -111,17 +118,49 @@ if (Beep==0)
 
 void Process_LED()
 {
-if (Beep==0)
+if ((Beep==0) && (scan==0))
 {
 	switch (LED_type)
 			{
-				case 0:			LED=1;
+				case 0:			
+					
+										
+										SET_INPUT(IO_LED);
+										
 										break;
-				case 1:			LED=0;
+				case 1:			
+										SET_CMOS(IO_LED);
+										LED=0;
 										break;
-				case 2: 		
-										if (Time_sec%2==0) LED=1;else LED=0;
+				case 2:			
+										SET_CMOS(IO_LED);
+										LED=1;
 										break;
+				case 3: 		
+										 
+										if (Time_sec%2==0) 
+										{
+											SET_CMOS(IO_LED);
+											LED=0;
+										}
+										else 
+										{
+											SET_INPUT(IO_LED);
+										}
+										break;
+				case 4: 		
+										 
+										if (((Time_us%512)==0) && ((Time_sec%4)==0))
+										{
+											SET_CMOS(IO_LED);
+											LED=1;
+										}
+										else 
+										{
+											SET_INPUT(IO_LED);
+										}
+										break;			
+										
 			}	
 }
 }
