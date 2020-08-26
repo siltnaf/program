@@ -178,7 +178,7 @@ void State_process()
 									 LED_type=1;
 										O3_level=2;
 										UV_on=1;
-										ION_on=1;
+										ION_on=0;
 										
 										if (Time_min>=time_T1) next_state=ozone_mode; else next_state=UVION_mode;
 										break;
@@ -190,7 +190,7 @@ void State_process()
 									LED_type=2;
 										O3_level=2;
 										UV_on=0;
-										ION_on=1;
+										ION_on=0;
 										
 	
 	 
@@ -236,6 +236,7 @@ void State_process()
 										Beep=0;
 										BUZ=0;
 										delay_ms(500);
+										LED_type=0;
 										next_state=  standby_mode;
 							
 										break;

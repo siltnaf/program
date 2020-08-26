@@ -1,0 +1,1 @@
+"Public\src\init.c" OMF2 ROM(COMPACT) OPTIMIZE (8,SPEED) BROWSE DEBUG PRINT(.\init.lst) TABS (2) OBJECT(init.obj)

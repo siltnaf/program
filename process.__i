@@ -1,0 +1,1 @@
+"Public\src\process.c" OMF2 ROM(COMPACT) OPTIMIZE (8,SPEED) BROWSE DEBUG PRINT(.\process.lst) TABS (2) OBJECT(process.obj)
