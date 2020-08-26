@@ -313,6 +313,7 @@ void State_process()
 										Beep=0;
 										BUZ=0;
 										delay_ms(500);
+										LED_type=0;
 										next_state=  standby_mode;
 									 
 										break;
