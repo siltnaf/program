@@ -262,7 +262,7 @@ void State_process()
 	case ozone_mode:	
 											
 									DCDC_enable();
-									LED_type=2;
+									LED_type=3;
 										O3_level=2;
 										UV_on=0;
 										ION_on=0;
@@ -279,7 +279,7 @@ void State_process()
 	case wait_mode:	
 											
 									DCDC_enable();
-								   	LED_type=2;
+								   	LED_type=3;
 										O3_level=0;
 										UV_on=0;
 										ION_on=1;

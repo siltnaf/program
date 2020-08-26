@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   INIT                                                                  08/26/2020 07:37:56 PAGE 1   
+C51 COMPILER V9.54   INIT                                                                  08/26/2020 08:06:01 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE INIT
@@ -62,7 +62,7 @@ line level    source
   52          
   53          
   54          void InitExtInterrupt (void)
-C51 COMPILER V9.54   INIT                                                                  08/26/2020 07:37:56 PAGE 2   
+C51 COMPILER V9.54   INIT                                                                  08/26/2020 08:06:01 PAGE 2   
 
   55          {
   56   1      

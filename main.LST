@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   MAIN                                                                  08/26/2020 07:37:55 PAGE 1   
+C51 COMPILER V9.54   MAIN                                                                  08/26/2020 08:06:01 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
@@ -62,7 +62,7 @@ line level    source
   53   3                          SET_INPUT(IO_LED);
   54   3                          break;
   55   3              case 1:     
-C51 COMPILER V9.54   MAIN                                                                  08/26/2020 07:37:55 PAGE 2   
+C51 COMPILER V9.54   MAIN                                                                  08/26/2020 08:06:01 PAGE 2   
 
   56   3                          if (Time_ms<500) 
   57   3                          {
@@ -126,7 +126,7 @@ line level    source
  115   3             {
  116   4                case 0:     
  117   4                        
-C51 COMPILER V9.54   MAIN                                                                  08/26/2020 07:37:55 PAGE 3   
+C51 COMPILER V9.54   MAIN                                                                  08/26/2020 08:06:01 PAGE 3   
 
  118   4                        state=standby_mode;
  119   4                          break;
@@ -190,7 +190,7 @@ line level    source
  177          
  178          void State_process()
  179          {
-C51 COMPILER V9.54   MAIN                                                                  08/26/2020 07:37:55 PAGE 4   
+C51 COMPILER V9.54   MAIN                                                                  08/26/2020 08:06:01 PAGE 4   
 
  180   1          switch (state)
  181   1          {
@@ -254,7 +254,7 @@ line level    source
  239   2          
  240   2                          next_state=O3_saving_mode;
  241   2                         
-C51 COMPILER V9.54   MAIN                                                                  08/26/2020 07:37:55 PAGE 5   
+C51 COMPILER V9.54   MAIN                                                                  08/26/2020 08:06:01 PAGE 5   
 
  242   2                          break;
  243   2                          
@@ -279,7 +279,7 @@ line level    source
  262   2        case ozone_mode:  
  263   2                            
  264   2                        DCDC_enable();
- 265   2                        LED_type=2;
+ 265   2                        LED_type=3;
  266   2                          O3_level=2;
  267   2                          UV_on=0;
  268   2                          ION_on=0;
@@ -296,7 +296,7 @@ line level    source
  279   2        case wait_mode: 
  280   2                            
  281   2                        DCDC_enable();
- 282   2                          LED_type=2;
+ 282   2                          LED_type=3;
  283   2                          O3_level=0;
  284   2                          UV_on=0;
  285   2                          ION_on=1;
@@ -318,7 +318,7 @@ line level    source
  301   2                          
  302   2                          break;
  303   2      
-C51 COMPILER V9.54   MAIN                                                                  08/26/2020 07:37:55 PAGE 6   
+C51 COMPILER V9.54   MAIN                                                                  08/26/2020 08:06:01 PAGE 6   
 
  304   2                          
  305   2        case BUZ_mode:
@@ -382,7 +382,7 @@ line level    source
  363   1      }
  364          
  365          void int0() interrupt 0
-C51 COMPILER V9.54   MAIN                                                                  08/26/2020 07:37:55 PAGE 7   
+C51 COMPILER V9.54   MAIN                                                                  08/26/2020 08:06:01 PAGE 7   
 
  366          {
  367   1      
@@ -446,7 +446,7 @@ line level    source
  425   2        //P30(BUZ)->INPUT         1      1
  426   2        //P31(LED)->CMOS          0      1
  427   2        //P32(SW1/BUZ)->INPUT       0      1
-C51 COMPILER V9.54   MAIN                                                                  08/26/2020 07:37:55 PAGE 8   
+C51 COMPILER V9.54   MAIN                                                                  08/26/2020 08:06:01 PAGE 8   
 
  428   2        //P33(O3)->OUTPUT         0      0
  429   2        //P34(UV)->CMOS           0      1
