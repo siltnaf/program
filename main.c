@@ -39,7 +39,37 @@ void Check_switch()
 {
 		if (key_holdtime>press_200ms) 
 		{
+			
+			switch (SW1_state)
 				
+			{
+				case 0:		LED_type=0;
+										break;
+				case 1:   LED_type=1;
+										break;
+				case 2:		LED_type=2;
+									break;
+				case 3:	 
+									
+				
+				
+				
+
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			
 			
 			if ((key_holdtime>press_3s)&&(SW1==1))
 				{
