@@ -33,147 +33,72 @@ void DCDC_enable(void)
 
 
 
-void Check_switch()
+
 	
-
-
+void Check_switch()
 {
-		
-		if (scan_sec>5) 
+		if (key_holdtime>press_200ms) 
 		{
-			scan=0;			
-//			SW1_state=0;
-		}
-	  if (scan==1)
-		{
-		 switch (SW1_state)
-			 {
-					case 0:			
+			SW1_state++;
+			if (SW1_state>3) SW1_state=0;
+		 
+			
+			switch (SW1_state)
+			{
+				case 0:			
 									
-										SET_INPUT(IO_LED);
-					
+										state=standby_mode;
 										break;
 				case 1:			
-										if (Time_ms<500) 
-										{
-											SET_CMOS(IO_LED);
-											LED=0;
-										}
-										else 
-										{
-											SET_INPUT(IO_LED);
-										}
-										next_SW1_state=2;
+										
+										state=ION_mode;
 										break;
 				case 2: 		
 									
-										if (Time_ms<500) 
-										{
-											SET_CMOS(IO_LED);
-											LED=0;
-											UV=1;
-										}
-										else 
-										{
-											SET_INPUT(IO_LED);
-											UV=0;
-										}
-										next_SW1_state=3;
-										break;			
-										
-										
+									
+										state=O3_mode;
+										break;
 				case 3: 		
 									
-										if (Time_ms<500) 
-										{
-											SET_CMOS(IO_LED);
-											LED=1;
-										}
-										else 
-										{
-											SET_INPUT(IO_LED);
-										}
-										next_SW1_state=1;
-										break;
-			
-			 }
-		 }
-	
-		if ((switch_update==1) &&(key_holdtime>press_200ms))
-		{
-				if (SW1_pressed)
-					{
-					scan=1;
-					scan_sec=0;
-					SW1_state=next_SW1_state;
-
-					}
-			 if (SW2_pressed)
-					{
-					
-					if (scan==1)
-					{
-						switch (SW1_state)
-						{
-						case 0:			
-									
-									state=standby_mode;
-									 
-										break;
-						case 1:		
-										state=ION_mode;
-										 
-										break;
-						case 2: 		
 									
 										state=UVION_mode;
-										 
 										break;
-						case 3: 		state=O3_mode;
-										break;
-									 
-									
-						}
-					}else 
-					{
-						state=standby_mode;
-						SW1_state=0;
-						next_SW1_state=1;
-					}
-						
-						
-						
-						
-						
-					scan=0;	
-			 
-					}
+				
+				
+			}	
 			
-			key_holdtime=0;
-			SW1_pressed=0;
-			SW2_pressed=0;
+		
+			
 			switch_update=0;
+			key_holdtime=0;
 			delay_ms(250);
 		}		
 	
-   if ((Time_ms%100)<10)
-	 {
-		 SW2=0;
-		 SET_INPUT(IO_SW2);
-		 if ((Time_ms%100)>5) 
-		 {
-			 EX1=1;
-			 EX0=1;
-		 }
-	 }
-	 else 
-	 {
-		 EX1=0;
-		 EX0=0;
-		 SET_CMOS(IO_SW2);
-		 if (O3_on==1) SW2=1; else SW2=0;
-	 }
-		 
+   
+		
+
+
+	
+
+//	
+//   if ((Time_ms%100)<10)
+//	 {
+//		 SW2=0;
+//		 SET_INPUT(IO_SW2);
+//		 if ((Time_ms%100)>5) 
+//		 {
+//			 EX1=1;
+//			 EX0=1;
+//		 }
+//	 }
+//	 else 
+//	 {
+//		 EX1=0;
+//		 EX0=0;
+//		 SET_CMOS(IO_SW2);
+//		 if (O3_on==1) SW2=1; else SW2=0;
+//	 }
+//		 
 		
 
 
