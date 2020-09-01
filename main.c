@@ -7,7 +7,7 @@
 #include "./public/inc/init.h"
 #include "./public/inc/process.h"
 
-volatile uint8 state,next_state,SW1_state;
+volatile uint8 state,next_state,SW1_state,next_SW1_state;
 volatile uint8   O3_level,LED_type;
 volatile uint16 process_time,buz_time,key_holdtime;
 volatile uint16 Time_us, Time_ms,Time_sec,Time_min,scan_sec;
@@ -27,7 +27,7 @@ void DCDC_enable(void)
 											P3M0 &=0xdf;												// P3M0 &= 0b11011111;          
 
 //
-	if ((VCC_det==0)&&((Time_ms<500)==0)) VCC_EN=0; else VCC_EN=1;
+//	if ((VCC_det==0)&&((Time_ms<500)==0)) VCC_EN=0; else VCC_EN=1;
 	
 }
 
@@ -42,7 +42,7 @@ void Check_switch()
 		if (scan_sec>5) 
 		{
 			scan=0;			
-			SW1_state=0;
+//			SW1_state=0;
 		}
 	  if (scan==1)
 		{
@@ -51,6 +51,7 @@ void Check_switch()
 					case 0:			
 									
 										SET_INPUT(IO_LED);
+					
 										break;
 				case 1:			
 										if (Time_ms<500) 
@@ -62,7 +63,7 @@ void Check_switch()
 										{
 											SET_INPUT(IO_LED);
 										}
-				
+										next_SW1_state=2;
 										break;
 				case 2: 		
 									
@@ -77,7 +78,7 @@ void Check_switch()
 											SET_INPUT(IO_LED);
 											UV=0;
 										}
-				
+										next_SW1_state=3;
 										break;			
 										
 										
@@ -92,7 +93,7 @@ void Check_switch()
 										{
 											SET_INPUT(IO_LED);
 										}
-				
+										next_SW1_state=1;
 										break;
 			
 			 }
@@ -104,37 +105,48 @@ void Check_switch()
 					{
 					scan=1;
 					scan_sec=0;
-					SW1_state++;
-					if (SW1_state>3) SW1_state=1;
+					SW1_state=next_SW1_state;
+
 					}
 			 if (SW2_pressed)
 					{
 					
-						
-				 switch (SW1_state)
-			 {
-					case 0:			
+					if (scan==1)
+					{
+						switch (SW1_state)
+						{
+						case 0:			
 									
 									state=standby_mode;
+									 
 										break;
-				case 1:		
+						case 1:		
 										state=ION_mode;
+										 
 										break;
-				case 2: 		
+						case 2: 		
 									
 										state=UVION_mode;
+										 
 										break;
-				case 3: 		state=O3_mode;
+						case 3: 		state=O3_mode;
 										break;
+									 
 									
-			}
+						}
+					}else 
+					{
+						state=standby_mode;
+						SW1_state=0;
+						next_SW1_state=1;
+					}
 						
 						
 						
 						
 						
 					scan=0;	
-					SW1_state=0;
+			 
 					}
 			
 			key_holdtime=0;
@@ -186,7 +198,7 @@ void State_process()
 										ION_on=0;
 										O3_level  = 0;
 										UV_on  = 0;
-										 
+										next_SW1_state=1;
 										LED_type=0;
 										next_state=standby_mode;
 	
