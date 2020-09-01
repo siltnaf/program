@@ -27,7 +27,7 @@ void DCDC_enable(void)
 											P3M0 &=0xdf;												// P3M0 &= 0b11011111;          
 
 //
-//	if ((VCC_det==0)&&((Time_ms<500)==0)) VCC_EN=0; else VCC_EN=1;
+ 	if ((VCC_det==0)&&((Time_ms<500)==0)) VCC_EN=0; else VCC_EN=1;
 	
 }
 

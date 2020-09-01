@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   MAIN                                                                  09/01/2020 12:36:53 PAGE 1   
+C51 COMPILER V9.54   MAIN                                                                  09/01/2020 12:50:27 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
@@ -36,7 +36,7 @@ line level    source
   27   1                            P3M0 &=0xdf;                        // P3M0 &= 0b11011111;          
   28   1      
   29   1      //
-  30   1      //  if ((VCC_det==0)&&((Time_ms<500)==0)) VCC_EN=0; else VCC_EN=1;
+  30   1        if ((VCC_det==0)&&((Time_ms<500)==0)) VCC_EN=0; else VCC_EN=1;
   31   1        
   32   1      }
   33          
@@ -62,7 +62,7 @@ line level    source
   53   3                          SET_INPUT(IO_LED);
   54   3                
   55   3                          break;
-C51 COMPILER V9.54   MAIN                                                                  09/01/2020 12:36:53 PAGE 2   
+C51 COMPILER V9.54   MAIN                                                                  09/01/2020 12:50:27 PAGE 2   
 
   56   3              case 1:     
   57   3                          if (Time_ms<500) 
@@ -126,7 +126,7 @@ line level    source
  115   3                {
  116   4                  switch (SW1_state)
  117   4                  {
-C51 COMPILER V9.54   MAIN                                                                  09/01/2020 12:36:53 PAGE 3   
+C51 COMPILER V9.54   MAIN                                                                  09/01/2020 12:50:27 PAGE 3   
 
  118   5                  case 0:     
  119   5                        
@@ -190,7 +190,7 @@ line level    source
  177   1          
  178   1      
  179   1      
-C51 COMPILER V9.54   MAIN                                                                  09/01/2020 12:36:53 PAGE 4   
+C51 COMPILER V9.54   MAIN                                                                  09/01/2020 12:50:27 PAGE 4   
 
  180   1        
  181   1      }
@@ -254,7 +254,7 @@ line level    source
  239   2                          DCDC_enable();
  240   2                          LED_type=4;
  241   2          
-C51 COMPILER V9.54   MAIN                                                                  09/01/2020 12:36:53 PAGE 5   
+C51 COMPILER V9.54   MAIN                                                                  09/01/2020 12:50:27 PAGE 5   
 
  242   2                          
  243   2                          UV_on=0;
@@ -318,7 +318,7 @@ line level    source
  301   2                 
  302   2                          if (Time_min>=time_T3) 
  303   2                          {
-C51 COMPILER V9.54   MAIN                                                                  09/01/2020 12:36:53 PAGE 6   
+C51 COMPILER V9.54   MAIN                                                                  09/01/2020 12:50:27 PAGE 6   
 
  304   3                            
  305   3                            
@@ -382,7 +382,7 @@ line level    source
  363   2          
  364   2      
  365   2          Process_Timer();
-C51 COMPILER V9.54   MAIN                                                                  09/01/2020 12:36:53 PAGE 7   
+C51 COMPILER V9.54   MAIN                                                                  09/01/2020 12:50:27 PAGE 7   
 
  366   2          Process_ION();
  367   2          Process_UV();
@@ -446,7 +446,7 @@ line level    source
  425   1        Timer_update=1;
  426   1      }
  427          
-C51 COMPILER V9.54   MAIN                                                                  09/01/2020 12:36:53 PAGE 8   
+C51 COMPILER V9.54   MAIN                                                                  09/01/2020 12:50:27 PAGE 8   
 
  428          
  429          
@@ -481,7 +481,7 @@ line level    source
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    874    ----
+   CODE SIZE        =    901    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
