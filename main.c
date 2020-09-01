@@ -39,39 +39,55 @@ void Check_switch()
 {
 		if (key_holdtime>press_200ms) 
 		{
-			SW1_state++;
-			if (SW1_state>3) SW1_state=0;
-		 
+				
 			
-			switch (SW1_state)
-			{
-				case 0:			
+			if ((key_holdtime>press_3s)&&(SW1==1))
+				{
+					state=standby_mode;
+					SW1_state=0;
+					key_holdtime=0;
+					SW1_pressed=0;
+					switch_update=0;
+				
+				}
+				else if ((key_holdtime<press_3s)&&(SW1==0))
+				{
+		
+					SW1_state++;
+				if (SW1_state>3) SW1_state=0;
+			
+					switch (SW1_state)
+					{
+					case 0:			
 									
 										state=standby_mode;
 										break;
-				case 1:			
+					case 1:			
 										
 										state=ION_mode;
 										break;
-				case 2: 		
+					case 2: 		
 									
 									
 										state=O3_mode;
 										break;
-				case 3: 		
+					case 3: 		
 									
 									
 										state=UVION_mode;
 										break;
 				
 				
-			}	
-			
-		
-			
-			switch_update=0;
-			key_holdtime=0;
-			delay_ms(250);
+					}	
+		 
+					
+					
+				
+					key_holdtime=0;
+					SW1_pressed=0;
+					switch_update=0;
+					delay_ms(250);
+				}
 		}		
 	
    
