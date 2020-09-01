@@ -76,6 +76,6 @@ extern volatile uint8 state,next_state,SW1_state,next_SW1_state;
 extern volatile uint16 process_time,buz_time,key_holdtime;
 extern volatile uint8  LED_type, O3_level;
 extern volatile uint16 Time_us,Time_ms,Time_sec,Time_min,scan_sec;
-extern volatile bit Timer_update,Beep, UV_on,ION_on,O3_on,switch_update,SW1_pressed,SW2_pressed,scan;
+extern volatile bit Timer_update,Beep, UV_on,ION_on,O3_on,switch_update,SW1_pressed,SW2_pressed,scan,unlock;
 
 #endif

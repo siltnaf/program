@@ -54,7 +54,7 @@ void Process_Timer()
 
 void Process_UV()
 {
-	if ((UV_on==1)&&(scan==0))
+	if ((UV_on==1))
 	{
 	
 		if((Time_us%2)==0) UV=0;
@@ -118,7 +118,7 @@ if (Beep==0)
 
 void Process_LED()
 {
-if ((Beep==0) && (scan==0))
+if ((Beep==0))
 {
 	switch (LED_type)
 			{

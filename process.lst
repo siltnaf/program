@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   PROCESS                                                               09/01/2020 20:57:05 PAGE 1   
+C51 COMPILER V9.54   PROCESS                                                               09/02/2020 01:31:37 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE PROCESS
@@ -62,11 +62,11 @@ line level    source
   52          
   53          
   54          
-C51 COMPILER V9.54   PROCESS                                                               09/01/2020 20:57:05 PAGE 2   
+C51 COMPILER V9.54   PROCESS                                                               09/02/2020 01:31:37 PAGE 2   
 
   55          void Process_UV()
   56          {
-  57   1        if ((UV_on==1)&&(scan==0))
+  57   1        if ((UV_on==1))
   58   1        {
   59   2        
   60   2          if((Time_us%2)==0) UV=0;
@@ -126,13 +126,13 @@ line level    source
  114   1      
  115   1      
  116   1      }
-C51 COMPILER V9.54   PROCESS                                                               09/01/2020 20:57:05 PAGE 3   
+C51 COMPILER V9.54   PROCESS                                                               09/02/2020 01:31:37 PAGE 3   
 
  117          
  118          
  119          void Process_LED()
  120          {
- 121   1      if ((Beep==0) && (scan==0))
+ 121   1      if ((Beep==0))
  122   1      {
  123   2        switch (LED_type)
  124   2            {
@@ -190,7 +190,7 @@ line level    source
  176   1        
  177   1        
  178   1        
-C51 COMPILER V9.54   PROCESS                                                               09/01/2020 20:57:05 PAGE 4   
+C51 COMPILER V9.54   PROCESS                                                               09/02/2020 01:31:37 PAGE 4   
 
  179   1        
  180   1        if (ION_on==1) ION=1; else ION=0;
@@ -244,7 +244,7 @@ line level    source
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    337    ----
+   CODE SIZE        =    331    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
@@ -254,7 +254,7 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
    EDATA SIZE       =   ----    ----
    HDATA SIZE       =   ----    ----
    XDATA CONST SIZE =   ----    ----
-C51 COMPILER V9.54   PROCESS                                                               09/01/2020 20:57:05 PAGE 5   
+C51 COMPILER V9.54   PROCESS                                                               09/02/2020 01:31:37 PAGE 5   
 
    FAR CONST SIZE   =   ----    ----
 END OF MODULE INFORMATION.
