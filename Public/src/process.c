@@ -50,8 +50,10 @@ void Process_UV()
 	if (UV_on==1)
 	{
 	
-		if((Time_us%2)==0) UV=0;
+		if((Time_sec%8)==0) UV=0;
 		   else UV=1;
+//		if((Time_us%2)==0) UV=0;
+//		   else UV=1;
 	}
 	else UV=0;
 
@@ -77,7 +79,8 @@ void Process_O3()
 																				break;
 										
 										case 3:						 
-																				O3_on=0;
+								
+									O3_on=0;
 																				break;
 									}									
 									break;

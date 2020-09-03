@@ -80,6 +80,7 @@ void Check_switch()
 				SW1_pressed=0;
 				SW2_pressed=0;
 				switch_update=0;
+				Time_sec=1;
 				}
 				else
 				{
