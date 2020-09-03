@@ -68,6 +68,10 @@ void Check_switch()
 								unlock=1;
 							
 							}
+							
+				   if ((SW1_state==0)&& (unlock==1))
+							SW1_state=1;
+					 
 				if (SW1_state>3) SW1_state=0;
 			
 					switch (SW1_state)
@@ -110,25 +114,25 @@ void Check_switch()
 
 	
 
-//	
-//   if ((Time_ms%100)<10)
-//	 {
-//		 SW2=0;
-//		 SET_INPUT(IO_SW2);
-//		 if ((Time_ms%100)>5) 
-//		 {
-//			 EX1=1;
-//			 EX0=1;
-//		 }
-//	 }
-//	 else 
-//	 {
-//		 EX1=0;
-//		 EX0=0;
-//		 SET_CMOS(IO_SW2);
-//		 if (O3_on==1) SW2=1; else SW2=0;
-//	 }
-//		 
+	
+   if ((Time_ms%100)<10)
+	 {
+		 SW2=0;
+		 SET_INPUT(IO_SW2);
+		 if ((Time_ms%100)>5) 
+		 {
+			 EX1=1;
+			 EX0=1;
+		 }
+	 }
+	 else 
+	 {
+		 EX1=0;
+		 EX0=0;
+		 SET_CMOS(IO_SW2);
+		 if (O3_on==1) SW2=1; else SW2=0;
+	 }
+		 
 		
 
 
