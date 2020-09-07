@@ -60,8 +60,7 @@ void InitExtInterrupt (void)
 void InitParameter(void )
 {
 	UV=0;
-	RC=1;
-	O3=0;
+	ION=0;
 	LED=0;
 	state=standby_mode;
 	switch_state=0;

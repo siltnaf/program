@@ -61,26 +61,11 @@ void Process_UV()
 
 }
 
-void Process_O3()
+void Process_ION()
 {
 	
-	switch (O3_level)
-	{
-		case 0:      
-									
-									O3_on=0;
-									break;
-		case 1:			 
-									
-									O3_on=1;
-																		
-									break;
-		
-	}
-	
-	SET_OUTPUT(IO_O3);
-	if (O3_on==1) O3=1; else O3=0; 
-	
+	if (ion_on==1) ION=1;else ION=0;
+	if (USB==1) ION=0;
 	
 	
 }
@@ -163,37 +148,10 @@ void Process_sleep()
 		_nop_ ();
 		
 		
-		
-	}
-
+	
 	
 //	
-	if  ((state==O3_off_mode))
-	{
-		SET_CMOS(IO_RC);
-		RC=1;
-		delay_ms(10);
-		
-		SET_INPUT(IO_RC);
-		
-		PCON|=0x02;
-		_nop_ ();
-		_nop_ ();
-		_nop_ ();
-		_nop_ ();
-		_nop_ ();
-		_nop_ ();
-		_nop_ ();
-		_nop_ ();
-		_nop_ ();
-		_nop_ ();
-		_nop_ ();
-		Time_ms=0;
-		Time_sec=0;
-		state=O3_LED_mode;
-		SET_CMOS(IO_RC);
-		RC=1;
-		
+
 		
 	}
 	
