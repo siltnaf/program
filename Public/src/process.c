@@ -65,7 +65,7 @@ void Process_ION()
 {
 	
 	if (ion_on==1) ION=1;else ION=0;
-	if (USB==1) ION=0;
+	
 	
 	
 }

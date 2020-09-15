@@ -13,13 +13,13 @@ void IO_Init(void)
 	//P30(VCC_EN)->OD         1      1
 	//P31(LED)->CMOS  				0      1
 	//P32(SW)->I				   		1    	 0        
-	//P33(RC)->CMOS	   				0      1
+	//P33(USB)->I	   		  		1      0
 	//P34(UV)->CMOS      			0      1
-	//P35(O3/VCC_det)->CMOS   0      1
+	//P35(ION)->CMOS   				0      1
 	
 	
-	P3M1 = 0x05;
-  P3M0 = 0x3b;                                                                                                                                                           ;
+	P3M1 = 0x0d;
+  P3M0 = 0x33;                                                                                                                                                           ;
 	
 }
 

@@ -220,6 +220,7 @@ void State_process()
 											Time_min=0;
 											next_state=standby_mode; 
 										}else next_state=uv_mode;
+										if (USB==1) next_state=standby_mode;
 										break;
 	
 	
@@ -232,6 +233,7 @@ void State_process()
 										
 									
 										next_state=ion_mode;
+										if (USB==1) next_state=standby_mode;
 										break;
 		
 	
