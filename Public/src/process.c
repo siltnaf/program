@@ -56,9 +56,10 @@ void Process_UV()
 {
 	if ((UV_on==1))
 	{
+		UV=1;
 	
-		if((Time_us%2)==0) UV=0;
-		   else UV=1;
+//		if((Time_us%2)==0) UV=0;
+//		   else UV=1;
 	}
 	else UV=0;
 
@@ -130,18 +131,18 @@ if ((Beep==0))
 										break;
 				case 1:			
 										SET_CMOS(IO_LED);
-										LED=0;
+										LED=1;
 										break;
 				case 2:			
 										SET_CMOS(IO_LED);
-										LED=1;
+										LED=0;
 										break;
 				case 3: 		
 										 
 										if (Time_sec%2==0) 
 										{
 											SET_CMOS(IO_LED);
-											LED=0;
+											LED=1;
 										}
 										else 
 										{

@@ -195,14 +195,15 @@ void State_process()
 		
 		case O3_saving_mode:
 										
-										DCDC_enable();
-										LED_type=4;
+										
+										LED_type=2;
 		
 										
 										UV_on=0;
 										ION_on=0;
 										if (Time_min<=5) 
 										{
+											DCDC_enable();
 												O3_level=2;
 										}else 	O3_level=0;
 											
@@ -251,7 +252,7 @@ void State_process()
 											
 									DCDC_enable();
 								   	LED_type=3;
-										O3_level=0;
+										O3_level=2;
 										UV_on=0;
 										ION_on=1;
 										
@@ -316,7 +317,7 @@ void main(void)
 	{ 
 	
 
-		
+		 
 		Check_switch();
 		State_process();
 		
