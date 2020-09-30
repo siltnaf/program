@@ -14,7 +14,12 @@ volatile uint16 Time_us, Time_ms,Time_sec,Time_min;
 volatile bit Timer_update,UV_on,switch_update;
 
 
-
+void Enable_power()
+{
+	
+	if (VCC_DET==0) VCC_EN=0;else VCC_EN=1;
+	
+}
 
 
 
@@ -25,40 +30,37 @@ void Check_switch()
 			switch_state++;
 			if (switch_state>4) switch_state=0;
 		 
-			FAN=0;
+//			FAN=0;
 			switch (switch_state)
 			{
 				case 0:			
-									
+										LED_type=0;
 										state=standby_mode;
 										break;
-//				case 1:			
-//										
-//										state=speed0_mode;
-//										break;
+
 				case 1: 		
-									
-										UV_on=0;
-										state=speed1_mode;
+										
+									 	LED_type=1;
+										state=speed0_mode;
 										break;
 				case 2: 		
 									
-										UV_on=1;
+									 	LED_type=2;
 				
 										state=speed1_mode;
 										break;
 				
 				case 3: 		
-									
-										UV_on=0;
+								
+										 LED_type=3;
 										state=speed2_mode;
 										break;
 				
 				
 				case 4: 		
 									
-										UV_on=1;
-										state=speed2_mode;
+									 	LED_type=4;
+										state=speed3_mode;
 										break;
 				
 				
@@ -101,9 +103,8 @@ void State_process()
 	case standby_mode:    
 										
 								 
-										UV_on  = 0;
 										LED_type=0;
-										FAN=0;
+									 
 										SET_INPUT(IO_SPEED1);
 										SET_INPUT(IO_SPEED2);
 										next_state=standby_mode;
@@ -115,26 +116,22 @@ void State_process()
 	
 	case speed0_mode:				
 										
-										
-										LED_type=1;
-										UV_on=1;
+										Enable_power();
+								 
 										SET_INPUT(IO_SPEED1);
 										SET_INPUT(IO_SPEED2);
-										
-									  FAN=1;
+									 
 										next_state=speed0_mode;
 										break;
 	
 	case speed1_mode:			
-										
-//										LED_type=2;
-										LED_type=3;
-//										UV_on=1;
+										Enable_power();
+									 
 										SET_INPUT(IO_SPEED2);
 										SET_CMOS(IO_SPEED1);
 										SPEED1=0;
 
-									 FAN=1;
+								 
 										
 									 next_state=speed1_mode;
 										break;
@@ -142,26 +139,24 @@ void State_process()
 	
 	case speed2_mode:	
 											
-//										LED_type=3;
-										LED_type=4;
-//										UV_on=1;
+									 		Enable_power();
+									 
 										SET_INPUT(IO_SPEED1);
 										SET_CMOS(IO_SPEED2);
 										SPEED2=0;
-									 	FAN=1;
+									  
 									  next_state= speed2_mode;
 
 										break;
 	case speed3_mode:	
 											
-										
-										LED_type=4;
-										UV_on=1;
+							 		
+									 		Enable_power();
 										SET_CMOS(IO_SPEED1);
 										SET_CMOS(IO_SPEED2);
 										SPEED1=0;
 										SPEED2=0;
-										FAN=1;
+								 
 									 
 										next_state= speed3_mode;
 
@@ -204,8 +199,7 @@ void main(void)
 		
 
 		Process_Timer();
-
-		Process_UV();
+ 
 		Process_LED();
 	 
 	

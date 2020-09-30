@@ -10,16 +10,16 @@ void IO_Init(void)
 {
   
 	//               			  P3M1   P3M0
-	//P30(UV)->CMOS        		0      1
+	//P30(VCC_EN)->CMOS      	0      1
 	//P31(LED)->CMOS  				0      1
 	//P32(SW)->I	   					1			 0       
-	//P33(FAN)->CMOS	    		0      1
+	//P33(VCC_DET)->I	    		1      0
 	//P34(SPEED1)->CMOS      	0      1
 	//P35(SPEED2)->CMOS       0      0
 	
 	
-	P3M1 = 0x04;
-  P3M0 = 0x1b;
+	P3M1 = 0x0c;
+  P3M0 = 0x13;
 	
 }
 
@@ -69,7 +69,7 @@ void InitExtInterrupt (void)
 
 void InitParameter(void )
 {
-	UV=0;
+ 
 	state=standby_mode;
 	switch_state=0;
 	process_time=0;

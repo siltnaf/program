@@ -45,16 +45,16 @@ void Process_Timer()
 
 
 
-void Process_UV()
-{
-	if (UV_on==1)
-	{
-	
-		UV=1;
-	}
-	else UV=0;
+//void Process_UV()
+//{
+//	if (UV_on==1)
+//	{
+//	
+//		UV=1;
+//	}
+//	else UV=0;
 
-}
+//}
 
 
  
@@ -69,14 +69,14 @@ void Process_LED()
 										break;
 
 				case 1: 		
-										if (Time_sec%4==0) LED=1;else LED=0;
+										if (Time_ms%20==0) LED=1;else LED=0;
 										break;
 				
 				case 2: 		
-										if (Time_sec%3==0) LED=1;else LED=0;
+										if (Time_ms%8==0) LED=1;else LED=0;
 										break;
 				case 3: 		
-										if (Time_sec%2==0) LED=1;else LED=0;
+										if (Time_ms%2==0) LED=1;else LED=0;
 										break;
 				
 				case 4: 		

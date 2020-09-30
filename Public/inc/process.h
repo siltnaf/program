@@ -3,8 +3,7 @@
 
 
 
-
-extern void Process_UV(void);
+ 
  
 extern void Process_LED(void);
  

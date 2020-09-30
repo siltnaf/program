@@ -3,19 +3,19 @@
 
 #include "STC15F104E.h"
 
-#define UV				    (P30)           //relay normal open 
+#define VCC_EN			  (P30)           //relay normal open 
 #define LED       		(P31)           //DC output for LED
 #define SW 						(P32)
-#define FAN    				(P33)
+#define VCC_DET    		(P33)
 #define SPEED1      	(P34)
 #define SPEED2				(P35)          //output for ION
 
 
 
-#define IO_UV           P3_0
+#define IO_VCC_EN       P3_0
 #define IO_LED          P3_1
 #define IO_SW						P3_2
-#define IO_FAN          P3_3
+#define IO_VCC_DET      P3_3
 #define IO_SPEED1       P3_4
 #define IO_SPEED2       P3_5
 
