@@ -6,7 +6,7 @@
 #define VCC_EN			  (P30)           //relay normal open 
 #define LED       		(P31)           //DC output for LED
 #define SW 						(P32)
-#define VCC_DET    		(P33)
+#define FAN			   		(P33)
 #define SPEED1      	(P34)
 #define SPEED2				(P35)          //output for ION
 
@@ -15,7 +15,7 @@
 #define IO_VCC_EN       P3_0
 #define IO_LED          P3_1
 #define IO_SW						P3_2
-#define IO_VCC_DET      P3_3
+#define IO_FAN		      P3_3
 #define IO_SPEED1       P3_4
 #define IO_SPEED2       P3_5
 
@@ -67,7 +67,7 @@
 extern volatile uint8 state,next_state,switch_state ;
 extern volatile uint16 process_time,key_holdtime;
 extern volatile uint8  LED_type ;
-extern volatile uint16 Time_us,Time_ms,Time_sec,Time_min;
+extern volatile uint16 Time_us,Time_ms,Time_sec,Time_min,power_refresh;
 extern volatile bit Timer_update,UV_on,switch_update;
 
 #endif

@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   PROCESS                                                               10/01/2020 00:25:44 PAGE 1   
+C51 COMPILER V9.54   PROCESS                                                               10/01/2020 02:51:00 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE PROCESS
@@ -38,80 +38,80 @@ line level    source
   28   2            {
   29   3              
   30   3              Time_ms=0;
-  31   3              Time_sec++;
-  32   3            }
-  33   2          if (Time_sec>=60)
-  34   2            {
-  35   3          
-  36   3              Time_sec=0;
-  37   3              Time_min++;
-  38   3            }
-  39   2          
-  40   2        } 
-  41   1      
+  31   3              power_refresh++;
+  32   3              Time_sec++;
+  33   3            }
+  34   2          if (Time_sec>=60)
+  35   2            {
+  36   3          
+  37   3              Time_sec=0;
+  38   3              Time_min++;
+  39   3            }
+  40   2          
+  41   2        } 
   42   1      
-  43   1      }
-  44          
+  43   1      
+  44   1      }
   45          
   46          
   47          
-  48          //void Process_UV()
-  49          //{
-  50          //  if (UV_on==1)
-  51          //  {
-  52          //  
-  53          //    UV=1;
-  54          //  }
-C51 COMPILER V9.54   PROCESS                                                               10/01/2020 00:25:44 PAGE 2   
+  48          
+  49          //void Process_UV()
+  50          //{
+  51          //  if (UV_on==1)
+  52          //  {
+  53          //  
+  54          //    UV=1;
+C51 COMPILER V9.54   PROCESS                                                               10/01/2020 02:51:00 PAGE 2   
 
-  55          //  else UV=0;
-  56          
-  57          //}
-  58          
+  55          //  }
+  56          //  else UV=0;
+  57          
+  58          //}
   59          
-  60           
-  61          
+  60          
+  61           
   62          
-  63          void Process_LED()
-  64          {
-  65   1      
-  66   1        switch (LED_type)
-  67   1            {
-  68   2              case 0:     LED=0;
-  69   2                          break;
-  70   2      
-  71   2              case 1:     
-  72   2                          if (Time_ms%20==0) LED=1;else LED=0;
-  73   2                          break;
-  74   2              
-  75   2              case 2:     
-  76   2                          if (Time_ms%8==0) LED=1;else LED=0;
-  77   2                          break;
-  78   2              case 3:     
-  79   2                          if (Time_ms%2==0) LED=1;else LED=0;
-  80   2                          break;
-  81   2              
-  82   2              case 4:     
-  83   2                        LED=1;
-  84   2                          break;
-  85   2            }
-  86   1      }
-  87          
+  63          
+  64          void Process_LED()
+  65          {
+  66   1      
+  67   1        switch (LED_type)
+  68   1            {
+  69   2              case 0:     LED=0;
+  70   2                          break;
+  71   2      
+  72   2              case 1:     
+  73   2                          if (Time_ms%20==0) LED=1;else LED=0;
+  74   2                          break;
+  75   2              
+  76   2              case 2:     
+  77   2                          if (Time_ms%8==0) LED=1;else LED=0;
+  78   2                          break;
+  79   2              case 3:     
+  80   2                          if (Time_ms%2==0) LED=1;else LED=0;
+  81   2                          break;
+  82   2              
+  83   2              case 4:     
+  84   2                        LED=1;
+  85   2                          break;
+  86   2            }
+  87   1      }
   88          
   89          
   90          
-  91          void Process_sleep()
-  92            
-  93          {
-  94   1      
-  95   1        
-  96   1        if ((Time_min>=time_1min) && (state==standby_mode))
-  97   1        {
-  98   2          PCON|=0x02;
-  99   2          _nop_ ();
- 100   2          
+  91          
+  92          void Process_sleep()
+  93            
+  94          {
+  95   1      
+  96   1        
+  97   1        if ((Time_min>=time_1min) && (state==standby_mode))
+  98   1        {
+  99   2          PCON|=0x02;
+ 100   2          _nop_ ();
  101   2          
- 102   2          _nop_ ();
+ 102   2          
  103   2          _nop_ ();
  104   2          _nop_ ();
  105   2          _nop_ ();
@@ -121,23 +121,24 @@ line level    source
  109   2          _nop_ ();
  110   2          _nop_ ();
  111   2          _nop_ ();
- 112   2          
+ 112   2          _nop_ ();
  113   2          
  114   2          
- 115   2        }
- 116   1      
-C51 COMPILER V9.54   PROCESS                                                               10/01/2020 00:25:44 PAGE 3   
+ 115   2          
+ 116   2        }
+C51 COMPILER V9.54   PROCESS                                                               10/01/2020 02:51:00 PAGE 3   
 
- 117   1        
+ 117   1      
  118   1        
- 119   1      }
- 120          
+ 119   1        
+ 120   1      }
  121          
  122          
+ 123          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    192    ----
+   CODE SIZE        =    200    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

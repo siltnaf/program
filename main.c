@@ -10,14 +10,21 @@
 volatile uint8 state,next_state,switch_state;
 volatile uint8   LED_type;
 volatile uint16 process_time,buz_time,key_holdtime;
-volatile uint16 Time_us, Time_ms,Time_sec,Time_min;
-volatile bit Timer_update,UV_on,switch_update;
+volatile uint16 Time_us, Time_ms,Time_sec,Time_min,power_refresh;
+volatile bit Timer_update,UV_on,switch_update,refresh;
 
 
 void Enable_power()
 {
 	
-	if (VCC_DET==0) VCC_EN=0;else VCC_EN=1;
+
+	if (((power_refresh%20)==0)&&((Time_ms<500)==0)) 
+	{
+		
+		VCC_EN=0;
+	} else VCC_EN=1;
+		 
+	
 	
 }
 
@@ -34,31 +41,32 @@ void Check_switch()
 			switch (switch_state)
 			{
 				case 0:			
+					
 										LED_type=0;
 										state=standby_mode;
 										break;
 
 				case 1: 		
-										
+										power_refresh=0;
 									 	LED_type=1;
 										state=speed0_mode;
 										break;
 				case 2: 		
-									
+										power_refresh=0;
 									 	LED_type=2;
 				
 										state=speed1_mode;
 										break;
 				
 				case 3: 		
-								
+												power_refresh=0;
 										 LED_type=3;
 										state=speed2_mode;
 										break;
 				
 				
 				case 4: 		
-									
+											power_refresh=0;
 									 	LED_type=4;
 										state=speed3_mode;
 										break;
@@ -102,7 +110,7 @@ void State_process()
 	
 	case standby_mode:    
 										
-								 
+										FAN=0;
 										LED_type=0;
 									 
 										SET_INPUT(IO_SPEED1);
@@ -117,7 +125,7 @@ void State_process()
 	case speed0_mode:				
 										
 										Enable_power();
-								 
+										FAN=1;
 										SET_INPUT(IO_SPEED1);
 										SET_INPUT(IO_SPEED2);
 									 
@@ -126,7 +134,7 @@ void State_process()
 	
 	case speed1_mode:			
 										Enable_power();
-									 
+									 	FAN=1;
 										SET_INPUT(IO_SPEED2);
 										SET_CMOS(IO_SPEED1);
 										SPEED1=0;
@@ -140,7 +148,7 @@ void State_process()
 	case speed2_mode:	
 											
 									 		Enable_power();
-									 
+									 	FAN=1;
 										SET_INPUT(IO_SPEED1);
 										SET_CMOS(IO_SPEED2);
 										SPEED2=0;
@@ -150,8 +158,8 @@ void State_process()
 										break;
 	case speed3_mode:	
 											
-							 		
-									 		Enable_power();
+							 			FAN=1;
+									 	Enable_power();
 										SET_CMOS(IO_SPEED1);
 										SET_CMOS(IO_SPEED2);
 										SPEED1=0;
