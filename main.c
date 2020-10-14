@@ -211,7 +211,7 @@ void State_process()
 	 	case uv_mode:				
 										
 										DCDC_enable();	
-										LED_type=3;
+										LED_type=2;
 										ion_on=0;
 										UV_on=1;
 										
