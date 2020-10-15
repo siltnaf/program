@@ -77,10 +77,13 @@ void Process_LED()
 										if (Time_ms%8==0) LED=1;else LED=0;
 										break;
 				case 3: 		
+										if (Time_ms%4==0) LED=1;else LED=0;
+										break;
+				case 4: 		
 										if (Time_ms%2==0) LED=1;else LED=0;
 										break;
 				
-				case 4: 		
+				case 5: 		
 									LED=1;
 										break;
 			}

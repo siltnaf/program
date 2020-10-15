@@ -35,7 +35,7 @@ void Check_switch()
 		if (key_holdtime>press_time) 
 		{
 			switch_state++;
-			if (switch_state>4) switch_state=0;
+			if (switch_state>5) switch_state=0;
 		 
 //			FAN=0;
 			switch (switch_state)
@@ -49,26 +49,33 @@ void Check_switch()
 				case 1: 		
 										power_refresh=0;
 									 	LED_type=1;
-										state=speed0_mode;
+										state=speed1_mode;
 										break;
 				case 2: 		
 										power_refresh=0;
 									 	LED_type=2;
 				
-										state=speed1_mode;
+										state=speed2_mode;
 										break;
 				
 				case 3: 		
 												power_refresh=0;
 										 LED_type=3;
-										state=speed2_mode;
+										state=speed3_mode;
 										break;
 				
 				
 				case 4: 		
 											power_refresh=0;
 									 	LED_type=4;
-										state=speed3_mode;
+										state=speed4_mode;
+										break;
+				
+				
+				case 5: 		
+											power_refresh=0;
+									 	LED_type=5;
+										state=speed5_mode;
 										break;
 				
 				
@@ -122,17 +129,27 @@ void State_process()
 	
 										break;
 	
-	case speed0_mode:				
+	case speed1_mode:				
+										
+										Enable_power();
+										FAN=0;
+										SET_INPUT(IO_SPEED1);
+										SET_INPUT(IO_SPEED2);
+									 
+										next_state=speed1_mode;
+										break;
+	
+	case speed2_mode:				
 										
 										Enable_power();
 										FAN=1;
 										SET_INPUT(IO_SPEED1);
 										SET_INPUT(IO_SPEED2);
 									 
-										next_state=speed0_mode;
+										next_state=speed2_mode;
 										break;
 	
-	case speed1_mode:			
+	case speed3_mode:			
 										Enable_power();
 									 	FAN=1;
 										SET_INPUT(IO_SPEED2);
@@ -141,11 +158,11 @@ void State_process()
 
 								 
 										
-									 next_state=speed1_mode;
+									 next_state=speed3_mode;
 										break;
 	
 	
-	case speed2_mode:	
+	case speed4_mode:	
 											
 									 		Enable_power();
 									 	FAN=1;
@@ -153,10 +170,10 @@ void State_process()
 										SET_CMOS(IO_SPEED2);
 										SPEED2=0;
 									  
-									  next_state= speed2_mode;
+									  next_state= speed4_mode;
 
 										break;
-	case speed3_mode:	
+	case speed5_mode:	
 											
 							 			FAN=1;
 									 	Enable_power();
@@ -166,7 +183,7 @@ void State_process()
 										SPEED2=0;
 								 
 									 
-										next_state= speed3_mode;
+										next_state= speed5_mode;
 
 										break;
 			
