@@ -199,7 +199,7 @@ void State_process()
 								 
 										ion_on=0;
 										UV_on  = 0;
-										 
+										switch_state=0;
 										LED_type=0;
 										next_state=standby_mode;
 	

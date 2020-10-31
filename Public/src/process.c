@@ -121,6 +121,12 @@ void Process_sleep()
 	
 	if ((Time_min>=time_1min) && (state==standby_mode))
 	{
+		
+		UV=0;
+		ION=0;
+		SET_INPUT(IO_LED);
+		VCC_EN=1;
+		switch_state=0;
 		PCON|=0x02;
 		_nop_ ();
 		

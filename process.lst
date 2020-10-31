@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   PROCESS                                                               10/14/2020 22:11:19 PAGE 1   
+C51 COMPILER V9.54   PROCESS                                                               11/01/2020 05:21:28 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE PROCESS
@@ -62,7 +62,7 @@ line level    source
   52          void Process_UV()
   53          {
   54   1        if (UV_on==1)
-C51 COMPILER V9.54   PROCESS                                                               10/14/2020 22:11:19 PAGE 2   
+C51 COMPILER V9.54   PROCESS                                                               11/01/2020 05:21:28 PAGE 2   
 
   55   1        {
   56   2        
@@ -126,7 +126,7 @@ line level    source
  114           
  115          
  116          
-C51 COMPILER V9.54   PROCESS                                                               10/14/2020 22:11:19 PAGE 3   
+C51 COMPILER V9.54   PROCESS                                                               11/01/2020 05:21:28 PAGE 3   
 
  117          void Process_sleep()
  118            
@@ -135,38 +135,44 @@ line level    source
  121   1        
  122   1        if ((Time_min>=time_1min) && (state==standby_mode))
  123   1        {
- 124   2          PCON|=0x02;
- 125   2          _nop_ ();
- 126   2          
- 127   2          
- 128   2          _nop_ ();
- 129   2          _nop_ ();
- 130   2          _nop_ ();
+ 124   2          
+ 125   2          UV=0;
+ 126   2          ION=0;
+ 127   2          SET_INPUT(IO_LED);
+ 128   2          VCC_EN=1;
+ 129   2          switch_state=0;
+ 130   2          PCON|=0x02;
  131   2          _nop_ ();
- 132   2          _nop_ ();
- 133   2          _nop_ ();
+ 132   2          
+ 133   2          
  134   2          _nop_ ();
  135   2          _nop_ ();
  136   2          _nop_ ();
  137   2          _nop_ ();
- 138   2          
- 139   2          
- 140   2        
- 141   2        
- 142   2      //  
- 143   2      
+ 138   2          _nop_ ();
+ 139   2          _nop_ ();
+ 140   2          _nop_ ();
+ 141   2          _nop_ ();
+ 142   2          _nop_ ();
+ 143   2          _nop_ ();
  144   2          
- 145   2        }
- 146   1        
- 147   1        
- 148   1      }
- 149          
- 150          
- 151          
+ 145   2          
+ 146   2        
+ 147   2        
+ 148   2      //  
+ 149   2      
+ 150   2          
+ 151   2        }
+ 152   1        
+ 153   1        
+ 154   1      }
+ 155          
+ 156          
+ 157          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    228    ----
+   CODE SIZE        =    243    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
