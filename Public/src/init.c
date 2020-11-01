@@ -13,7 +13,7 @@ void IO_Init(void)
 	//P30(VCC_EN)->IO       	0      0
 	//P31(LED)->CMOS  				0      1
 	//P32(SW)->I	   					1			 0       
-	//P33(FAN)->CMOS	    		0      1
+	//P33(SPEED0)->CMOS	    		0      1
 	//P34(SPEED1)->CMOS      	0      1
 	//P35(SPEED2)->CMOS       0      0
 	

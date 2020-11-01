@@ -6,7 +6,7 @@
 #define VCC_EN			  (P30)           //relay normal open 
 #define LED       		(P31)           //DC output for LED
 #define SW 						(P32)
-#define FAN			   		(P33)
+#define SPEED0			   		(P33)
 #define SPEED1      	(P34)
 #define SPEED2				(P35)          //output for ION
 
@@ -15,7 +15,7 @@
 #define IO_VCC_EN       P3_0
 #define IO_LED          P3_1
 #define IO_SW						P3_2
-#define IO_FAN		      P3_3
+#define IO_SPEED0		    P3_3
 #define IO_SPEED1       P3_4
 #define IO_SPEED2       P3_5
 
@@ -33,11 +33,10 @@
 
 
 #define standby_mode 				0
-#define speed1_mode  				1
-#define speed2_mode 				2
-#define speed3_mode					3
-#define speed4_mode 				4
-#define speed5_mode 				5
+#define speed0_mode  				1
+#define speed1_mode 				2
+#define speed2_mode					3
+
 
 
 

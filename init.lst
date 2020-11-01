@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   INIT                                                                  10/14/2020 22:19:41 PAGE 1   
+C51 COMPILER V9.54   INIT                                                                  11/01/2020 21:54:06 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE INIT
@@ -23,7 +23,7 @@ line level    source
   13   1        //P30(VCC_EN)->IO         0      0
   14   1        //P31(LED)->CMOS          0      1
   15   1        //P32(SW)->I              1      0       
-  16   1        //P33(FAN)->CMOS          0      1
+  16   1        //P33(SPEED0)->CMOS         0      1
   17   1        //P34(SPEED1)->CMOS       0      1
   18   1        //P35(SPEED2)->CMOS       0      0
   19   1        
@@ -62,7 +62,7 @@ line level    source
   52          
   53          
   54          void InitExtInterrupt (void)
-C51 COMPILER V9.54   INIT                                                                  10/14/2020 22:19:41 PAGE 2   
+C51 COMPILER V9.54   INIT                                                                  11/01/2020 21:54:06 PAGE 2   
 
   55          {
   56   1      
