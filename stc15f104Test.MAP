@@ -1,4 +1,4 @@
-LX51 LINKER/LOCATER V4.66.41.0                                                          09/26/2020  15:05:06  PAGE 1
+LX51 LINKER/LOCATER V4.66.41.0                                                          11/06/2020  15:32:45  PAGE 1
 
 
 LX51 LINKER/LOCATER V4.66.41.0, INVOKED BY:
@@ -67,7 +67,7 @@ START     STOP      LENGTH    ALIGN  RELOC    MEMORY CLASS   SEGMENT NAME
 00039BH   0003D1H   000037H   BYTE   INBLOCK  CODE           ?PR?INITPARAMETER?INIT
 0003D2H   000405H   000034H   BYTE   INBLOCK  CODE           ?PR?PROCESS_SLEEP?PROCESS
 000406H   000431H   00002CH   BYTE   INBLOCK  CODE           ?PR?MAIN?MAIN
-LX51 LINKER/LOCATER V4.66.41.0                                                        09/26/2020  15:05:06  PAGE 2
+LX51 LINKER/LOCATER V4.66.41.0                                                        11/06/2020  15:32:45  PAGE 2
 
 
 000432H   00045DH   00002CH   BYTE   INBLOCK  CODE           ?PR?PROCESS_O3?PROCESS
@@ -135,7 +135,7 @@ INITTIME2/INIT              ----- -----  ----- -----
 
 INITEXTINTERRUPT/INIT       ----- -----  ----- -----
 
-LX51 LINKER/LOCATER V4.66.41.0                                                        09/26/2020  15:05:06  PAGE 3
+LX51 LINKER/LOCATER V4.66.41.0                                                        11/06/2020  15:32:45  PAGE 3
 
 
 INITPARAMETER/INIT          ----- -----  ----- -----
@@ -203,7 +203,7 @@ PUBLIC SYMBOLS OF MODULE:  stc15f104Test (MAIN)
 *SFR* 000000D8H.2 DATA     BIT       CCF2
 *SFR* 000000D8H   DATA     BYTE      CCON
 *SFR* 000000D8H.7 DATA     BIT       CF
-LX51 LINKER/LOCATER V4.66.41.0                                                        09/26/2020  15:05:06  PAGE 4
+LX51 LINKER/LOCATER V4.66.41.0                                                        11/06/2020  15:32:45  PAGE 4
 
 
 *SFR* 000000F9H   DATA     BYTE      CH
@@ -271,7 +271,7 @@ PUBLIC SYMBOLS OF MODULE:  stc15f104Test (MAIN)
 *SFR* 00000093H   DATA     BYTE      P0M1
 *SFR* 00000090H   DATA     BYTE      P1
 *SFR* 00000090H   DATA     BIT       P10
-LX51 LINKER/LOCATER V4.66.41.0                                                        09/26/2020  15:05:06  PAGE 5
+LX51 LINKER/LOCATER V4.66.41.0                                                        11/06/2020  15:32:45  PAGE 5
 
 
 *SFR* 00000090H.1 DATA     BIT       P11
@@ -339,7 +339,7 @@ PUBLIC SYMBOLS OF MODULE:  stc15f104Test (MAIN)
 *SFR* 000000E8H.7 DATA     BIT       P67
 *SFR* 000000CCH   DATA     BYTE      P6M0
 *SFR* 000000CBH   DATA     BYTE      P6M1
-LX51 LINKER/LOCATER V4.66.41.0                                                        09/26/2020  15:05:06  PAGE 6
+LX51 LINKER/LOCATER V4.66.41.0                                                        11/06/2020  15:32:45  PAGE 6
 
 
 *SFR* 000000F8H   DATA     BYTE      P7
@@ -407,7 +407,7 @@ PUBLIC SYMBOLS OF MODULE:  stc15f104Test (MAIN)
       00000019H   IDATA    BYTE      SW1_state
       00000020H.4 BIT      BIT       SW2_pressed
       00000021H.0 BIT      BIT       switch_update
-LX51 LINKER/LOCATER V4.66.41.0                                                        09/26/2020  15:05:06  PAGE 7
+LX51 LINKER/LOCATER V4.66.41.0                                                        11/06/2020  15:32:45  PAGE 7
 
 
 *SFR* 000000D6H   DATA     BYTE      T2H
@@ -475,7 +475,7 @@ SYMBOL TABLE OF MODULE:  stc15f104Test (MAIN)
       00000009H   PUBLIC    IDATA    WORD      key_holdtime
       00000008H   PUBLIC    IDATA    BYTE      next_SW1_state
       010004B4H   PUBLIC    CODE     ---       timer2
-LX51 LINKER/LOCATER V4.66.41.0                                                        09/26/2020  15:05:06  PAGE 8
+LX51 LINKER/LOCATER V4.66.41.0                                                        11/06/2020  15:32:45  PAGE 8
 
 
       01000480H   PUBLIC    CODE     ---       timer0
@@ -543,7 +543,7 @@ SYMBOL TABLE OF MODULE:  stc15f104Test (MAIN)
       000000C3H   SFRSYM    DATA     BYTE      IAP_ADDRH
       000000B8H.4 SFRSYM    DATA     BIT       PS
       00000081H   SFRSYM    DATA     BYTE      SP
-LX51 LINKER/LOCATER V4.66.41.0                                                        09/26/2020  15:05:06  PAGE 9
+LX51 LINKER/LOCATER V4.66.41.0                                                        11/06/2020  15:32:45  PAGE 9
 
 
       000000D9H   SFRSYM    DATA     BYTE      CMOD
@@ -611,7 +611,7 @@ SYMBOL TABLE OF MODULE:  stc15f104Test (MAIN)
       000000F8H.3 SFRSYM    DATA     BIT       P73
       000000E8H.4 SFRSYM    DATA     BIT       P64
       000000C8H.5 SFRSYM    DATA     BIT       P55
-LX51 LINKER/LOCATER V4.66.41.0                                                        09/26/2020  15:05:06  PAGE 10
+LX51 LINKER/LOCATER V4.66.41.0                                                        11/06/2020  15:32:45  PAGE 10
 
 
       000000C0H.6 SFRSYM    DATA     BIT       P46
@@ -679,7 +679,7 @@ SYMBOL TABLE OF MODULE:  stc15f104Test (MAIN)
       000000BEH   SFRSYM    DATA     BYTE      ADC_RESL
       00000082H   SFRSYM    DATA     BYTE      DPL
       000000CDH   SFRSYM    DATA     BYTE      SPSTAT
-LX51 LINKER/LOCATER V4.66.41.0                                                        09/26/2020  15:05:06  PAGE 11
+LX51 LINKER/LOCATER V4.66.41.0                                                        11/06/2020  15:32:45  PAGE 11
 
 
       0000009BH   SFRSYM    DATA     BYTE      S2BUF
@@ -747,7 +747,7 @@ SYMBOL TABLE OF MODULE:  stc15f104Test (MAIN)
       0100022CH   LINE      CODE     ---       #82
       0100022EH   LINE      CODE     ---       #83
       0100022EH   LINE      CODE     ---       #85
-LX51 LINKER/LOCATER V4.66.41.0                                                        09/26/2020  15:05:06  PAGE 12
+LX51 LINKER/LOCATER V4.66.41.0                                                        11/06/2020  15:32:45  PAGE 12
 
 
       01000232H   LINE      CODE     ---       #86
@@ -815,7 +815,7 @@ SYMBOL TABLE OF MODULE:  stc15f104Test (MAIN)
       010000B6H   LINE      CODE     ---       #187
       010000B8H   LINE      CODE     ---       #188
       010000C6H   LINE      CODE     ---       #189
-LX51 LINKER/LOCATER V4.66.41.0                                                        09/26/2020  15:05:06  PAGE 13
+LX51 LINKER/LOCATER V4.66.41.0                                                        11/06/2020  15:32:45  PAGE 13
 
 
       010000C6H   LINE      CODE     ---       #191
@@ -883,7 +883,7 @@ SYMBOL TABLE OF MODULE:  stc15f104Test (MAIN)
 
       01000406H   BLOCK     CODE     ---       LVL=0
       01000406H   LINE      CODE     ---       #307
-LX51 LINKER/LOCATER V4.66.41.0                                                        09/26/2020  15:05:06  PAGE 14
+LX51 LINKER/LOCATER V4.66.41.0                                                        11/06/2020  15:32:45  PAGE 14
 
 
       01000406H   LINE      CODE     ---       #308
@@ -951,7 +951,7 @@ SYMBOL TABLE OF MODULE:  stc15f104Test (MAIN)
       010004B4H   LINE      CODE     ---       #393
       010004B7H   LINE      CODE     ---       #394
       010004B7H   LINE      CODE     ---       #410
-LX51 LINKER/LOCATER V4.66.41.0                                                        09/26/2020  15:05:06  PAGE 15
+LX51 LINKER/LOCATER V4.66.41.0                                                        11/06/2020  15:32:45  PAGE 15
 
 
       010004BAH   LINE      CODE     ---       #411
@@ -1019,7 +1019,7 @@ SYMBOL TABLE OF MODULE:  stc15f104Test (MAIN)
       000000CCH   SFRSYM    DATA     BYTE      P6M0
       000000C9H   SFRSYM    DATA     BYTE      P5M1
       000000C0H   SFRSYM    DATA     BYTE      P4
-LX51 LINKER/LOCATER V4.66.41.0                                                        09/26/2020  15:05:06  PAGE 16
+LX51 LINKER/LOCATER V4.66.41.0                                                        11/06/2020  15:32:45  PAGE 16
 
 
       000000D0H.6 SFRSYM    DATA     BIT       AC
@@ -1087,7 +1087,7 @@ SYMBOL TABLE OF MODULE:  stc15f104Test (MAIN)
       00000090H.3 SFRSYM    DATA     BIT       P13
       00000080H.4 SFRSYM    DATA     BIT       P04
       00000089H   SFRSYM    DATA     BYTE      TMOD
-LX51 LINKER/LOCATER V4.66.41.0                                                        09/26/2020  15:05:06  PAGE 17
+LX51 LINKER/LOCATER V4.66.41.0                                                        11/06/2020  15:32:45  PAGE 17
 
 
       00000088H   SFRSYM    DATA     BYTE      TCON
@@ -1155,7 +1155,7 @@ SYMBOL TABLE OF MODULE:  stc15f104Test (MAIN)
       00000088H.7 SFRSYM    DATA     BIT       TF1
       000000B5H   SFRSYM    DATA     BYTE      IP2
       00000098H.2 SFRSYM    DATA     BIT       RB8
-LX51 LINKER/LOCATER V4.66.41.0                                                        09/26/2020  15:05:06  PAGE 18
+LX51 LINKER/LOCATER V4.66.41.0                                                        11/06/2020  15:32:45  PAGE 18
 
 
       0000008CH   SFRSYM    DATA     BYTE      TH0
@@ -1223,7 +1223,7 @@ SYMBOL TABLE OF MODULE:  stc15f104Test (MAIN)
       00000004H   SYMBOL    DATA     WORD      i
       ---         BLOCKEND  ---      ---       LVL=1
       0100049DH   LINE      CODE     ---       #9
-LX51 LINKER/LOCATER V4.66.41.0                                                        09/26/2020  15:05:06  PAGE 19
+LX51 LINKER/LOCATER V4.66.41.0                                                        11/06/2020  15:32:45  PAGE 19
 
 
       0100049DH   LINE      CODE     ---       #10
@@ -1291,7 +1291,7 @@ SYMBOL TABLE OF MODULE:  stc15f104Test (MAIN)
       000000A8H.4 SFRSYM    DATA     BIT       ES
       000000B8H.5 SFRSYM    DATA     BIT       PADC
       000000B8H   SFRSYM    DATA     BYTE      IP
-LX51 LINKER/LOCATER V4.66.41.0                                                        09/26/2020  15:05:06  PAGE 20
+LX51 LINKER/LOCATER V4.66.41.0                                                        11/06/2020  15:32:45  PAGE 20
 
 
       00000098H   SFRSYM    DATA     BIT       RI
@@ -1359,7 +1359,7 @@ SYMBOL TABLE OF MODULE:  stc15f104Test (MAIN)
       00000090H.7 SFRSYM    DATA     BIT       P17
       000000F8H.2 SFRSYM    DATA     BIT       P72
       000000E8H.3 SFRSYM    DATA     BIT       P63
-LX51 LINKER/LOCATER V4.66.41.0                                                        09/26/2020  15:05:06  PAGE 21
+LX51 LINKER/LOCATER V4.66.41.0                                                        11/06/2020  15:32:45  PAGE 21
 
 
       000000C8H.4 SFRSYM    DATA     BIT       P54
@@ -1427,7 +1427,7 @@ SYMBOL TABLE OF MODULE:  stc15f104Test (MAIN)
       000000F2H   SFRSYM    DATA     BYTE      PCA_PWM0
       000000F3H   SFRSYM    DATA     BYTE      PCA_PWM1
       000000F4H   SFRSYM    DATA     BYTE      PCA_PWM2
-LX51 LINKER/LOCATER V4.66.41.0                                                        09/26/2020  15:05:06  PAGE 22
+LX51 LINKER/LOCATER V4.66.41.0                                                        11/06/2020  15:32:45  PAGE 22
 
 
       0000009DH   SFRSYM    DATA     BYTE      P1ASF
@@ -1495,7 +1495,7 @@ SYMBOL TABLE OF MODULE:  stc15f104Test (MAIN)
       010004E3H   LINE      CODE     ---       #59
       010004E5H   LINE      CODE     ---       #60
       010004E7H   LINE      CODE     ---       #61
-LX51 LINKER/LOCATER V4.66.41.0                                                        09/26/2020  15:05:06  PAGE 23
+LX51 LINKER/LOCATER V4.66.41.0                                                        11/06/2020  15:32:45  PAGE 23
 
 
       010004E9H   LINE      CODE     ---       #62
@@ -1563,7 +1563,7 @@ SYMBOL TABLE OF MODULE:  stc15f104Test (MAIN)
       000000D8H.7 SFRSYM    DATA     BIT       CF
       000000F9H   SFRSYM    DATA     BYTE      CH
       000000A2H   SFRSYM    DATA     BYTE      P_SW1
-LX51 LINKER/LOCATER V4.66.41.0                                                        09/26/2020  15:05:06  PAGE 24
+LX51 LINKER/LOCATER V4.66.41.0                                                        11/06/2020  15:32:45  PAGE 24
 
 
       000000BAH   SFRSYM    DATA     BYTE      P_SW2
@@ -1631,7 +1631,7 @@ SYMBOL TABLE OF MODULE:  stc15f104Test (MAIN)
       000000B0H.3 SFRSYM    DATA     BIT       P33
       000000A0H.4 SFRSYM    DATA     BIT       P24
       00000090H.5 SFRSYM    DATA     BIT       P15
-LX51 LINKER/LOCATER V4.66.41.0                                                        09/26/2020  15:05:06  PAGE 25
+LX51 LINKER/LOCATER V4.66.41.0                                                        11/06/2020  15:32:45  PAGE 25
 
 
       00000080H.6 SFRSYM    DATA     BIT       P06
@@ -1699,7 +1699,7 @@ SYMBOL TABLE OF MODULE:  stc15f104Test (MAIN)
       00000098H.7 SFRSYM    DATA     BIT       SM0
       000000D2H   SFRSYM    DATA     BYTE      T4H
       0000008AH   SFRSYM    DATA     BYTE      TL0
-LX51 LINKER/LOCATER V4.66.41.0                                                        09/26/2020  15:05:06  PAGE 26
+LX51 LINKER/LOCATER V4.66.41.0                                                        11/06/2020  15:32:45  PAGE 26
 
 
       00000098H.6 SFRSYM    DATA     BIT       SM1
@@ -1767,7 +1767,7 @@ SYMBOL TABLE OF MODULE:  stc15f104Test (MAIN)
       010002E3H   LINE      CODE     ---       #32
       010002EBH   LINE      CODE     ---       #33
       010002EBH   LINE      CODE     ---       #34
-LX51 LINKER/LOCATER V4.66.41.0                                                        09/26/2020  15:05:06  PAGE 27
+LX51 LINKER/LOCATER V4.66.41.0                                                        11/06/2020  15:32:45  PAGE 27
 
 
       010002F7H   LINE      CODE     ---       #35
@@ -1835,7 +1835,7 @@ SYMBOL TABLE OF MODULE:  stc15f104Test (MAIN)
       01000314H   BLOCK     CODE     ---       LVL=0
       01000314H   LINE      CODE     ---       #120
       01000314H   LINE      CODE     ---       #121
-LX51 LINKER/LOCATER V4.66.41.0                                                        09/26/2020  15:05:06  PAGE 28
+LX51 LINKER/LOCATER V4.66.41.0                                                        11/06/2020  15:32:45  PAGE 28
 
 
       01000314H   LINE      CODE     ---       #122
@@ -1903,7 +1903,7 @@ SYMBOL TABLE OF MODULE:  stc15f104Test (MAIN)
       010003FCH   LINE      CODE     ---       #209
       010003FDH   LINE      CODE     ---       #210
       010003FEH   LINE      CODE     ---       #211
-LX51 LINKER/LOCATER V4.66.41.0                                                        09/26/2020  15:05:06  PAGE 29
+LX51 LINKER/LOCATER V4.66.41.0                                                        11/06/2020  15:32:45  PAGE 29
 
 
       010003FFH   LINE      CODE     ---       #212

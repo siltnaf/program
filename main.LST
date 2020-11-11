@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   MAIN                                                                  09/26/2020 15:05:04 PAGE 1   
+C51 COMPILER V9.54   MAIN                                                                  11/06/2020 15:32:44 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
@@ -62,7 +62,7 @@ line level    source
   53   3                state=standby_mode;
   54   3                unlock=0;
   55   3                SW1_state=0;
-C51 COMPILER V9.54   MAIN                                                                  09/26/2020 15:05:04 PAGE 2   
+C51 COMPILER V9.54   MAIN                                                                  11/06/2020 15:32:44 PAGE 2   
 
   56   3                key_holdtime=0;
   57   3                SW1_pressed=0;
@@ -126,7 +126,7 @@ line level    source
  115   1        
  116   1      
  117   1        
-C51 COMPILER V9.54   MAIN                                                                  09/26/2020 15:05:04 PAGE 3   
+C51 COMPILER V9.54   MAIN                                                                  11/06/2020 15:32:44 PAGE 3   
 
  118   1         if ((Time_ms%100)<10)
  119   1         {
@@ -190,7 +190,7 @@ line level    source
  177   2                         
  178   2                      
  179   2                          break;
-C51 COMPILER V9.54   MAIN                                                                  09/26/2020 15:05:04 PAGE 4   
+C51 COMPILER V9.54   MAIN                                                                  11/06/2020 15:32:44 PAGE 4   
 
  180   2        
  181   2        case O3_mode:       
@@ -254,7 +254,7 @@ line level    source
  239   2                          UV_on=0;
  240   2                          ION_on=0;
  241   2                          
-C51 COMPILER V9.54   MAIN                                                                  09/26/2020 15:05:04 PAGE 5   
+C51 COMPILER V9.54   MAIN                                                                  11/06/2020 15:32:44 PAGE 5   
 
  242   2        
  243   2         
@@ -318,7 +318,7 @@ line level    source
  301          
  302          
  303          
-C51 COMPILER V9.54   MAIN                                                                  09/26/2020 15:05:04 PAGE 6   
+C51 COMPILER V9.54   MAIN                                                                  11/06/2020 15:32:44 PAGE 6   
 
  304          
  305          
@@ -382,7 +382,7 @@ line level    source
  363   2            Time_min=0;
  364   2            SW2_pressed=1;
  365   2            key_holdtime=0;
-C51 COMPILER V9.54   MAIN                                                                  09/26/2020 15:05:04 PAGE 7   
+C51 COMPILER V9.54   MAIN                                                                  11/06/2020 15:32:44 PAGE 7   
 
  366   2             
  367   2            switch_update=1;
@@ -446,7 +446,7 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
    DATA SIZE        =   ----    ----
    IDATA SIZE       =     22    ----
    BIT SIZE         =     10    ----
-C51 COMPILER V9.54   MAIN                                                                  09/26/2020 15:05:04 PAGE 8   
+C51 COMPILER V9.54   MAIN                                                                  11/06/2020 15:32:44 PAGE 8   
 
    EDATA SIZE       =   ----    ----
    HDATA SIZE       =   ----    ----

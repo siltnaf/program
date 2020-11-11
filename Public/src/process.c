@@ -131,18 +131,18 @@ if ((Beep==0))
 										break;
 				case 1:			
 										SET_CMOS(IO_LED);
-										LED=1;
+										LED=0;
 										break;
 				case 2:			
 										SET_CMOS(IO_LED);
-										LED=0;
+										LED=1;
 										break;
 				case 3: 		
 										 
 										if (Time_sec%2==0) 
 										{
 											SET_CMOS(IO_LED);
-											LED=1;
+											LED=0;
 										}
 										else 
 										{
@@ -154,7 +154,7 @@ if ((Beep==0))
 										if (((Time_us%512)==0) && ((Time_sec%4)==0))
 										{
 											SET_CMOS(IO_LED);
-											LED=1;
+											LED=0;
 										}
 										else 
 										{

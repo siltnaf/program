@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   PROCESS                                                               09/26/2020 15:05:06 PAGE 1   
+C51 COMPILER V9.54   PROCESS                                                               11/06/2020 15:32:44 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE PROCESS
@@ -62,7 +62,7 @@ line level    source
   52          
   53          
   54          
-C51 COMPILER V9.54   PROCESS                                                               09/26/2020 15:05:06 PAGE 2   
+C51 COMPILER V9.54   PROCESS                                                               11/06/2020 15:32:44 PAGE 2   
 
   55          void Process_UV()
   56          {
@@ -126,7 +126,7 @@ line level    source
  114   1      
  115   1      
  116   1      
-C51 COMPILER V9.54   PROCESS                                                               09/26/2020 15:05:06 PAGE 3   
+C51 COMPILER V9.54   PROCESS                                                               11/06/2020 15:32:44 PAGE 3   
 
  117   1      }
  118          
@@ -145,18 +145,18 @@ line level    source
  131   3                          break;
  132   3              case 1:     
  133   3                          SET_CMOS(IO_LED);
- 134   3                          LED=1;
+ 134   3                          LED=0;
  135   3                          break;
  136   3              case 2:     
  137   3                          SET_CMOS(IO_LED);
- 138   3                          LED=0;
+ 138   3                          LED=1;
  139   3                          break;
  140   3              case 3:     
  141   3                           
  142   3                          if (Time_sec%2==0) 
  143   3                          {
  144   4                            SET_CMOS(IO_LED);
- 145   4                            LED=1;
+ 145   4                            LED=0;
  146   4                          }
  147   3                          else 
  148   3                          {
@@ -168,7 +168,7 @@ line level    source
  154   3                          if (((Time_us%512)==0) && ((Time_sec%4)==0))
  155   3                          {
  156   4                            SET_CMOS(IO_LED);
- 157   4                            LED=1;
+ 157   4                            LED=0;
  158   4                          }
  159   3                          else 
  160   3                          {
@@ -190,7 +190,7 @@ line level    source
  176   1            
  177   1        
  178   1        
-C51 COMPILER V9.54   PROCESS                                                               09/26/2020 15:05:06 PAGE 4   
+C51 COMPILER V9.54   PROCESS                                                               11/06/2020 15:32:44 PAGE 4   
 
  179   1        
  180   1        
@@ -254,7 +254,7 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
    BIT SIZE         =   ----    ----
    EDATA SIZE       =   ----    ----
    HDATA SIZE       =   ----    ----
-C51 COMPILER V9.54   PROCESS                                                               09/26/2020 15:05:06 PAGE 5   
+C51 COMPILER V9.54   PROCESS                                                               11/06/2020 15:32:44 PAGE 5   
 
    XDATA CONST SIZE =   ----    ----
    FAR CONST SIZE   =   ----    ----
