@@ -8,7 +8,7 @@
 #define LED       		(P31)           //DC output for LED
 #define SW1 						(P32)
 #define O3    				(P33)
-#define SW2 						(P33)
+//#define SW2 						(P33)
 #define UV       			(P34)
 #define ION 					(P35)          //output for ION
 
@@ -17,7 +17,7 @@
 #define IO_BUZ          P3_2
 #define IO_SW1					P3_2
 #define IO_O3           P3_3
-#define IO_SW2					P3_3
+//#define IO_SW2					P3_3
 #define IO_UV           P3_4
 #define IO_ION          P3_5
 

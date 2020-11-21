@@ -79,17 +79,17 @@ void Check_switch()
 										state=standby_mode;
 										break;
 					case 1:			
-										
+										power_refresh=0;
 										state=ION_mode;
 										break;
 					case 2: 		
 									
-									
+										power_refresh=0;
 										state=UVION_mode;
 										break;
 					case 3: 		
 									
-									
+										power_refresh=0;
 										state=O3_mode;
 										break;
 				
@@ -112,25 +112,25 @@ void Check_switch()
 
 	
 
-	
-   if ((Time_ms%100)<10)
-	 {
-		 SW2=0;
-		 SET_INPUT(IO_SW2);
-		 if ((Time_ms%100)>5) 
-		 {
-			 EX1=1;
-			 EX0=1;
-		 }
-	 }
-	 else 
-	 {
-		 EX1=0;
-		 EX0=0;
-		 SET_CMOS(IO_SW2);
-		 if (O3_on==1) SW2=1; else SW2=0;
-	 }
-		 
+//	
+//   if ((Time_ms%100)<10)
+//	 {
+//		 SW2=0;
+//		 SET_INPUT(IO_SW2);
+//		 if ((Time_ms%100)>5) 
+//		 {
+//			 EX1=1;
+//			 EX0=1;
+//		 }
+//	 }
+//	 else 
+//	 {
+//		 EX1=0;
+//		 EX0=0;
+		 SET_CMOS(IO_O3);
+		 if (O3_on==1) O3=1; else O3=0;
+//	 }
+//		 
 		
 
 
@@ -155,7 +155,7 @@ void State_process()
 										ION_on=0;
 										O3_level  = 0;
 										UV_on  = 0;
-										next_SW1_state=1;
+									 SW1_state=0;
 										LED_type=0;
 										next_state=standby_mode;
 	
@@ -165,7 +165,7 @@ void State_process()
 	
 	case ION_mode:				
 										
-									DCDC_enable();
+//									DCDC_enable();
 											
 									 LED_type=1;
 									 O3_level=0;
@@ -178,7 +178,7 @@ void State_process()
 	
 	case O3_mode:				
 										
-										DCDC_enable();	
+//										DCDC_enable();	
 										LED_type=2;
 										O3_level=2;
 										UV_on=0;
@@ -201,7 +201,7 @@ void State_process()
 										ION_on=0;
 										if (Time_min<=5) 
 										{
-											DCDC_enable();
+//											DCDC_enable();
 												O3_level=2;
 										}else 	O3_level=0;
 											
@@ -231,7 +231,7 @@ void State_process()
 	
 	case ozone_mode:	
 											
-									DCDC_enable();
+//									DCDC_enable();
 									LED_type=3;
 										O3_level=2;
 										UV_on=0;
@@ -248,7 +248,7 @@ void State_process()
 
 	case wait_mode:	
 											
-									DCDC_enable();
+//									DCDC_enable();
 								   	LED_type=3;
 										O3_level=2;
 										UV_on=0;
@@ -352,18 +352,18 @@ void int0() interrupt 0
 void int1() interrupt 2
 {
 
-    if ((switch_update==0)&&(SW2==1)) 
-	 {
-		 
-			Time_us=0;
-			Time_ms=0;
-			Time_sec=0;
-			Time_min=0;
-			SW2_pressed=1;
-			key_holdtime=0;
-			 
-			switch_update=1;
-	 }
+//    if ((switch_update==0)&&(SW2==1)) 
+//	 {
+//		 
+//			Time_us=0;
+//			Time_ms=0;
+//			Time_sec=0;
+//			Time_min=0;
+//			SW2_pressed=1;
+//			key_holdtime=0;
+//			 
+//			switch_update=1;
+//	 }
 }
 
 

@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   MAIN                                                                  11/21/2020 09:10:05 PAGE 1   
+C51 COMPILER V9.54   MAIN                                                                  11/21/2020 11:42:18 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
@@ -62,7 +62,7 @@ line level    source
   53   3                SW1_state=0;
   54   3                key_holdtime=0;
   55   3                SW1_pressed=0;
-C51 COMPILER V9.54   MAIN                                                                  11/21/2020 09:10:05 PAGE 2   
+C51 COMPILER V9.54   MAIN                                                                  11/21/2020 11:42:18 PAGE 2   
 
   56   3                switch_update=0;
   57   3              
@@ -90,17 +90,17 @@ line level    source
   79   4                          state=standby_mode;
   80   4                          break;
   81   4                case 1:     
-  82   4                          
+  82   4                          power_refresh=0;
   83   4                          state=ION_mode;
   84   4                          break;
   85   4                case 2:     
   86   4                        
-  87   4                        
+  87   4                          power_refresh=0;
   88   4                          state=UVION_mode;
   89   4                          break;
   90   4                case 3:     
   91   4                        
-  92   4                        
+  92   4                          power_refresh=0;
   93   4                          state=O3_mode;
   94   4                          break;
   95   4              
@@ -123,27 +123,27 @@ line level    source
  112   1      
  113   1        
  114   1      
- 115   1        
- 116   1         if ((Time_ms%100)<10)
- 117   1         {
-C51 COMPILER V9.54   MAIN                                                                  11/21/2020 09:10:05 PAGE 3   
+ 115   1      //  
+ 116   1      //   if ((Time_ms%100)<10)
+ 117   1      //   {
+C51 COMPILER V9.54   MAIN                                                                  11/21/2020 11:42:18 PAGE 3   
 
- 118   2           SW2=0;
- 119   2           SET_INPUT(IO_SW2);
- 120   2           if ((Time_ms%100)>5) 
- 121   2           {
- 122   3             EX1=1;
- 123   3             EX0=1;
- 124   3           }
- 125   2         }
- 126   1         else 
- 127   1         {
- 128   2           EX1=0;
- 129   2           EX0=0;
- 130   2           SET_CMOS(IO_SW2);
- 131   2           if (O3_on==1) SW2=1; else SW2=0;
- 132   2         }
- 133   1           
+ 118   1      //     SW2=0;
+ 119   1      //     SET_INPUT(IO_SW2);
+ 120   1      //     if ((Time_ms%100)>5) 
+ 121   1      //     {
+ 122   1      //       EX1=1;
+ 123   1      //       EX0=1;
+ 124   1      //     }
+ 125   1      //   }
+ 126   1      //   else 
+ 127   1      //   {
+ 128   1      //     EX1=0;
+ 129   1      //     EX0=0;
+ 130   1           SET_CMOS(IO_O3);
+ 131   1           if (O3_on==1) O3=1; else O3=0;
+ 132   1      //   }
+ 133   1      //     
  134   1          
  135   1      
  136   1      
@@ -168,7 +168,7 @@ line level    source
  155   2                          ION_on=0;
  156   2                          O3_level  = 0;
  157   2                          UV_on  = 0;
- 158   2                          next_SW1_state=1;
+ 158   2                         SW1_state=0;
  159   2                          LED_type=0;
  160   2                          next_state=standby_mode;
  161   2        
@@ -178,7 +178,7 @@ line level    source
  165   2        
  166   2        case ION_mode:        
  167   2                          
- 168   2                        DCDC_enable();
+ 168   2      //                  DCDC_enable();
  169   2                            
  170   2                         LED_type=1;
  171   2                         O3_level=0;
@@ -190,10 +190,10 @@ line level    source
  177   2                          break;
  178   2        
  179   2        case O3_mode:       
-C51 COMPILER V9.54   MAIN                                                                  11/21/2020 09:10:05 PAGE 4   
+C51 COMPILER V9.54   MAIN                                                                  11/21/2020 11:42:18 PAGE 4   
 
  180   2                          
- 181   2                          DCDC_enable();  
+ 181   2      //                    DCDC_enable();  
  182   2                          LED_type=2;
  183   2                          O3_level=2;
  184   2                          UV_on=0;
@@ -216,7 +216,7 @@ line level    source
  201   2                          ION_on=0;
  202   2                          if (Time_min<=5) 
  203   2                          {
- 204   3                            DCDC_enable();
+ 204   3      //                      DCDC_enable();
  205   3                              O3_level=2;
  206   3                          }else   O3_level=0;
  207   2                            
@@ -246,7 +246,7 @@ line level    source
  231   2        
  232   2        case ozone_mode:  
  233   2                            
- 234   2                        DCDC_enable();
+ 234   2      //                  DCDC_enable();
  235   2                        LED_type=3;
  236   2                          O3_level=2;
  237   2                          UV_on=0;
@@ -254,7 +254,7 @@ line level    source
  239   2                          
  240   2        
  241   2         
-C51 COMPILER V9.54   MAIN                                                                  11/21/2020 09:10:05 PAGE 5   
+C51 COMPILER V9.54   MAIN                                                                  11/21/2020 11:42:18 PAGE 5   
 
  242   2                          if (Time_min>=time_T2) next_state=wait_mode; else   next_state=ozone_mode;
  243   2                            
@@ -265,7 +265,7 @@ line level    source
  248   2      
  249   2        case wait_mode: 
  250   2                            
- 251   2                        DCDC_enable();
+ 251   2      //                  DCDC_enable();
  252   2                          LED_type=3;
  253   2                          O3_level=2;
  254   2                          UV_on=0;
@@ -318,7 +318,7 @@ line level    source
  301          
  302          
  303          
-C51 COMPILER V9.54   MAIN                                                                  11/21/2020 09:10:05 PAGE 6   
+C51 COMPILER V9.54   MAIN                                                                  11/21/2020 11:42:18 PAGE 6   
 
  304          
  305          void main(void) 
@@ -371,20 +371,20 @@ line level    source
  352          void int1() interrupt 2
  353          {
  354   1      
- 355   1          if ((switch_update==0)&&(SW2==1)) 
- 356   1         {
- 357   2           
- 358   2            Time_us=0;
- 359   2            Time_ms=0;
- 360   2            Time_sec=0;
- 361   2            Time_min=0;
- 362   2            SW2_pressed=1;
- 363   2            key_holdtime=0;
- 364   2             
- 365   2            switch_update=1;
-C51 COMPILER V9.54   MAIN                                                                  11/21/2020 09:10:05 PAGE 7   
+ 355   1      //    if ((switch_update==0)&&(SW2==1)) 
+ 356   1      //   {
+ 357   1      //     
+ 358   1      //      Time_us=0;
+ 359   1      //      Time_ms=0;
+ 360   1      //      Time_sec=0;
+ 361   1      //      Time_min=0;
+ 362   1      //      SW2_pressed=1;
+ 363   1      //      key_holdtime=0;
+ 364   1      //       
+ 365   1      //      switch_update=1;
+C51 COMPILER V9.54   MAIN                                                                  11/21/2020 11:42:18 PAGE 7   
 
- 366   2         }
+ 366   1      //   }
  367   1      }
  368          
  369          
@@ -437,7 +437,7 @@ line level    source
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    828    ----
+   CODE SIZE        =    712    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
@@ -446,7 +446,7 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
    BIT SIZE         =     10    ----
    EDATA SIZE       =   ----    ----
    HDATA SIZE       =   ----    ----
-C51 COMPILER V9.54   MAIN                                                                  11/21/2020 09:10:05 PAGE 8   
+C51 COMPILER V9.54   MAIN                                                                  11/21/2020 11:42:18 PAGE 8   
 
    XDATA CONST SIZE =   ----    ----
    FAR CONST SIZE   =   ----    ----
