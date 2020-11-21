@@ -6,9 +6,9 @@
 #define VCC_EN			  (P30)           //relay normal open 
 #define LED       		(P31)           //DC output for LED
 #define SW 						(P32)
-#define SPEED0			   		(P33)
+#define SPEED0			 	(P33)
 #define SPEED1      	(P34)
-#define SPEED2				(P35)          //output for ION
+#define UV    				(P35)          //output for ION
 
 
 
@@ -17,7 +17,7 @@
 #define IO_SW						P3_2
 #define IO_SPEED0		    P3_3
 #define IO_SPEED1       P3_4
-#define IO_SPEED2       P3_5
+#define IO_UV 		      P3_5
 
 
 
