@@ -9,7 +9,7 @@
 
 volatile uint8 state,next_state,SW1_state,next_SW1_state;
 volatile uint8   O3_level,LED_type;
-volatile uint16 process_time,buz_time,key_holdtime;
+volatile uint16 process_time,buz_time,key_holdtime,power_refresh;
 volatile uint16 Time_us, Time_ms,Time_sec,Time_min,scan_sec;
 volatile bit Timer_update,Beep, UV_on,ION_on,O3_on,switch_update,SW1_pressed,SW2_pressed,scan,unlock;
 
@@ -20,14 +20,12 @@ void DCDC_enable(void)
 
 	
 	
-	
-												//P35 as input
+	if (((power_refresh%20)==0)&&((Time_ms<500)==0)) 
+	{
 		
-											P3M1 |=0x20;                      	// P3M1 |= 0b00100000;
-											P3M0 &=0xdf;												// P3M0 &= 0b11011111;          
-
-//
- 	if ((VCC_det==0)&&((Time_ms<500)==0)) VCC_EN=0; else VCC_EN=1;
+		VCC_EN=0;
+	} else VCC_EN=1;
+		 
 	
 }
 
