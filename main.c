@@ -63,8 +63,8 @@ void Check_switch()
 			
 			
 				switch_update=0;
+				delay_ms(200);
 				key_holdtime=0;
-				delay_ms(250);
 				}		
 			}
    
@@ -76,114 +76,6 @@ void Check_switch()
 			
 		
 
-//	
-//void Check_switch()
-//{
-//	if (scan_sec>5)
-//	{
-//		unlock=0; 
-//		scan=0;
-//		scan_sec=0;
-//	}
-//		if (key_holdtime>press_200ms) 
-//		{
-//			
-//			
-//				if ((key_holdtime>press_3s)&&(SW1==1))
-//				{
-//					state=standby_mode;
-//					unlock=0;
-//					SW1_state=0;
-//					key_holdtime=0;
-//					SW1_pressed=0;
-//					switch_update=0;
-//				
-//				}
-//				else if ((key_holdtime<press_3s)&&(SW1==0))
-//				{
-//		
-//				else if ((key_holdtime<press_3s)&&(SW1==0))
-//				{
-//		
-//					if (unlock==1) SW1_state++;
-//							else 
-//							{
-//							
-//								unlock=1;
-//							
-//							}
-//							
-//				   if ((SW1_state==0)&& (unlock==1))
-//							SW1_state=1;
-//					 
-//				if (SW1_state>3) SW1_state=0;
-//			
-//					switch (SW1_state)
-//					{
-//					case 0:			
-//									
-//										state=standby_mode;
-//										break;
-//					case 1:			
-//										
-//										state=ION_mode;
-//										break;
-//					case 2: 		
-//									
-//									
-//										state=UVION_mode;
-//										break;
-//					case 3: 		
-//									
-//									
-//										state=O3_mode;
-//										break;
-//				
-//				
-//					}	
-//		 
-//					scan=1;
-//					scan_sec=0;
-//					
-//					key_holdtime=0;
-//					SW1_pressed=0;
-//					switch_update=0;
-//					delay_ms(250);
-//				}
-//		}		
-//	
-//   
-//		
-
-
-//	
-
-//	
-//   if ((Time_ms%100)<10)
-//	 {
-//		 SW2=0;
-//		 SET_INPUT(IO_SW2);
-//		 if ((Time_ms%100)>5) 
-//		 {
-//			 EX1=1;
-//			 EX0=1;
-//		 }
-//	 }
-//	 else 
-//	 {
-//		 EX1=0;
-//		 EX0=0;
-//		 SET_CMOS(IO_SW2);
-//		 if (O3_on==1) SW2=1; else SW2=0;
-//	 }
-//		 
-//		
-
-
-//	
-//}
-					
-		
 	
 	
 	
