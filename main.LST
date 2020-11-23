@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   MAIN                                                                  11/21/2020 15:14:54 PAGE 1   
+C51 COMPILER V9.54   MAIN                                                                  11/23/2020 11:02:05 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
@@ -29,10 +29,10 @@ line level    source
   20   1      
   21   1        
   22   1        
-  23   1        
-  24   1        SET_INPUT(IO_VCC_det);                
-  25   1        if ((VCC_det==0)&&(Time_ms<500)==0) VCC_EN=0; else  VCC_EN=1;
-  26   1          
+  23   1      //  
+  24   1      //  SET_INPUT(IO_VCC_det);                
+  25   1      //  if ((VCC_det==0)&&(Time_ms<500)==0) VCC_EN=0; else  VCC_EN=1;
+  26   1      //    
   27   1        
   28   1      }
   29          
@@ -62,7 +62,7 @@ line level    source
   53   4              case 1:     
   54   4                          
   55   4                          state=ion_mode;
-C51 COMPILER V9.54   MAIN                                                                  11/21/2020 15:14:54 PAGE 2   
+C51 COMPILER V9.54   MAIN                                                                  11/23/2020 11:02:05 PAGE 2   
 
   56   4                          break;
   57   4              case 2:     
@@ -126,7 +126,7 @@ line level    source
  115   2                          if (USB==1) next_state=standby_mode;
  116   2                          break;
  117   2        
-C51 COMPILER V9.54   MAIN                                                                  11/21/2020 15:14:54 PAGE 3   
+C51 COMPILER V9.54   MAIN                                                                  11/23/2020 11:02:05 PAGE 3   
 
  118   2        
  119   2          case ion_mode:        
@@ -190,7 +190,7 @@ line level    source
  177   1      }
  178          
  179          void int0() interrupt 0
-C51 COMPILER V9.54   MAIN                                                                  11/21/2020 15:14:54 PAGE 4   
+C51 COMPILER V9.54   MAIN                                                                  11/23/2020 11:02:05 PAGE 4   
 
  180          {
  181   1      
@@ -238,7 +238,7 @@ line level    source
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    376    ----
+   CODE SIZE        =    343    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

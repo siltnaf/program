@@ -20,10 +20,10 @@ void DCDC_enable(void)
 
 	
 	
-	
-	SET_INPUT(IO_VCC_det);								
-	if ((VCC_det==0)&&(Time_ms<500)==0) VCC_EN=0; else 	VCC_EN=1;
-		
+//	
+//	SET_INPUT(IO_VCC_det);								
+//	if ((VCC_det==0)&&(Time_ms<500)==0) VCC_EN=0; else 	VCC_EN=1;
+//		
 	
 }
 
