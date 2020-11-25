@@ -37,7 +37,7 @@ void Check_switch()
 			switch_state++;
 			if (switch_state>2) switch_state=0;
 		 
-//			SPEED0=0;
+//			FAN=0;
 			switch (switch_state)
 			{
 				case 0:			
@@ -95,11 +95,11 @@ void State_process()
 	
 	case standby_mode:    
 										
-										SPEED0=0;
+										FAN=0;
 										LED_type=0;
-									  SPEED0=0;
-										SPEED1=0;
-										UV=0;
+									  switch_state=0;
+ 
+									 
 										next_state=standby_mode;
 	
 										 
@@ -108,24 +108,22 @@ void State_process()
 										break;
 	
 	case speed0_mode:				
-										
-										Enable_power();
+ 
 										 
-										SPEED0=1;
-										SPEED1=0;
-										UV=1;
-									 
-										next_state=speed0_mode;
+										if (VCC_det==1) FAN=0; else FAN=1;   //wait until VCC return to 0
+  
+								 
+									  if (VUSB==1) next_state=standby_mode; else next_state=speed0_mode;
 										break;
 	
 	case speed1_mode:				
 										
 										Enable_power();
-										SPEED0=1;
-										SPEED1=1;
-										UV=1;
+										FAN=1;
+								   
+										 
 									 
-										next_state=speed1_mode;
+										if (VUSB==1) next_state=standby_mode; else next_state=speed1_mode;
 										break;
 	
 	 
