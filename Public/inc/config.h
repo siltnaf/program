@@ -47,8 +47,8 @@
 #define time_5s					5
 #define time_1s         1
 
-#define press_time     200
-
+#define press_200ms     200
+#define press_3s    		3000
  
  
 #define SET_INPUT(P3_n)  P3M1 |=(1<<(P3_n)) ; 	P3M0 &=~((1)<<(P3_n)) 

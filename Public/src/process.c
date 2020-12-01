@@ -66,7 +66,7 @@ void Process_LED()
 
 	switch (LED_type)
 			{
-				case 0:			
+				case 0:			LED=0;
 										SET_INPUT(IO_LED);
 									 
 										break;
