@@ -32,12 +32,25 @@ void Enable_power()
 
 void Check_switch()
 {
-		if (key_holdtime>press_time) 
-		{
-			switch_state++;
-			if (switch_state>3) switch_state=0;
 		 
-//			SPEED0=0;
+
+	if (key_holdtime>press_200ms) 
+		{
+				if ((key_holdtime>press_3s)&&(SW==1))
+				{
+					state=standby_mode;
+					switch_state=0;
+					key_holdtime=0;
+					switch_update=0;
+				}
+				else if ((key_holdtime<press_3s)&&(SW==0))
+				{
+				switch_state++;
+				if (switch_state>3) switch_state=0;
+	
+	
+	
+	
 			switch (switch_state)
 			{
 				case 0:			
@@ -80,7 +93,7 @@ void Check_switch()
 	
    
 		
-
+	}
 
 	
 }
