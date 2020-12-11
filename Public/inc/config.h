@@ -33,9 +33,11 @@
 
 
 #define standby_mode 				0
-#define speed0_mode  				1
-#define speed1_mode 				2
-#define speed2_mode					3
+#define  quite_mode         1
+#define speed0_mode  				2
+#define speed1_mode 				3
+#define speed2_mode					4
+
 
 
 

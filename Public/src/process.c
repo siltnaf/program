@@ -83,6 +83,28 @@ void Process_LED()
 									  LED=1;
 										break;
 				
+				case 4: 		
+										if (Time_ms%4==0) 
+										{
+											SET_CMOS(IO_LED);
+											LED=0;
+											
+										}
+											else 
+											{
+											SET_INPUT(IO_LED);
+											LED=1;
+											}
+										if (Time_ms<50) 
+										{
+											SET_CMOS(IO_LED);
+											LED=1;
+											
+										}
+										
+											
+										break;
+				
 		
 			}
 }

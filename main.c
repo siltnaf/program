@@ -46,7 +46,7 @@ void Check_switch()
 				else if ((key_holdtime<press_3s)&&(SW==0))
 				{
 				switch_state++;
-				if (switch_state>3) switch_state=0;
+				if (switch_state>4) switch_state=0;
 	
 	
 	
@@ -59,19 +59,23 @@ void Check_switch()
 										state=standby_mode;
 										break;
 
-				case 1: 		
+				case 1:			LED_type=4;
+										state=quite_mode;
+										break;
+				
+				case 2: 		
 										power_refresh=0;
 									 	LED_type=1;
 										state=speed0_mode;
 										break;
-				case 2: 		
+				case 3: 		
 										power_refresh=0;
 									 	LED_type=2;
 				
 										state=speed1_mode;
 										break;
 				
-				case 3: 		
+				case 4: 		
 										power_refresh=0;
 										 LED_type=3;
 										state=speed2_mode;
@@ -123,6 +127,17 @@ void State_process()
 	
 	
 										break;
+	
+	
+	case quite_mode:
+									Enable_power();
+										if (Time_ms%2==0) SPEED0=1; else SPEED0=0;
+										
+										SPEED1=0;
+										SET_INPUT(IO_SPEED2);
+										next_state=quite_mode;
+										break;
+	
 	
 	case speed0_mode:				
 										
