@@ -273,7 +273,9 @@ void State_process()
 
 										
 	case BUZ_mode:
-									
+									  UV_on=0;
+										ION_on=0;
+										EX0=0;
 										Beep=1;
 										delay_ms(250);
 										Beep=0;
@@ -284,6 +286,7 @@ void State_process()
 										BUZ=0;
 										delay_ms(500);
 										LED_type=0;
+										EX0=1;
 										next_state=  standby_mode;
 									 
 										break;

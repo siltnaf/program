@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   MAIN                                                                  11/21/2020 11:42:18 PAGE 1   
+C51 COMPILER V9.54   MAIN                                                                  12/13/2020 23:49:12 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
@@ -62,7 +62,7 @@ line level    source
   53   3                SW1_state=0;
   54   3                key_holdtime=0;
   55   3                SW1_pressed=0;
-C51 COMPILER V9.54   MAIN                                                                  11/21/2020 11:42:18 PAGE 2   
+C51 COMPILER V9.54   MAIN                                                                  12/13/2020 23:49:12 PAGE 2   
 
   56   3                switch_update=0;
   57   3              
@@ -126,7 +126,7 @@ line level    source
  115   1      //  
  116   1      //   if ((Time_ms%100)<10)
  117   1      //   {
-C51 COMPILER V9.54   MAIN                                                                  11/21/2020 11:42:18 PAGE 3   
+C51 COMPILER V9.54   MAIN                                                                  12/13/2020 23:49:12 PAGE 3   
 
  118   1      //     SW2=0;
  119   1      //     SET_INPUT(IO_SW2);
@@ -190,7 +190,7 @@ line level    source
  177   2                          break;
  178   2        
  179   2        case O3_mode:       
-C51 COMPILER V9.54   MAIN                                                                  11/21/2020 11:42:18 PAGE 4   
+C51 COMPILER V9.54   MAIN                                                                  12/13/2020 23:49:12 PAGE 4   
 
  180   2                          
  181   2      //                    DCDC_enable();  
@@ -254,7 +254,7 @@ line level    source
  239   2                          
  240   2        
  241   2         
-C51 COMPILER V9.54   MAIN                                                                  11/21/2020 11:42:18 PAGE 5   
+C51 COMPILER V9.54   MAIN                                                                  12/13/2020 23:49:12 PAGE 5   
 
  242   2                          if (Time_min>=time_T2) next_state=wait_mode; else   next_state=ozone_mode;
  243   2                            
@@ -290,164 +290,167 @@ line level    source
  273   2      
  274   2                          
  275   2        case BUZ_mode:
- 276   2                        
- 277   2                          Beep=1;
- 278   2                          delay_ms(250);
- 279   2                          Beep=0;
+ 276   2                          UV_on=0;
+ 277   2                          ION_on=0;
+ 278   2                          EX0=0;
+ 279   2                          Beep=1;
  280   2                          delay_ms(250);
- 281   2                          Beep=1;
+ 281   2                          Beep=0;
  282   2                          delay_ms(250);
- 283   2                          Beep=0;
- 284   2                          BUZ=0;
- 285   2                          delay_ms(500);
- 286   2                          LED_type=0;
- 287   2                          next_state=  standby_mode;
- 288   2                         
- 289   2                          break;
- 290   2        
- 291   2          }
- 292   1          
- 293   1      state=next_state;
- 294   1      
- 295   1      
- 296   1      }
- 297          
- 298          
- 299          
+ 283   2                          Beep=1;
+ 284   2                          delay_ms(250);
+ 285   2                          Beep=0;
+ 286   2                          BUZ=0;
+ 287   2                          delay_ms(500);
+ 288   2                          LED_type=0;
+ 289   2                          EX0=1;
+ 290   2                          next_state=  standby_mode;
+ 291   2                         
+ 292   2                          break;
+ 293   2        
+ 294   2          }
+ 295   1          
+ 296   1      state=next_state;
+ 297   1      
+ 298   1      
+ 299   1      }
  300          
  301          
  302          
  303          
-C51 COMPILER V9.54   MAIN                                                                  11/21/2020 11:42:18 PAGE 6   
+C51 COMPILER V9.54   MAIN                                                                  12/13/2020 23:49:12 PAGE 6   
 
  304          
- 305          void main(void) 
- 306          {
- 307   1        IO_Init();
- 308   1        InitTime0();
- 309   1        InitTime2();
- 310   1        InitExtInterrupt();
- 311   1      
- 312   1        InitParameter() ;
- 313   1      
- 314   1        while(1) 
- 315   1        { 
- 316   2        
- 317   2      
- 318   2           
- 319   2          Check_switch();
- 320   2          State_process();
- 321   2          
- 322   2      
- 323   2          Process_Timer();
- 324   2          Process_ION();
- 325   2          Process_UV();
- 326   2          Process_LED();
- 327   2          Process_BUZ();
- 328   2          Process_O3();
- 329   2          Process_sleep();
- 330   2      
- 331   2      
- 332   2          
- 333   2        } 
- 334   1      }
- 335          
- 336          void int0() interrupt 0
- 337          {
- 338   1      
- 339   1         if ((switch_update==0)&&(SW1==1)) 
- 340   1         {
- 341   2            Time_us=0;
- 342   2            Time_ms=0;
- 343   2            Time_sec=0;
- 344   2            Time_min=0;
- 345   2            SW1_pressed=1;
- 346   2            key_holdtime=0;
- 347   2             
- 348   2            switch_update=1;
- 349   2         }
- 350   1      }
- 351          
- 352          void int1() interrupt 2
- 353          {
- 354   1      
- 355   1      //    if ((switch_update==0)&&(SW2==1)) 
- 356   1      //   {
- 357   1      //     
- 358   1      //      Time_us=0;
- 359   1      //      Time_ms=0;
- 360   1      //      Time_sec=0;
- 361   1      //      Time_min=0;
- 362   1      //      SW2_pressed=1;
- 363   1      //      key_holdtime=0;
- 364   1      //       
- 365   1      //      switch_update=1;
-C51 COMPILER V9.54   MAIN                                                                  11/21/2020 11:42:18 PAGE 7   
+ 305          
+ 306          
+ 307          
+ 308          void main(void) 
+ 309          {
+ 310   1        IO_Init();
+ 311   1        InitTime0();
+ 312   1        InitTime2();
+ 313   1        InitExtInterrupt();
+ 314   1      
+ 315   1        InitParameter() ;
+ 316   1      
+ 317   1        while(1) 
+ 318   1        { 
+ 319   2        
+ 320   2      
+ 321   2           
+ 322   2          Check_switch();
+ 323   2          State_process();
+ 324   2          
+ 325   2      
+ 326   2          Process_Timer();
+ 327   2          Process_ION();
+ 328   2          Process_UV();
+ 329   2          Process_LED();
+ 330   2          Process_BUZ();
+ 331   2          Process_O3();
+ 332   2          Process_sleep();
+ 333   2      
+ 334   2      
+ 335   2          
+ 336   2        } 
+ 337   1      }
+ 338          
+ 339          void int0() interrupt 0
+ 340          {
+ 341   1      
+ 342   1         if ((switch_update==0)&&(SW1==1)) 
+ 343   1         {
+ 344   2            Time_us=0;
+ 345   2            Time_ms=0;
+ 346   2            Time_sec=0;
+ 347   2            Time_min=0;
+ 348   2            SW1_pressed=1;
+ 349   2            key_holdtime=0;
+ 350   2             
+ 351   2            switch_update=1;
+ 352   2         }
+ 353   1      }
+ 354          
+ 355          void int1() interrupt 2
+ 356          {
+ 357   1      
+ 358   1      //    if ((switch_update==0)&&(SW2==1)) 
+ 359   1      //   {
+ 360   1      //     
+ 361   1      //      Time_us=0;
+ 362   1      //      Time_ms=0;
+ 363   1      //      Time_sec=0;
+ 364   1      //      Time_min=0;
+ 365   1      //      SW2_pressed=1;
+C51 COMPILER V9.54   MAIN                                                                  12/13/2020 23:49:12 PAGE 7   
 
- 366   1      //   }
- 367   1      }
- 368          
- 369          
- 370           
- 371          void timer0() interrupt 1
- 372          {
- 373   1      
- 374   1      if (switch_update==1) 
- 375   1      {
- 376   2        key_holdtime++;
- 377   2       
- 378   2        
- 379   2        
- 380   2          
- 381   2          }
- 382   1         
- 383   1        Timer_update=1;
- 384   1      }
- 385          
- 386          
- 387          
+ 366   1      //      key_holdtime=0;
+ 367   1      //       
+ 368   1      //      switch_update=1;
+ 369   1      //   }
+ 370   1      }
+ 371          
+ 372          
+ 373           
+ 374          void timer0() interrupt 1
+ 375          {
+ 376   1      
+ 377   1      if (switch_update==1) 
+ 378   1      {
+ 379   2        key_holdtime++;
+ 380   2       
+ 381   2        
+ 382   2        
+ 383   2          
+ 384   2          }
+ 385   1         
+ 386   1        Timer_update=1;
+ 387   1      }
  388          
- 389          void timer2() interrupt 12  
- 390          {
- 391   1       if (Beep==1) 
- 392   1          {
- 393   2          
- 394   2          //P32 as output
- 395   2        //                      P3M1   P3M0
- 396   2        //P30(BUZ)->INPUT         1      1
- 397   2        //P31(LED)->CMOS          0      1
- 398   2        //P32(SW1/BUZ)->INPUT       0      1
- 399   2        //P33(O3)->OUTPUT         0      0
- 400   2        //P34(UV)->CMOS           0      1
- 401   2        //P35(ION)->OUTPUT        0      0
- 402   2              
- 403   2      
- 404   2        //P3M1 &=0b1111 1011;
- 405   2        //P3M0 |=0b0000 0100;
- 406   2        
- 407   2        
- 408   2          P3M1 &= 0xfb;               //P32 as CMOS output  
- 409   2          P3M0 |= 0x04;
- 410   2            
- 411   2          BUZ=~BUZ;
- 412   2      }
- 413   1          else BUZ=0;
- 414   1      }
- 415          
+ 389          
+ 390          
+ 391          
+ 392          void timer2() interrupt 12  
+ 393          {
+ 394   1       if (Beep==1) 
+ 395   1          {
+ 396   2          
+ 397   2          //P32 as output
+ 398   2        //                      P3M1   P3M0
+ 399   2        //P30(BUZ)->INPUT         1      1
+ 400   2        //P31(LED)->CMOS          0      1
+ 401   2        //P32(SW1/BUZ)->INPUT       0      1
+ 402   2        //P33(O3)->OUTPUT         0      0
+ 403   2        //P34(UV)->CMOS           0      1
+ 404   2        //P35(ION)->OUTPUT        0      0
+ 405   2              
+ 406   2      
+ 407   2        //P3M1 &=0b1111 1011;
+ 408   2        //P3M0 |=0b0000 0100;
+ 409   2        
+ 410   2        
+ 411   2          P3M1 &= 0xfb;               //P32 as CMOS output  
+ 412   2          P3M0 |= 0x04;
+ 413   2            
+ 414   2          BUZ=~BUZ;
+ 415   2      }
+ 416   1          else BUZ=0;
+ 417   1      }
+ 418          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    712    ----
+   CODE SIZE        =    723    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
    DATA SIZE        =   ----    ----
    IDATA SIZE       =     24    ----
+C51 COMPILER V9.54   MAIN                                                                  12/13/2020 23:49:12 PAGE 8   
+
    BIT SIZE         =     10    ----
    EDATA SIZE       =   ----    ----
    HDATA SIZE       =   ----    ----
-C51 COMPILER V9.54   MAIN                                                                  11/21/2020 11:42:18 PAGE 8   
-
    XDATA CONST SIZE =   ----    ----
    FAR CONST SIZE   =   ----    ----
 END OF MODULE INFORMATION.
