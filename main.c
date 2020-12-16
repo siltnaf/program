@@ -61,7 +61,7 @@ void Check_switch()
 					}	
 	
 			
-			
+			  EX0=0;
 				switch_update=0;
 				delay_ms(200);
 				key_holdtime=0;
@@ -168,9 +168,9 @@ void main(void)
 		Process_UV();
 		Process_LED();
 	 
-		Process_ION();
+	  Process_ION(); 
 		Process_sleep();
-
+		EX0=1;                   //complete the process and enable external SW interrupt
 
 		
 	} 

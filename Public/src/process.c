@@ -55,7 +55,9 @@ void Process_UV()
 	{
 	
 //		if((Time_us%2)==0) UV=0;
+		 EX0=0;
 		 UV=1;
+	
 	}
 	else UV=0;;
 
@@ -64,7 +66,13 @@ void Process_UV()
 void Process_ION()
 {
 	SET_CMOS(IO_ION);	
-	if (ion_on==1) ION=1;else ION=0;
+	if (ion_on==1) 
+	{
+		EX0=0;
+		ION=1;
+		
+	}
+	else ION=0;
 	
 	
 	

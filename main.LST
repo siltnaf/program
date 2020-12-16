@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   MAIN                                                                  11/23/2020 11:02:05 PAGE 1   
+C51 COMPILER V9.54   MAIN                                                                  12/17/2020 00:11:36 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
@@ -62,7 +62,7 @@ line level    source
   53   4              case 1:     
   54   4                          
   55   4                          state=ion_mode;
-C51 COMPILER V9.54   MAIN                                                                  11/23/2020 11:02:05 PAGE 2   
+C51 COMPILER V9.54   MAIN                                                                  12/17/2020 00:11:36 PAGE 2   
 
   56   4                          break;
   57   4              case 2:     
@@ -72,7 +72,7 @@ line level    source
   61   4                } 
   62   3        
   63   3            
-  64   3            
+  64   3              EX0=0;
   65   3              switch_update=0;
   66   3              delay_ms(200);
   67   3              key_holdtime=0;
@@ -126,7 +126,7 @@ line level    source
  115   2                          if (USB==1) next_state=standby_mode;
  116   2                          break;
  117   2        
-C51 COMPILER V9.54   MAIN                                                                  11/23/2020 11:02:05 PAGE 3   
+C51 COMPILER V9.54   MAIN                                                                  12/17/2020 00:11:36 PAGE 3   
 
  118   2        
  119   2          case ion_mode:        
@@ -181,16 +181,16 @@ line level    source
  168   2          Process_UV();
  169   2          Process_LED();
  170   2         
- 171   2          Process_ION();
+ 171   2          Process_ION(); 
  172   2          Process_sleep();
- 173   2      
+ 173   2          EX0=1;                   //complete the process and enable external SW interrupt
  174   2      
  175   2          
  176   2        } 
  177   1      }
  178          
  179          void int0() interrupt 0
-C51 COMPILER V9.54   MAIN                                                                  11/23/2020 11:02:05 PAGE 4   
+C51 COMPILER V9.54   MAIN                                                                  12/17/2020 00:11:36 PAGE 4   
 
  180          {
  181   1      
@@ -238,7 +238,7 @@ line level    source
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    343    ----
+   CODE SIZE        =    347    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
