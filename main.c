@@ -11,7 +11,7 @@ volatile uint8 state,next_state,switch_state;
 volatile uint8   LED_type;
 volatile uint16 process_time,buz_time,key_holdtime;
 volatile uint16 Time_us, Time_ms,Time_sec,Time_min,power_refresh;
-volatile bit Timer_update,UV_on,switch_update,refresh;
+volatile bit Timer_update,ION_on,switch_update,refresh;
 
 
 void Enable_power()
@@ -114,7 +114,7 @@ void State_process()
 										LED_type=0;
 									  switch_state=0;
  
-									 
+										ION_on=0;
 										next_state=standby_mode;
 	
 										 
@@ -124,10 +124,10 @@ void State_process()
 	
 	case speed0_mode:				
  
-										 
-										if (VCC_det==1) FAN=0; else FAN=1;   //wait until VCC return to 0
-  
-								 
+										 		Enable_power();
+//										if (VCC_det==1) FAN=0; else FAN=1;   //wait until VCC return to 0
+										if (Time_ms%2==0) FAN=1;else FAN=0;
+										ION_on=1;
 									  if (VUSB==1) next_state=standby_mode; else next_state=speed0_mode;
 										break;
 	
@@ -135,7 +135,7 @@ void State_process()
 										
 										Enable_power();
 										FAN=1;
-								   
+										ION_on=1;
 										 
 									 
 										if (VUSB==1) next_state=standby_mode; else next_state=speed1_mode;
@@ -185,7 +185,7 @@ void main(void)
  
 		Process_LED();
 	 
-	
+		Process_ION();
 		Process_sleep();
 
 

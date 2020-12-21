@@ -15,11 +15,10 @@ void IO_Init(void)
 	//P32(SW)->I	   					1			 0       
 	//P33(FAN)->CMOS	    		0      1
 	//P34(VUSB)->I      			1      0
-	//P35(VCC_det)->I         1      0
+	//P35(ION)->CMOS	    		0      1
 	
-	
-	P3M1 = 0x34;
-  P3M0 = 0x0a;
+	P3M1 = 0x14;
+  P3M0 = 0x2a;
 	
 }
 

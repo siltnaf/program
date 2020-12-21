@@ -8,7 +8,7 @@
 #define SW 						(P32)
 #define FAN					 	(P33)
 #define VUSB      		(P34)
-#define VCC_det   		(P35)          //output for ION
+#define ION   				(P35)          //output for ION
 
 
 
@@ -17,7 +17,7 @@
 #define IO_SW						P3_2
 #define IO_FAN		   	  P3_3
 #define IO_VUSB         P3_4
-#define IO_VCC_det		  P3_5
+#define IO_ION		  P3_5
 
 
 
@@ -68,6 +68,6 @@ extern volatile uint8 state,next_state,switch_state ;
 extern volatile uint16 process_time,key_holdtime;
 extern volatile uint8  LED_type ;
 extern volatile uint16 Time_us,Time_ms,Time_sec,Time_min,power_refresh;
-extern volatile bit Timer_update,UV_on,switch_update;
+extern volatile bit Timer_update,ION_on,switch_update;
 
 #endif

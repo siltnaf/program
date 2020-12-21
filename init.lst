@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   INIT                                                                  12/01/2020 23:52:08 PAGE 1   
+C51 COMPILER V9.54   INIT                                                                  12/21/2020 18:23:55 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE INIT
@@ -25,77 +25,76 @@ line level    source
   15   1        //P32(SW)->I              1      0       
   16   1        //P33(FAN)->CMOS          0      1
   17   1        //P34(VUSB)->I            1      0
-  18   1        //P35(VCC_det)->I         1      0
+  18   1        //P35(ION)->CMOS          0      1
   19   1        
-  20   1        
-  21   1        P3M1 = 0x34;
-  22   1        P3M0 = 0x0a;
-  23   1        
-  24   1      }
+  20   1        P3M1 = 0x14;
+  21   1        P3M0 = 0x2a;
+  22   1        
+  23   1      }
+  24          
   25          
-  26          
-  27          void InitTime0(void)
-  28          {
-  29   1        TMOD &= 0x00;              //clear timer0 mode 
-  30   1        AUXR =0x80 ;                //1T mode
-  31   1        TL0 =T0_25MS;
-  32   1        TH0 =T0_25MS>>8;
-  33   1      
-  34   1        TR0 =1;       
-  35   1        ET0 =1;    
-  36   1      
-  37   1      }
-  38              
-  39          void InitTime2(void)
-  40          {
-  41   1          T2L=T2KHZ;        
-  42   1          T2H=T2KHZ>>8;      
-  43   1      
-  44   1          AUXR|=0X10;     
-  45   1          IE2|=0X04;                                                                    
-  46   1              
+  26          void InitTime0(void)
+  27          {
+  28   1        TMOD &= 0x00;              //clear timer0 mode 
+  29   1        AUXR =0x80 ;                //1T mode
+  30   1        TL0 =T0_25MS;
+  31   1        TH0 =T0_25MS>>8;
+  32   1      
+  33   1        TR0 =1;       
+  34   1        ET0 =1;    
+  35   1      
+  36   1      }
+  37              
+  38          void InitTime2(void)
+  39          {
+  40   1          T2L=T2KHZ;        
+  41   1          T2H=T2KHZ>>8;      
+  42   1      
+  43   1          AUXR|=0X10;     
+  44   1          IE2|=0X04;                                                                    
+  45   1              
+  46   1        
   47   1        
-  48   1        
-  49   1      }
+  48   1      }
+  49          
   50          
   51          
   52          
-  53          
-  54          void InitExtInterrupt (void)
-C51 COMPILER V9.54   INIT                                                                  12/01/2020 23:52:08 PAGE 2   
+  53          void InitExtInterrupt (void)
+  54          {
+C51 COMPILER V9.54   INIT                                                                  12/21/2020 18:23:55 PAGE 2   
 
-  55          {
-  56   1      
-  57   1        IT0=0;    //detect both falling and rising edge of signal (AC signal)
-  58   1        EX0=1;
-  59   1        PX0=1;
-  60   1      //  IT1=0;    //detect both falling and rising edge of signal  (H1 signal) only rising edge 
-  61   1      //  EX1=1;    //enable INT1
-  62   1      //  PX1=1;
-  63   1      //  INT_CLKO |= 0x10;  //enable INT2, falling edge 
-  64   1        
-  65   1      }
+  55   1      
+  56   1        IT0=0;    //detect both falling and rising edge of signal (AC signal)
+  57   1        EX0=1;
+  58   1        PX0=1;
+  59   1      //  IT1=0;    //detect both falling and rising edge of signal  (H1 signal) only rising edge 
+  60   1      //  EX1=1;    //enable INT1
+  61   1      //  PX1=1;
+  62   1      //  INT_CLKO |= 0x10;  //enable INT2, falling edge 
+  63   1        
+  64   1      }
+  65          
   66          
   67          
   68          
-  69          
-  70          void InitParameter(void )
-  71          {
-  72   1       
-  73   1        state=standby_mode;
-  74   1        switch_state=0;
-  75   1        process_time=0;
-  76   1        
-  77   1        Time_us=0;
-  78   1        Time_ms=0;
-  79   1        Time_sec=0;
-  80   1        Time_min=0;
-  81   1      
-  82   1        switch_update=0;
-  83   1        key_holdtime=0;
-  84   1        Timer_update=0;
-  85   1        EA=1;
-  86   1      }
+  69          void InitParameter(void )
+  70          {
+  71   1       
+  72   1        state=standby_mode;
+  73   1        switch_state=0;
+  74   1        process_time=0;
+  75   1        
+  76   1        Time_us=0;
+  77   1        Time_ms=0;
+  78   1        Time_sec=0;
+  79   1        Time_min=0;
+  80   1      
+  81   1        switch_update=0;
+  82   1        key_holdtime=0;
+  83   1        Timer_update=0;
+  84   1        EA=1;
+  85   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE

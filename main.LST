@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   MAIN                                                                  12/01/2020 23:52:08 PAGE 1   
+C51 COMPILER V9.54   MAIN                                                                  12/21/2020 18:23:55 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
@@ -20,7 +20,7 @@ line level    source
   11          volatile uint8   LED_type;
   12          volatile uint16 process_time,buz_time,key_holdtime;
   13          volatile uint16 Time_us, Time_ms,Time_sec,Time_min,power_refresh;
-  14          volatile bit Timer_update,UV_on,switch_update,refresh;
+  14          volatile bit Timer_update,ION_on,switch_update,refresh;
   15          
   16          
   17          void Enable_power()
@@ -62,7 +62,7 @@ line level    source
   53   3        
   54   3      
   55   3            switch (switch_state)
-C51 COMPILER V9.54   MAIN                                                                  12/01/2020 23:52:08 PAGE 2   
+C51 COMPILER V9.54   MAIN                                                                  12/21/2020 18:23:55 PAGE 2   
 
   56   3            {
   57   4              case 0:     
@@ -125,8 +125,8 @@ line level    source
  114   2                          LED_type=0;
  115   2                          switch_state=0;
  116   2       
- 117   2                         
-C51 COMPILER V9.54   MAIN                                                                  12/01/2020 23:52:08 PAGE 3   
+ 117   2                          ION_on=0;
+C51 COMPILER V9.54   MAIN                                                                  12/21/2020 18:23:55 PAGE 3   
 
  118   2                          next_state=standby_mode;
  119   2        
@@ -137,10 +137,10 @@ line level    source
  124   2        
  125   2        case speed0_mode:       
  126   2       
- 127   2                           
- 128   2                          if (VCC_det==1) FAN=0; else FAN=1;   //wait until VCC return to 0
- 129   2        
- 130   2                       
+ 127   2                              Enable_power();
+ 128   2      //                    if (VCC_det==1) FAN=0; else FAN=1;   //wait until VCC return to 0
+ 129   2                          if (Time_ms%2==0) FAN=1;else FAN=0;
+ 130   2                          ION_on=1;
  131   2                          if (VUSB==1) next_state=standby_mode; else next_state=speed0_mode;
  132   2                          break;
  133   2        
@@ -148,7 +148,7 @@ line level    source
  135   2                          
  136   2                          Enable_power();
  137   2                          FAN=1;
- 138   2                         
+ 138   2                          ION_on=1;
  139   2                           
  140   2                         
  141   2                          if (VUSB==1) next_state=standby_mode; else next_state=speed1_mode;
@@ -190,7 +190,7 @@ line level    source
  177   2        
  178   2      
  179   2          
-C51 COMPILER V9.54   MAIN                                                                  12/01/2020 23:52:08 PAGE 4   
+C51 COMPILER V9.54   MAIN                                                                  12/21/2020 18:23:55 PAGE 4   
 
  180   2          Check_switch();
  181   2          State_process();
@@ -200,7 +200,7 @@ line level    source
  185   2       
  186   2          Process_LED();
  187   2         
- 188   2        
+ 188   2          Process_ION();
  189   2          Process_sleep();
  190   2      
  191   2      
@@ -254,12 +254,12 @@ line level    source
  239   1           
  240   1      }
  241          
-C51 COMPILER V9.54   MAIN                                                                  12/01/2020 23:52:08 PAGE 5   
+C51 COMPILER V9.54   MAIN                                                                  12/21/2020 18:23:55 PAGE 5   
 
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    390    ----
+   CODE SIZE        =    405    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

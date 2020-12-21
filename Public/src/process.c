@@ -46,16 +46,16 @@ void Process_Timer()
 
 
 
-//void Process_UV()
-//{
-//	if (UV_on==1)
-//	{
-//	
-//		UV=1;
-//	}
-//	else UV=0;
+void Process_ION()
+{
+	if (ION_on==1)
+	{
+	
+		ION=1;
+	}
+	else ION=0;
 
-//}
+}
 
 
  
