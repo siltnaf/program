@@ -131,7 +131,7 @@ void State_process()
 	
 	case quite_mode:
 									Enable_power();
-										if (Time_ms%2==0) SPEED0=1; else SPEED0=0;
+										if (Time_min%2==0) SPEED0=1; else SPEED0=0;
 										
 										SPEED1=0;
 										SET_INPUT(IO_SPEED2);

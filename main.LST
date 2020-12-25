@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   MAIN                                                                  12/12/2020 01:00:04 PAGE 1   
+C51 COMPILER V9.54   MAIN                                                                  12/25/2020 18:45:23 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
@@ -62,7 +62,7 @@ line level    source
   53   3        
   54   3            switch (switch_state)
   55   3            {
-C51 COMPILER V9.54   MAIN                                                                  12/12/2020 01:00:04 PAGE 2   
+C51 COMPILER V9.54   MAIN                                                                  12/25/2020 18:45:23 PAGE 2   
 
   56   4              case 0:     
   57   4                
@@ -126,7 +126,7 @@ line level    source
  115   1          {
  116   2        
  117   2        case standby_mode:    
-C51 COMPILER V9.54   MAIN                                                                  12/12/2020 01:00:04 PAGE 3   
+C51 COMPILER V9.54   MAIN                                                                  12/25/2020 18:45:23 PAGE 3   
 
  118   2                          
  119   2                          SPEED0=0;
@@ -144,7 +144,7 @@ line level    source
  131   2        
  132   2        case quite_mode:
  133   2                        Enable_power();
- 134   2                          if (Time_ms%2==0) SPEED0=1; else SPEED0=0;
+ 134   2                          if (Time_min%2==0) SPEED0=1; else SPEED0=0;
  135   2                          
  136   2                          SPEED1=0;
  137   2                          SET_INPUT(IO_SPEED2);
@@ -190,7 +190,7 @@ line level    source
  177   2      
  178   2      
  179   2      
-C51 COMPILER V9.54   MAIN                                                                  12/12/2020 01:00:04 PAGE 4   
+C51 COMPILER V9.54   MAIN                                                                  12/25/2020 18:45:23 PAGE 4   
 
  180   2        
  181   2          }
@@ -254,7 +254,7 @@ line level    source
  239          
  240          void int1() interrupt 2
  241          {
-C51 COMPILER V9.54   MAIN                                                                  12/12/2020 01:00:04 PAGE 5   
+C51 COMPILER V9.54   MAIN                                                                  12/25/2020 18:45:23 PAGE 5   
 
  242   1         
  243   1      }
