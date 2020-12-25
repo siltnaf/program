@@ -124,9 +124,15 @@ void State_process()
 	
 	case speed0_mode:				
  
-										 		Enable_power();
+										 	
 //										if (VCC_det==1) FAN=0; else FAN=1;   //wait until VCC return to 0
-										if (Time_ms%2==0) FAN=1;else FAN=0;
+//										if ((Time_min%5)==0) 
+//										{
+//											Enable_power();
+//											
+//										}
+										
+										if (((Time_min%2)==0)&&(Time_sec<30)) FAN=1; else FAN=0;
 										ION_on=1;
 									  if (VUSB==1) next_state=standby_mode; else next_state=speed0_mode;
 										break;
