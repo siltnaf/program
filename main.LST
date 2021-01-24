@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   MAIN                                                                  12/25/2020 18:45:23 PAGE 1   
+C51 COMPILER V9.54   MAIN                                                                  01/25/2021 07:23:52 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
@@ -62,7 +62,7 @@ line level    source
   53   3        
   54   3            switch (switch_state)
   55   3            {
-C51 COMPILER V9.54   MAIN                                                                  12/25/2020 18:45:23 PAGE 2   
+C51 COMPILER V9.54   MAIN                                                                  01/25/2021 07:23:52 PAGE 2   
 
   56   4              case 0:     
   57   4                
@@ -126,7 +126,7 @@ line level    source
  115   1          {
  116   2        
  117   2        case standby_mode:    
-C51 COMPILER V9.54   MAIN                                                                  12/25/2020 18:45:23 PAGE 3   
+C51 COMPILER V9.54   MAIN                                                                  01/25/2021 07:23:52 PAGE 3   
 
  118   2                          
  119   2                          SPEED0=0;
@@ -190,7 +190,7 @@ line level    source
  177   2      
  178   2      
  179   2      
-C51 COMPILER V9.54   MAIN                                                                  12/25/2020 18:45:23 PAGE 4   
+C51 COMPILER V9.54   MAIN                                                                  01/25/2021 07:23:52 PAGE 4   
 
  180   2        
  181   2          }
@@ -254,7 +254,7 @@ line level    source
  239          
  240          void int1() interrupt 2
  241          {
-C51 COMPILER V9.54   MAIN                                                                  12/25/2020 18:45:23 PAGE 5   
+C51 COMPILER V9.54   MAIN                                                                  01/25/2021 07:23:52 PAGE 5   
 
  242   1         
  243   1      }

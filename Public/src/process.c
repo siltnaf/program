@@ -84,7 +84,7 @@ void Process_LED()
 										break;
 				
 				case 4: 		
-										if (Time_ms%4==0) 
+										if ((Time_sec%2==0) &&(Time_ms%8==0))
 										{
 											SET_CMOS(IO_LED);
 											LED=0;
@@ -95,12 +95,7 @@ void Process_LED()
 											SET_INPUT(IO_LED);
 											LED=1;
 											}
-										if (Time_ms<50) 
-										{
-											SET_CMOS(IO_LED);
-											LED=1;
-											
-										}
+										
 										
 											
 										break;
