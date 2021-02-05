@@ -59,7 +59,8 @@ void Check_switch()
 										state=standby_mode;
 										break;
 
-				case 1:			LED_type=4;
+				case 1:			power_refresh=0;
+										LED_type=4;
 										state=quite_mode;
 										break;
 				
@@ -120,6 +121,7 @@ void State_process()
 										LED_type=0;
 									  SPEED0=0;
 										SPEED1=0;
+										switch_state=0;
 										SET_INPUT(IO_SPEED2);
 										next_state=standby_mode;
 	
@@ -131,8 +133,15 @@ void State_process()
 	
 	case quite_mode:
 									Enable_power();
-										if (Time_min%2==0) SPEED0=1; else SPEED0=0;
+									
+										if (Time_min%2==0) 
+											{
+											SPEED0=1;
+											
+											}
+												else SPEED0=0;
 										
+									
 										SPEED1=0;
 										SET_INPUT(IO_SPEED2);
 										next_state=quite_mode;
