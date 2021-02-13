@@ -49,30 +49,30 @@ void Process_Timer()
 
 
 
-void Process_UV()
+void Process_USPRAY()
 {
-	if (UV_on==1)
+	if (USPRAY_on==1)
 	{
 	
-//		if((Time_us%2)==0) UV=0;
+//		if((Time_us%2)==0) USPRAY=0;
 		 EX0=0;
-		 UV=1;
+		 USPRAY=1;
 	
 	}
-	else UV=0;;
+	else USPRAY=0;;
 
 }
 
-void Process_ION()
+void Process_O3H2O()
 {
-	SET_CMOS(IO_ION);	
-	if (ion_on==1) 
+	SET_CMOS(IO_O3H2O);	
+	if (O3H2O_on==1) 
 	{
 		EX0=0;
-		ION=1;
+		O3H2O=1;
 		
 	}
-	else ION=0;
+	else O3H2O=0;
 	
 	
 	
@@ -130,8 +130,8 @@ void Process_sleep()
 	if ((Time_min>=time_1min) && (state==standby_mode))
 	{
 		
-		UV=0;
-		ION=0;
+		USPRAY=0;
+		O3H2O=0;
 		SET_INPUT(IO_LED);
 		VCC_EN=1;
 		switch_state=0;

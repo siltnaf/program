@@ -13,13 +13,13 @@ void IO_Init(void)
 	//P30(VCC_EN)->OD         1      1
 	//P31(LED)->CMOS  				0      1
 	//P32(SW)->I				   		1    	 0        
-	//P33(USB)->I	   		  		1      0
-	//P34(UV)->CMOS      			0      1
-	//P35(ION)->CMOS   				0      1
+	//P33(USPRAY)->CMOS	   		0      1
+	//P34(O3H2O)->CMOS      	0      1
+	//P35(USB)->I   					1      0
 	
 	
-	P3M1 = 0x0d;
-  P3M0 = 0x33;                                                                                                                                                           ;
+	P3M1 = 0x45;
+  P3M0 = 0x1b;                                                                                                                                                           ;
 	
 }
 
@@ -36,6 +36,18 @@ void InitTime0(void)
 
 }
     
+
+void InitTime2 (void)
+	
+{
+	T2L=T113KHz;			 
+	T2H=T113KHz>>8;      
+
+  AUXR|=0X14;		 //enable timer2, set to full speed
+	
+	IE2|=0X04;       //enable timer2 interrupt                                                           
+  	
+}
  
 
 
@@ -59,8 +71,8 @@ void InitExtInterrupt (void)
 
 void InitParameter(void )
 {
-	UV=0;
-	ION=0;
+	USPRAY=0;
+	O3H2O=0;
 	LED=0;
 	state=standby_mode;
 	switch_state=0;
