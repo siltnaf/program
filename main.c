@@ -11,7 +11,7 @@ volatile uint8 state,next_state,switch_state;
 volatile uint8   LED_type;
 volatile uint16 process_time,buz_time,key_holdtime;
 volatile uint16 Time_us, Time_ms,Time_sec,Time_min,Time_cnt,scan_sec;
-volatile bit Timer_update,Beep, UV_on, ion_on,switch_update,scan;
+volatile bit Timer_update,Beep, UV_on, ion_on,switch_update,scan,unlock;
 
 
 
