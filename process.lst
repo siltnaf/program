@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   PROCESS                                                               03/08/2021 17:46:05 PAGE 1   
+C51 COMPILER V9.54   PROCESS                                                               03/08/2021 17:47:40 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE PROCESS
@@ -39,7 +39,7 @@ line level    source
   29   3              
   30   3              Time_ms=0;
   31   3              Time_sec++;
-  32   3              
+  32   3                if (scan==1) scan_sec++;
   33   3            }
   34   2          if (Time_sec>=60)
   35   2            {
@@ -62,7 +62,7 @@ line level    source
   52          
   53          void Process_UV()
   54          {
-C51 COMPILER V9.54   PROCESS                                                               03/08/2021 17:46:05 PAGE 2   
+C51 COMPILER V9.54   PROCESS                                                               03/08/2021 17:47:40 PAGE 2   
 
   55   1        if (UV_on==1)
   56   1        {
@@ -126,7 +126,7 @@ line level    source
  114   4                          }
  115   3                          break;
  116   3            
-C51 COMPILER V9.54   PROCESS                                                               03/08/2021 17:46:05 PAGE 3   
+C51 COMPILER V9.54   PROCESS                                                               03/08/2021 17:47:40 PAGE 3   
 
  117   3                          
  118   3            } 
@@ -181,7 +181,7 @@ line level    source
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    244    ----
+   CODE SIZE        =    255    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
@@ -190,7 +190,7 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
    BIT SIZE         =   ----    ----
    EDATA SIZE       =   ----    ----
    HDATA SIZE       =   ----    ----
-C51 COMPILER V9.54   PROCESS                                                               03/08/2021 17:46:05 PAGE 4   
+C51 COMPILER V9.54   PROCESS                                                               03/08/2021 17:47:40 PAGE 4   
 
    XDATA CONST SIZE =   ----    ----
    FAR CONST SIZE   =   ----    ----
