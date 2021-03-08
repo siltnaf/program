@@ -33,15 +33,16 @@ void Check_switch()
 {
 	
 	
-//	if (scan_sec>5)
-//	{
-//		unlock=0; 
-//		scan=0;
-//		scan_sec=0;
-//	}
+	if (scan_sec>5)
+	{
+		unlock=0; 
+		scan=0;
+		scan_sec=0;
+
+
+	}
 	
-	unlock=1;
-	
+
 			if (key_holdtime>press_200ms) 
 		{
 				if ((key_holdtime>press_3s)&&(SW==1))

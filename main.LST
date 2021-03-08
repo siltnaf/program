@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   MAIN                                                                  03/08/2021 17:22:11 PAGE 1   
+C51 COMPILER V9.54   MAIN                                                                  03/08/2021 17:46:05 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
@@ -42,135 +42,135 @@ line level    source
   33          {
   34   1        
   35   1        
-  36   1      //  if (scan_sec>5)
-  37   1      //  {
-  38   1      //    unlock=0; 
-  39   1      //    scan=0;
-  40   1      //    scan_sec=0;
-  41   1      //  }
-  42   1        
-  43   1        unlock=1;
+  36   1        if (scan_sec>5)
+  37   1        {
+  38   2          unlock=0; 
+  39   2          scan=0;
+  40   2          scan_sec=0;
+  41   2      
+  42   2      
+  43   2        }
   44   1        
-  45   1            if (key_holdtime>press_200ms) 
-  46   1          {
-  47   2              if ((key_holdtime>press_3s)&&(SW==1))
-  48   2              {
-  49   3                unlock=0;
-  50   3                state=standby_mode;
-  51   3                switch_state=0;
-  52   3                key_holdtime=0;
-  53   3                switch_update=0;
-  54   3              }
-  55   2              else if ((key_holdtime<press_3s)&&(SW==0))
-C51 COMPILER V9.54   MAIN                                                                  03/08/2021 17:22:11 PAGE 2   
+  45   1      
+  46   1            if (key_holdtime>press_200ms) 
+  47   1          {
+  48   2              if ((key_holdtime>press_3s)&&(SW==1))
+  49   2              {
+  50   3                unlock=0;
+  51   3                state=standby_mode;
+  52   3                switch_state=0;
+  53   3                key_holdtime=0;
+  54   3                switch_update=0;
+  55   3              }
+C51 COMPILER V9.54   MAIN                                                                  03/08/2021 17:46:05 PAGE 2   
 
-  56   2              {
-  57   3                if (unlock==1) switch_state++;
-  58   3                    else 
-  59   3                    {   
-  60   4                      unlock=1;
-  61   4                    }
-  62   3                    
-  63   3                if ((switch_state==0)&& (unlock==1))
-  64   3                    switch_state=1;
-  65   3                
+  56   2              else if ((key_holdtime<press_3s)&&(SW==0))
+  57   2              {
+  58   3                if (unlock==1) switch_state++;
+  59   3                    else 
+  60   3                    {   
+  61   4                      unlock=1;
+  62   4                    }
+  63   3                    
+  64   3                if ((switch_state==0)&& (unlock==1))
+  65   3                    switch_state=1;
   66   3                
   67   3                
   68   3                
   69   3                
-  70   3              if (switch_state>2) switch_state=0;
-  71   3              switch (switch_state)
-  72   3              {
-  73   4              case 0:     
-  74   4                        
-  75   4                          state=standby_mode;
-  76   4                          break;
-  77   4              case 1:     
-  78   4                          
-  79   4                          state=ion_mode;
-  80   4                          break;
-  81   4              case 2:     
-  82   4                          
-  83   4                          state=uv_mode;
-  84   4                          break;
-  85   4                } 
-  86   3        
-  87   3              scan=1;
-  88   3              scan_sec=0;
-  89   3              EX0=0;
-  90   3              switch_update=0;
-  91   3              delay_ms(200);
-  92   3              key_holdtime=0;
-  93   3              }   
-  94   2            }
-  95   1      
-  96   1        
-  97   1      }
-  98                
-  99              
- 100          
- 101            
+  70   3                
+  71   3              if (switch_state>2) switch_state=0;
+  72   3              switch (switch_state)
+  73   3              {
+  74   4              case 0:     
+  75   4                        
+  76   4                          state=standby_mode;
+  77   4                          break;
+  78   4              case 1:     
+  79   4                          
+  80   4                          state=ion_mode;
+  81   4                          break;
+  82   4              case 2:     
+  83   4                          
+  84   4                          state=uv_mode;
+  85   4                          break;
+  86   4                } 
+  87   3        
+  88   3              scan=1;
+  89   3              scan_sec=0;
+  90   3              EX0=0;
+  91   3              switch_update=0;
+  92   3              delay_ms(200);
+  93   3              key_holdtime=0;
+  94   3              }   
+  95   2            }
+  96   1      
+  97   1        
+  98   1      }
+  99                
+ 100              
+ 101          
  102            
  103            
- 104          
- 105          void State_process()
- 106          {
- 107   1          switch (state)
- 108   1          {
- 109   2        
- 110   2        case standby_mode:    
- 111   2                          
- 112   2                          VCC_EN=1;
- 113   2                       
- 114   2                          ion_on=0;
- 115   2                          UV_on  = 0;
- 116   2                          switch_state=0;
- 117   2                          LED_type=0;
-C51 COMPILER V9.54   MAIN                                                                  03/08/2021 17:22:11 PAGE 3   
+ 104            
+ 105          
+ 106          void State_process()
+ 107          {
+ 108   1          switch (state)
+ 109   1          {
+ 110   2        
+ 111   2        case standby_mode:    
+ 112   2                          
+ 113   2                          VCC_EN=1;
+ 114   2                       
+ 115   2                          ion_on=0;
+ 116   2                          UV_on  = 0;
+ 117   2                          switch_state=0;
+C51 COMPILER V9.54   MAIN                                                                  03/08/2021 17:46:05 PAGE 3   
 
- 118   2                          next_state=standby_mode;
- 119   2        
- 120   2                           
- 121   2        
+ 118   2                          LED_type=0;
+ 119   2                          next_state=standby_mode;
+ 120   2        
+ 121   2                           
  122   2        
- 123   2                          break;
- 124   2        
- 125   2          case uv_mode:       
- 126   2                          
- 127   2                          DCDC_enable();  
- 128   2                          LED_type=2;
- 129   2                          ion_on=0;
- 130   2                          UV_on=1;
- 131   2                          
- 132   2                          if (Time_min>=time_T0) 
- 133   2                          {
- 134   3                            Time_min=0;
- 135   3                            next_state=standby_mode; 
- 136   3                          }else next_state=uv_mode;
- 137   2                          if (USB==1) next_state=standby_mode;
- 138   2                          break;
- 139   2        
+ 123   2        
+ 124   2                          break;
+ 125   2        
+ 126   2          case uv_mode:       
+ 127   2                          
+ 128   2                          DCDC_enable();  
+ 129   2                          LED_type=2;
+ 130   2                          ion_on=0;
+ 131   2                          UV_on=1;
+ 132   2                          
+ 133   2                          if (Time_min>=time_T0) 
+ 134   2                          {
+ 135   3                            Time_min=0;
+ 136   3                            next_state=standby_mode; 
+ 137   3                          }else next_state=uv_mode;
+ 138   2                          if (USB==1) next_state=standby_mode;
+ 139   2                          break;
  140   2        
- 141   2          case ion_mode:        
- 142   2                          
- 143   2                          DCDC_enable();  
- 144   2                          LED_type=2;
- 145   2                          ion_on=1;
- 146   2                          UV_on=0;
- 147   2                          
- 148   2                        
- 149   2                          next_state=ion_mode;
- 150   2                          if (USB==1) next_state=standby_mode;
- 151   2                          break;
- 152   2          
- 153   2        
- 154   2          }
- 155   1          
- 156   1      state=next_state;
- 157   1      
+ 141   2        
+ 142   2          case ion_mode:        
+ 143   2                          
+ 144   2                          DCDC_enable();  
+ 145   2                          LED_type=2;
+ 146   2                          ion_on=1;
+ 147   2                          UV_on=0;
+ 148   2                          
+ 149   2                        
+ 150   2                          next_state=ion_mode;
+ 151   2                          if (USB==1) next_state=standby_mode;
+ 152   2                          break;
+ 153   2          
+ 154   2        
+ 155   2          }
+ 156   1          
+ 157   1      state=next_state;
  158   1      
- 159   1      }
- 160          
+ 159   1      
+ 160   1      }
  161          
  162          
  163          
@@ -178,91 +178,92 @@ line level    source
  165          
  166          
  167          
- 168          void main(void) 
- 169          {
- 170   1        IO_Init();
- 171   1        InitTime0();
- 172   1         
- 173   1        InitExtInterrupt();
- 174   1      
- 175   1        InitParameter() ;
- 176   1        
- 177   1      
+ 168          
+ 169          void main(void) 
+ 170          {
+ 171   1        IO_Init();
+ 172   1        InitTime0();
+ 173   1         
+ 174   1        InitExtInterrupt();
+ 175   1      
+ 176   1        InitParameter() ;
+ 177   1        
  178   1      
- 179   1        while(1) 
-C51 COMPILER V9.54   MAIN                                                                  03/08/2021 17:22:11 PAGE 4   
+ 179   1      
+C51 COMPILER V9.54   MAIN                                                                  03/08/2021 17:46:05 PAGE 4   
 
- 180   1        { 
- 181   2        
- 182   2      
- 183   2        
- 184   2          Check_switch();
- 185   2          State_process();
- 186   2          
- 187   2      
- 188   2          Process_Timer();
- 189   2         
- 190   2          Process_UV();
- 191   2          Process_LED();
- 192   2         
- 193   2          Process_ION(); 
- 194   2          Process_sleep();
- 195   2          EX0=1;                   //complete the process and enable external SW interrupt
- 196   2      
- 197   2          
- 198   2        } 
- 199   1      }
- 200          
- 201          void int0() interrupt 0
- 202          {
- 203   1      
- 204   1         if ((switch_update==0)&&(SW==1)) 
- 205   1         {
- 206   2            Time_us=0;
- 207   2            Time_ms=0;
- 208   2            Time_sec=0;
- 209   2            Time_min=0;
- 210   2            
- 211   2            key_holdtime=0;
- 212   2            switch_update=1;
- 213   2         }
- 214   1      }
- 215          
- 216          void int1() interrupt 2
- 217          {
- 218   1       
- 219   1      
- 220   1      }
- 221           
- 222          void timer0() interrupt 1
- 223          {
- 224   1      
- 225   1      if (switch_update==1) 
- 226   1      {
- 227   2        key_holdtime++;
- 228   2        
+ 180   1        while(1) 
+ 181   1        { 
+ 182   2        
+ 183   2      
+ 184   2        
+ 185   2          Check_switch();
+ 186   2          State_process();
+ 187   2          
+ 188   2      
+ 189   2          Process_Timer();
+ 190   2         
+ 191   2          Process_UV();
+ 192   2          Process_LED();
+ 193   2         
+ 194   2          Process_ION(); 
+ 195   2          Process_sleep();
+ 196   2          EX0=1;                   //complete the process and enable external SW interrupt
+ 197   2      
+ 198   2          
+ 199   2        } 
+ 200   1      }
+ 201          
+ 202          void int0() interrupt 0
+ 203          {
+ 204   1      
+ 205   1         if ((switch_update==0)&&(SW==1)) 
+ 206   1         {
+ 207   2            Time_us=0;
+ 208   2            Time_ms=0;
+ 209   2            Time_sec=0;
+ 210   2            Time_min=0;
+ 211   2            
+ 212   2            key_holdtime=0;
+ 213   2            switch_update=1;
+ 214   2         }
+ 215   1      }
+ 216          
+ 217          void int1() interrupt 2
+ 218          {
+ 219   1       
+ 220   1      
+ 221   1      }
+ 222           
+ 223          void timer0() interrupt 1
+ 224          {
+ 225   1      
+ 226   1      if (switch_update==1) 
+ 227   1      {
+ 228   2        key_holdtime++;
  229   2        
  230   2        
- 231   2          
- 232   2          }
- 233   1         
- 234   1        Timer_update=1;
- 235   1      }
- 236          
+ 231   2        
+ 232   2          
+ 233   2          }
+ 234   1         
+ 235   1        Timer_update=1;
+ 236   1      }
  237          
  238          
  239          
- 240          void timer2() interrupt 12  
- 241          {
-C51 COMPILER V9.54   MAIN                                                                  03/08/2021 17:22:11 PAGE 5   
+ 240          
+ 241          void timer2() interrupt 12  
+C51 COMPILER V9.54   MAIN                                                                  03/08/2021 17:46:05 PAGE 5   
 
- 242   1        
- 243   1      }
- 244          
+ 242          {
+ 243   1        
+ 244   1      }
+ 245          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    380    ----
+   CODE SIZE        =    398    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
