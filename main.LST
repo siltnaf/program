@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   MAIN                                                                  03/08/2021 16:44:36 PAGE 1   
+C51 COMPILER V9.54   MAIN                                                                  03/08/2021 16:53:05 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
@@ -60,19 +60,16 @@ line level    source
   51   3              }
   52   2              else if ((key_holdtime<press_3s)&&(SW==0))
   53   2              {
-  54   3                if (unlock==1) SW1_state++;
-*** ERROR C202 IN LINE 54 OF Main.c: 'SW1_state': undefined identifier
-C51 COMPILER V9.54   MAIN                                                                  03/08/2021 16:44:36 PAGE 2   
-
+  54   3                if (unlock==1) switch_state++;
   55   3                    else 
+C51 COMPILER V9.54   MAIN                                                                  03/08/2021 16:53:05 PAGE 2   
+
   56   3                    {   
   57   4                      unlock=1;
   58   4                    }
   59   3                    
-  60   3                if ((SW1_state==0)&& (unlock==1))
-*** ERROR C202 IN LINE 60 OF Main.c: 'SW1_state': undefined identifier
-  61   3                    SW1_state=1;
-*** ERROR C202 IN LINE 61 OF Main.c: 'SW1_state': undefined identifier
+  60   3                if ((switch_state==0)&& (unlock==1))
+  61   3                    switch_state=1;
   62   3                
   63   3                
   64   3                
@@ -126,11 +123,11 @@ line level    source
  112   2                          UV_on  = 0;
  113   2                          switch_state=0;
  114   2                          LED_type=0;
-C51 COMPILER V9.54   MAIN                                                                  03/08/2021 16:44:36 PAGE 3   
-
  115   2                          next_state=standby_mode;
  116   2        
  117   2                           
+C51 COMPILER V9.54   MAIN                                                                  03/08/2021 16:53:05 PAGE 3   
+
  118   2        
  119   2        
  120   2                          break;
@@ -190,11 +187,11 @@ line level    source
  174   1      
  175   1      
  176   1        while(1) 
-C51 COMPILER V9.54   MAIN                                                                  03/08/2021 16:44:36 PAGE 4   
-
  177   1        { 
  178   2        
  179   2      
+C51 COMPILER V9.54   MAIN                                                                  03/08/2021 16:53:05 PAGE 4   
+
  180   2        
  181   2          Check_switch();
  182   2          State_process();
@@ -254,10 +251,26 @@ line level    source
  236          
  237          void timer2() interrupt 12  
  238          {
-C51 COMPILER V9.54   MAIN                                                                  03/08/2021 16:44:36 PAGE 5   
-
  239   1        
  240   1      }
  241          
+C51 COMPILER V9.54   MAIN                                                                  03/08/2021 16:53:05 PAGE 5   
 
-C51 COMPILATION COMPLETE.  0 WARNING(S),  3 ERROR(S)
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    398    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =     22    ----
+   BIT SIZE         =      7    ----
+   EDATA SIZE       =   ----    ----
+   HDATA SIZE       =   ----    ----
+   XDATA CONST SIZE =   ----    ----
+   FAR CONST SIZE   =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

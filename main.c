@@ -51,14 +51,14 @@ void Check_switch()
 				}
 				else if ((key_holdtime<press_3s)&&(SW==0))
 				{
-					if (unlock==1) SW1_state++;
+					if (unlock==1) switch_state++;
 							else 
 							{		
 								unlock=1;
 							}
 							
-				  if ((SW1_state==0)&& (unlock==1))
-							SW1_state=1;
+				  if ((switch_state==0)&& (unlock==1))
+							switch_state=1;
 					
 					
 					
