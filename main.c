@@ -43,6 +43,7 @@ void Check_switch()
 		{
 				if ((key_holdtime>press_3s)&&(SW==1))
 				{
+					unlock=0;
 					state=standby_mode;
 					switch_state=0;
 					key_holdtime=0;
@@ -50,7 +51,19 @@ void Check_switch()
 				}
 				else if ((key_holdtime<press_3s)&&(SW==0))
 				{
-				switch_state++;
+					if (unlock==1) SW1_state++;
+							else 
+							{		
+								unlock=1;
+							}
+							
+				  if ((SW1_state==0)&& (unlock==1))
+							SW1_state=1;
+					
+					
+					
+					
+					
 				if (switch_state>2) switch_state=0;
 				switch (switch_state)
 				{
@@ -76,9 +89,6 @@ void Check_switch()
 				key_holdtime=0;
 				}		
 			}
-		 
-
-
 
 	
 }
