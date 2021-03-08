@@ -68,6 +68,7 @@ void InitParameter(void )
  
 	scan=0;
 	scan_sec=0;
+	unlock=0;
 	Time_us=0;
   Time_ms=0;
 	Time_sec=0;
