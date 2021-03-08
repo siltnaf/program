@@ -10,8 +10,8 @@
 volatile uint8 state,next_state,switch_state;
 volatile uint8   LED_type;
 volatile uint16 process_time,buz_time,key_holdtime;
-volatile uint16 Time_us, Time_ms,Time_sec,Time_min,Time_cnt;
-volatile bit Timer_update,Beep, UV_on, ion_on,switch_update;
+volatile uint16 Time_us, Time_ms,Time_sec,Time_min,Time_cnt,scan_sec;
+volatile bit Timer_update,Beep, UV_on, ion_on,switch_update,scan;
 
 
 
@@ -31,7 +31,15 @@ void DCDC_enable(void)
 
 void Check_switch()
 {
-		if (key_holdtime>press_200ms) 
+	
+	
+	if (scan_sec>5)
+	{
+		unlock=0; 
+		scan=0;
+		scan_sec=0;
+	}
+			if (key_holdtime>press_200ms) 
 		{
 				if ((key_holdtime>press_3s)&&(SW==1))
 				{
@@ -60,15 +68,16 @@ void Check_switch()
 										break;
 					}	
 	
-			
+				scan=1;
+				scan_sec=0;
 			  EX0=0;
 				switch_update=0;
 				delay_ms(200);
 				key_holdtime=0;
 				}		
 			}
-   
-		
+		 
+
 
 
 	

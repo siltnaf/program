@@ -66,7 +66,8 @@ void InitParameter(void )
 	switch_state=0;
 	process_time=0;
  
-	
+	scan=0;
+	scan_sec=0;
 	Time_us=0;
   Time_ms=0;
 	Time_sec=0;
