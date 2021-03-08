@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   INIT                                                                  06/27/2020 09:33:37 PAGE 1   
+C51 COMPILER V9.54   INIT                                                                  03/02/2021 17:52:08 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE INIT
@@ -20,7 +20,7 @@ line level    source
   10          {
   11   1        
   12   1        //                      P3M1   P3M0
-  13   1        //P30(VCC_EN)->OD         1      1
+  13   1        //P30(USB_det)->OD         1      1
   14   1        //P31(LED)->CMOS          0      1
   15   1        //P32(SW)->I              1      0        
   16   1        //P33(RC)->CMOS           0      1
@@ -62,7 +62,7 @@ line level    source
   51   1        EX1=1;    //enable INT1
   52   1        PX1=1;
   53   1      //  INT_CLKO |= 0x10;  //enable INT2, falling edge 
-C51 COMPILER V9.54   INIT                                                                  06/27/2020 09:33:37 PAGE 2   
+C51 COMPILER V9.54   INIT                                                                  03/02/2021 17:52:08 PAGE 2   
 
   54   1        
   55   1      }

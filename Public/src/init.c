@@ -10,7 +10,7 @@ void IO_Init(void)
 {
   
 	//               			  P3M1   P3M0
-	//P30(VCC_EN)->OD         1      1
+	//P30(USB_det)->OD         1      1
 	//P31(LED)->CMOS  				0      1
 	//P32(SW)->I				   		1    	 0        
 	//P33(RC)->CMOS	   				0      1

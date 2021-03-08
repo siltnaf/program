@@ -3,22 +3,21 @@
 
 #include "STC15F104E.h"
 
-#define VCC_EN		    (P30)           //relay normal open 
+#define USB_det		    (P30)           //relay normal open 
 #define LED       		(P31)           //DC output for LED
 #define SW 						(P32)
 #define RC            (P33)
 #define UV       			(P34)
 #define O3	  				(P35)          //input for USB detect
-#define VCC_det    		(P35)
 
 
-#define IO_VCC_EN       P3_0
+
+#define IO_USB_det       P3_0
 #define IO_LED          P3_1
 #define IO_SW						P3_2
 #define IO_RC						P3_3
 #define IO_UV           P3_4
 #define IO_O3           P3_5
-#define IO_VCC_det      P3_5
 
 
 #define MAIN_Fosc   12000000L

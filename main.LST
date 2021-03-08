@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   MAIN                                                                  06/27/2020 09:33:37 PAGE 1   
+C51 COMPILER V9.54   MAIN                                                                  03/02/2021 17:52:08 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
@@ -30,9 +30,9 @@ line level    source
   21   1        
   22   1        
   23   1        
-  24   1        SET_INPUT(IO_VCC_det);                
-  25   1        if ((VCC_det==0)&&(Time_ms<500)==0) VCC_EN=0; else  VCC_EN=1;
-  26   1          
+  24   1        SET_INPUT(IO_USB_det);                
+  25   1      //  if ((USB_det==0)&&(Time_ms<500)==0) USB_det=0; else   USB_det=1;
+  26   1      //    
   27   1        
   28   1      }
   29          
@@ -43,247 +43,259 @@ line level    source
   34   1          if (key_holdtime>press_time) 
   35   1          {
   36   2            switch_state++;
-  37   2            if (switch_state>1) switch_state=0;
+  37   2            if (switch_state>2) switch_state=0;
   38   2           
   39   2            
   40   2            switch (switch_state)
   41   2            {
   42   3              case 0:     
-  43   3                        
+  43   3                          LED_type=0;
   44   3                          state=standby_mode;
   45   3                          break;
   46   3              case 1:     
   47   3                          
   48   3                          state=uv_mode;
-  49   3                          break;
-  50   3          
-  51   3              
-  52   3            } 
-  53   2        
-  54   2            
-  55   2            
-C51 COMPILER V9.54   MAIN                                                                  06/27/2020 09:33:37 PAGE 2   
+  49   3                          LED_type=1;
+  50   3                          break;
+  51   3          
+  52   3              case 2:     
+  53   3                          
+  54   3                          state=O3_mode;
+  55   3                          LED_type=1;   
+C51 COMPILER V9.54   MAIN                                                                  03/02/2021 17:52:08 PAGE 2   
 
-  56   2            switch_update=0;
-  57   2            key_holdtime=0;
-  58   2            delay_ms(250);
-  59   2          }   
-  60   1        
-  61   1         
-  62   1          
-  63   1      
-  64   1      
-  65   1        
-  66   1      }
-  67                
-  68              
-  69              
-  70              
-  71            
-  72            
-  73            
-  74          
-  75          void State_process()
-  76          {
-  77   1          switch (state)
-  78   1          {
-  79   2        
-  80   2        case standby_mode:    
-  81   2                          
-  82   2                          VCC_EN=1;
-  83   2                       
-  84   2                          O3_level  = 0;
-  85   2                          UV_on  = 0;
-  86   2                           
-  87   2                          LED_type=0;
-  88   2                          next_state=standby_mode;
-  89   2        
-  90   2                           
+  56   3              
+  57   3                          break;
+  58   3              
+  59   3              
+  60   3              
+  61   3            } 
+  62   2        
+  63   2          
+  64   2            
+  65   2            switch_update=0;
+  66   2            key_holdtime=0;
+  67   2            delay_ms(250);
+  68   2          }   
+  69   1        
+  70   1          if (USB_det==1) {
+  71   2                          LED_type=0;
+  72   2                          state=standby_mode;
+  73   2                            }
+  74   1          
+  75   1      
+  76   1      
+  77   1        
+  78   1      }
+  79                
+  80              
+  81              
+  82              
+  83            
+  84            
+  85            
+  86          
+  87          void State_process()
+  88          {
+  89   1          switch (state)
+  90   1          {
   91   2        
-  92   2        
-  93   2                          break;
-  94   2        
-  95   2          case uv_mode:       
-  96   2                          
-  97   2                          DCDC_enable();  
-  98   2                          LED_type=2;
-  99   2                          O3_level=1;
- 100   2                          UV_on=1;
- 101   2                          
- 102   2                          if (Time_min>=time_T0) 
- 103   2                          {
- 104   3                            Time_min=0;
- 105   3                            next_state=O3_mode; 
- 106   3                          }else next_state=uv_mode;
- 107   2                          break;
- 108   2        
- 109   2        
- 110   2          case O3_mode:       
- 111   2                          
- 112   2                          DCDC_enable();  
- 113   2                          LED_type=2;
- 114   2                          O3_level=1;
- 115   2                          UV_on=0;
- 116   2                          
- 117   2                          if (Time_min>=time_T1) 
-C51 COMPILER V9.54   MAIN                                                                  06/27/2020 09:33:37 PAGE 3   
+  92   2        case standby_mode:    
+  93   2                          
+  94   2                          USB_det=1;
+  95   2                       
+  96   2                          O3_level  = 0;
+  97   2                          UV_on  = 0;
+  98   2                           
+  99   2                          LED_type=0;
+ 100   2                          next_state=standby_mode;
+ 101   2        
+ 102   2                           
+ 103   2        
+ 104   2        
+ 105   2                          break;
+ 106   2        
+ 107   2          case uv_mode:       
+ 108   2                          
+ 109   2                          DCDC_enable();  
+ 110   2                        
+ 111   2                          O3_level=1;
+ 112   2                          UV_on=1;
+ 113   2                          
+ 114   2                          if (Time_min>=time_T0) 
+ 115   2                          {
+ 116   3                            Time_min=0;
+ 117   3                            next_state=standby_mode; 
+C51 COMPILER V9.54   MAIN                                                                  03/02/2021 17:52:08 PAGE 3   
 
- 118   2                          {
- 119   3                            Time_min=0;
- 120   3                            next_state=O3_saving_mode; 
- 121   3                          }else next_state=O3_mode;
- 122   2                          break;
- 123   2          
- 124   2          case O3_saving_mode:
+ 118   3                          }else next_state=uv_mode;
+ 119   2                          break;
+ 120   2        
+ 121   2        
+ 122   2          case O3_mode:       
+ 123   2                          
+ 124   2                          DCDC_enable();  
  125   2                          
- 126   2                          DCDC_enable();
- 127   2                          LED_type=4;
- 128   2                          O3_level=1;
- 129   2                          UV_on=0;
- 130   2                          
- 131   2                          if (Time_min>=time_T2) 
- 132   2                          {
- 133   3                            LED_type=0;
- 134   3                            Time_min=0;
- 135   3                            next_state=O3_off_mode; 
- 136   3                          }else next_state=O3_saving_mode;
+ 126   2                          O3_level=1;
+ 127   2                          UV_on=0;
+ 128   2                          
+ 129   2                          if (Time_min>=time_T1) 
+ 130   2                          {
+ 131   3                            Time_min=0;
+ 132   3                            next_state=O3_saving_mode; 
+ 133   3                          }else next_state=O3_mode;
+ 134   2                          break;
+ 135   2          
+ 136   2          case O3_saving_mode:
  137   2                          
- 138   2                          break;
- 139   2            
- 140   2          
- 141   2          
- 142   2          
- 143   2          case O3_off_mode:
- 144   2                          UV_on=0;
- 145   2                          LED_type=0;
- 146   2                          O3_level=0;
- 147   2                         next_state=O3_off_mode;
- 148   2                          
- 149   2                          break;                
- 150   2           
- 151   2        
- 152   2          case O3_LED_mode:
- 153   2                          UV_on=0;
- 154   2                          LED_type=2;
- 155   2                          O3_level=0;
- 156   2                          
- 157   2                          if (Time_sec>=1)
- 158   2                            {
- 159   3                            LED_type=0;
- 160   3                            next_state=O3_off_mode;
- 161   3                            } else next_state=O3_LED_mode;
- 162   2                          if (Time_min>=time_T3) 
- 163   2                            {
- 164   3                            Time_min=0;
- 165   3                            next_state=O3_saving_mode; 
- 166   3                            }
- 167   2          }
- 168   1          
- 169   1      state=next_state;
- 170   1      
- 171   1      
- 172   1      }
- 173          
- 174          
- 175          
- 176          
- 177          
- 178          
- 179          
-C51 COMPILER V9.54   MAIN                                                                  06/27/2020 09:33:37 PAGE 4   
+ 138   2                          DCDC_enable();
+ 139   2                          
+ 140   2                          O3_level=1;
+ 141   2                          UV_on=0;
+ 142   2                          
+ 143   2                          if (Time_min>=time_T2) 
+ 144   2                          {
+ 145   3                            LED_type=0;
+ 146   3                            Time_min=0;
+ 147   3                            next_state=O3_off_mode; 
+ 148   3                          }else next_state=O3_saving_mode;
+ 149   2                          
+ 150   2                          break;
+ 151   2            
+ 152   2          
+ 153   2          
+ 154   2          
+ 155   2          case O3_off_mode:
+ 156   2                          UV_on=0;
+ 157   2                          
+ 158   2                          O3_level=0;
+ 159   2                         next_state=O3_off_mode;
+ 160   2                          
+ 161   2                          break;                
+ 162   2           
+ 163   2        
+ 164   2      //    case O3_LED_mode:
+ 165   2      //                    UV_on=0;
+ 166   2      //                    LED_type=2;
+ 167   2      //                    O3_level=0;
+ 168   2      //                    
+ 169   2      //                    if (Time_sec>=1)
+ 170   2      //                      {
+ 171   2      //                      LED_type=0;
+ 172   2      //                      next_state=O3_off_mode;
+ 173   2      //                      } else next_state=O3_LED_mode;
+ 174   2      //                    if (Time_min>=time_T3) 
+ 175   2      //                      {
+ 176   2      //                      Time_min=0;
+ 177   2      //                      next_state=O3_saving_mode; 
+ 178   2      //                      }
+ 179   2          }
+C51 COMPILER V9.54   MAIN                                                                  03/02/2021 17:52:08 PAGE 4   
 
- 180          
- 181          void main(void) 
- 182          {
- 183   1        IO_Init();
- 184   1        InitTime0();
- 185   1         
- 186   1        InitExtInterrupt();
- 187   1      
- 188   1        InitParameter() ;
- 189   1        
- 190   1      
- 191   1      
- 192   1        while(1) 
- 193   1        { 
- 194   2        
- 195   2      
- 196   2        
- 197   2          Check_switch();
- 198   2          State_process();
- 199   2          
- 200   2      
- 201   2          Process_Timer();
- 202   2         
- 203   2          Process_UV();
- 204   2          Process_LED();
- 205   2         
- 206   2          Process_O3();
- 207   2          Process_sleep();
- 208   2      
- 209   2      
- 210   2          
- 211   2        } 
- 212   1      }
- 213          
- 214          void int0() interrupt 0
- 215          {
- 216   1      
- 217   1         if ((switch_update==0)&&(SW==1)) 
- 218   1         {
- 219   2            Time_us=0;
- 220   2            Time_ms=0;
- 221   2            Time_sec=0;
- 222   2            Time_min=0;
- 223   2            
- 224   2            key_holdtime=0;
- 225   2            switch_update=1;
- 226   2         }
- 227   1      }
- 228          
- 229          void int1() interrupt 2
- 230          {
- 231   1       if (RC==0) 
- 232   1       {
- 233   2         Time_cnt++;
- 234   2         if (Time_cnt>=3)
- 235   2          {
- 236   3            Time_cnt=0;
- 237   3            Time_min++;
- 238   3          }
- 239   2       }
- 240   1      
- 241   1      }
-C51 COMPILER V9.54   MAIN                                                                  06/27/2020 09:33:37 PAGE 5   
+ 180   1          
+ 181   1      state=next_state;
+ 182   1      
+ 183   1      
+ 184   1      }
+ 185          
+ 186          
+ 187          
+ 188          
+ 189          
+ 190          
+ 191          
+ 192          
+ 193          void main(void) 
+ 194          {
+ 195   1        IO_Init();
+ 196   1        InitTime0();
+ 197   1         
+ 198   1        InitExtInterrupt();
+ 199   1      
+ 200   1        InitParameter() ;
+ 201   1        
+ 202   1      
+ 203   1      
+ 204   1        while(1) 
+ 205   1        { 
+ 206   2        
+ 207   2      
+ 208   2        
+ 209   2          Check_switch();
+ 210   2          State_process();
+ 211   2          
+ 212   2      
+ 213   2          Process_Timer();
+ 214   2         
+ 215   2          Process_UV();
+ 216   2          Process_LED();
+ 217   2         
+ 218   2          Process_O3();
+ 219   2          Process_sleep();
+ 220   2      
+ 221   2      
+ 222   2          
+ 223   2        } 
+ 224   1      }
+ 225          
+ 226          void int0() interrupt 0
+ 227          {
+ 228   1      
+ 229   1         if ((switch_update==0)&&(SW==1)) 
+ 230   1         {
+ 231   2            Time_us=0;
+ 232   2            Time_ms=0;
+ 233   2            Time_sec=0;
+ 234   2            Time_min=0;
+ 235   2            
+ 236   2            key_holdtime=0;
+ 237   2            switch_update=1;
+ 238   2         }
+ 239   1      }
+ 240          
+ 241          void int1() interrupt 2
+C51 COMPILER V9.54   MAIN                                                                  03/02/2021 17:52:08 PAGE 5   
 
- 242           
- 243          void timer0() interrupt 1
- 244          {
- 245   1      
- 246   1      if (switch_update==1) 
- 247   1      {
- 248   2        key_holdtime++;
- 249   2        
- 250   2        
- 251   2        
- 252   2          
- 253   2          }
- 254   1         
- 255   1        Timer_update=1;
- 256   1      }
- 257          
- 258          
- 259          
- 260          
- 261          void timer2() interrupt 12  
- 262          {
- 263   1        
- 264   1      }
- 265          
+ 242          {
+ 243   1       if (RC==0) 
+ 244   1       {
+ 245   2         Time_cnt++;
+ 246   2         if (Time_cnt>=3)
+ 247   2          {
+ 248   3            Time_cnt=0;
+ 249   3            Time_min++;
+ 250   3          }
+ 251   2       }
+ 252   1      
+ 253   1      }
+ 254           
+ 255          void timer0() interrupt 1
+ 256          {
+ 257   1      
+ 258   1      if (switch_update==1) 
+ 259   1      {
+ 260   2        key_holdtime++;
+ 261   2        
+ 262   2        
+ 263   2        
+ 264   2          
+ 265   2          }
+ 266   1         
+ 267   1        Timer_update=1;
+ 268   1      }
+ 269          
+ 270          
+ 271          
+ 272          
+ 273          void timer2() interrupt 12  
+ 274          {
+ 275   1        
+ 276   1      }
+ 277          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    491    ----
+   CODE SIZE        =    429    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

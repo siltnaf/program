@@ -105,7 +105,7 @@ if (Beep==0)
 										break;
 				case 2:			
 										SET_CMOS(IO_LED);
-										LED=1;
+										LED=0;
 										break;
 				case 3: 		
 										 

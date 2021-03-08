@@ -21,9 +21,9 @@ void DCDC_enable(void)
 	
 	
 	
-	SET_INPUT(IO_VCC_det);								
-	if ((VCC_det==0)&&(Time_ms<500)==0) VCC_EN=0; else 	VCC_EN=1;
-		
+	SET_INPUT(IO_USB_det);								
+//	if ((USB_det==0)&&(Time_ms<500)==0) USB_det=0; else 	USB_det=1;
+//		
 	
 }
 
@@ -34,31 +34,43 @@ void Check_switch()
 		if (key_holdtime>press_time) 
 		{
 			switch_state++;
-			if (switch_state>1) switch_state=0;
+			if (switch_state>2) switch_state=0;
 		 
 			
 			switch (switch_state)
 			{
 				case 0:			
-									
+										LED_type=0;
 										state=standby_mode;
 										break;
 				case 1:			
 										
 										state=uv_mode;
+										LED_type=1;
 										break;
 		
+				case 2:			
+										
+										state=O3_mode;
+										LED_type=1;		
+				
+										break;
+				
+				
 				
 			}	
 	
-			
+		
 			
 			switch_update=0;
 			key_holdtime=0;
 			delay_ms(250);
 		}		
 	
-   
+   	if (USB_det==1) {
+										LED_type=0;
+										state=standby_mode;
+											}
 		
 
 
@@ -79,7 +91,7 @@ void State_process()
 	
 	case standby_mode:    
 										
-										VCC_EN=1;
+										USB_det=1;
 								 
 										O3_level  = 0;
 										UV_on  = 0;
@@ -95,14 +107,14 @@ void State_process()
 	 	case uv_mode:				
 										
 										DCDC_enable();	
-										LED_type=2;
+									
 										O3_level=1;
 										UV_on=1;
 										
 										if (Time_min>=time_T0) 
 										{
 											Time_min=0;
-											next_state=O3_mode; 
+											next_state=standby_mode; 
 										}else next_state=uv_mode;
 										break;
 	
@@ -110,7 +122,7 @@ void State_process()
 		case O3_mode:				
 										
 										DCDC_enable();	
-										LED_type=2;
+										
 										O3_level=1;
 										UV_on=0;
 										
@@ -124,7 +136,7 @@ void State_process()
 		case O3_saving_mode:
 										
 										DCDC_enable();
-										LED_type=4;
+										
 										O3_level=1;
 										UV_on=0;
 										
@@ -142,28 +154,28 @@ void State_process()
 		
 		case O3_off_mode:
 										UV_on=0;
-										LED_type=0;
+										
 										O3_level=0;
 									 next_state=O3_off_mode;
 										
 										break;								
 		 
 	
-		case O3_LED_mode:
-										UV_on=0;
-										LED_type=2;
-										O3_level=0;
-										
-										if (Time_sec>=1)
-											{
-											LED_type=0;
-											next_state=O3_off_mode;
-											} else next_state=O3_LED_mode;
-										if (Time_min>=time_T3) 
-											{
-											Time_min=0;
-											next_state=O3_saving_mode; 
-											}
+//		case O3_LED_mode:
+//										UV_on=0;
+//										LED_type=2;
+//										O3_level=0;
+//										
+//										if (Time_sec>=1)
+//											{
+//											LED_type=0;
+//											next_state=O3_off_mode;
+//											} else next_state=O3_LED_mode;
+//										if (Time_min>=time_T3) 
+//											{
+//											Time_min=0;
+//											next_state=O3_saving_mode; 
+//											}
 		}
 		
 state=next_state;
