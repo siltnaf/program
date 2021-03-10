@@ -19,7 +19,7 @@
 #define IO_USB		      P3_5
 
 
-#define MAIN_Fosc   12000000L
+#define MAIN_Fosc   35000000L
 #define T0_25MS        (65536- MAIN_Fosc/4000)     //1T mode Timer0
 #define T113KHz     (65536- MAIN_Fosc/113000/2)     //Timer2
 
@@ -68,6 +68,6 @@ extern volatile uint8 state,next_state,switch_state ;
 extern volatile uint16 process_time,buz_time,key_holdtime;
 extern volatile uint8  LED_type;
 extern volatile uint16 Time_us,Time_ms,Time_sec,Time_min,Time_cnt;
-extern volatile bit Timer_update,Beep, USPRAY_on,O3H2O_on,switch_update;
+extern volatile bit Timer_update,Beep, USPRAY_on,O3H2O_on,switch_update,status_update;
 
 #endif

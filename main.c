@@ -11,7 +11,7 @@ volatile uint8 state,next_state,switch_state;
 volatile uint8   LED_type;
 volatile uint16 process_time,buz_time,key_holdtime;
 volatile uint16 Time_us, Time_ms,Time_sec,Time_min,Time_cnt;
-volatile bit Timer_update,Beep, USPRAY_on, O3H2O_on,switch_update;
+volatile bit Timer_update,Beep, USPRAY_on, O3H2O_on,switch_update,status_update;
 
 
 
@@ -39,10 +39,12 @@ void Check_switch()
 					switch_state=0;
 					key_holdtime=0;
 					switch_update=0;
+					status_update=0;
 				}
 				else if ((key_holdtime<press_3s)&&(SW==0))
 				{
 				switch_state++;
+				
 				if (switch_state>2) switch_state=0;
 				switch (switch_state)
 				{
@@ -63,6 +65,7 @@ void Check_switch()
 			
 			  EX0=0;
 				switch_update=0;
+				status_update=0;	
 				delay_ms(200);
 				key_holdtime=0;
 				}		
@@ -159,20 +162,24 @@ O3H2O =1;
 	{ 
 	
 
-//	
-//  	Check_switch();
-//		State_process();
-//		
+		if (status_update==1)
+		{
+				Check_switch();
+				State_process();
+		
 
-//		Process_Timer();
-//	 
-//		Process_USPRAY();
-//		Process_LED();
-//	 
-//	  Process_O3H2O(); 
-//		Process_sleep();
-//		EX0=1;                   //complete the process and enable external SW interrupt
-
+			
+	 
+		Process_USPRAY();
+		Process_LED();
+	 
+	  Process_O3H2O(); 
+		Process_sleep();
+		EX0=1;                   //complete the process and enable external SW interrupt
+	
+		}
+		
+		Process_Timer();
 		
 	} 
 }
@@ -189,6 +196,7 @@ void int0() interrupt 0
 			
 			key_holdtime=0;
 			switch_update=1;
+			status_update=1;
 	 }
 }
 
@@ -204,6 +212,7 @@ void timer0() interrupt 1
 if (switch_update==1) 
 {
 	key_holdtime++;
+	if (key_holdtime>5000) status_update=0;
 	
 	
 	

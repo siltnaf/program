@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   INIT                                                                  02/11/2021 07:15:52 PAGE 1   
+C51 COMPILER V9.54   INIT                                                                  03/10/2021 05:06:41 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE INIT
@@ -62,7 +62,7 @@ line level    source
   51           
   52          
   53          
-C51 COMPILER V9.54   INIT                                                                  02/11/2021 07:15:52 PAGE 2   
+C51 COMPILER V9.54   INIT                                                                  03/10/2021 05:06:41 PAGE 2   
 
   54          
   55          
@@ -98,14 +98,15 @@ line level    source
   85   1        Time_min=0;
   86   1      
   87   1        switch_update=0;
-  88   1        key_holdtime=0;
-  89   1        Timer_update=0;
-  90   1        EA=1;
-  91   1      }
+  88   1        status_update=0;
+  89   1        key_holdtime=0;
+  90   1        Timer_update=0;
+  91   1        EA=1;
+  92   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    100    ----
+   CODE SIZE        =    102    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
