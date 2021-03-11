@@ -11,15 +11,15 @@ void IO_Init(void)
   
 	//               			  P3M1   P3M0
 	//P30(VCC_EN)->OD         1      1
-	//P31(LED)->CMOS  				0      1
+	//P31(LED)->I     				1      0
 	//P32(SW)->I				   		1    	 0        
 	//P33(USPRAY)->CMOS	   		0      1
 	//P34(O3H2O)->CMOS      	0      1
 	//P35(USB)->I   					1      0
 	
 	
-	P3M1 = 0x45;
-  P3M0 = 0x1b;                                                                                                                                                           ;
+	P3M1 = 0x27;
+  P3M0 = 0x19;                                                                                                                                                           ;
 	
 }
 
@@ -45,7 +45,7 @@ void InitTime2 (void)
 
   AUXR|=0X14;		 //enable timer2, set to full speed
 	
-	IE2|=0X04;       //enable timer2 interrupt                                                           
+	                                                         
   	
 }
  

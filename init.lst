@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   INIT                                                                  03/10/2021 05:06:41 PAGE 1   
+C51 COMPILER V9.54   INIT                                                                  03/12/2021 01:42:55 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE INIT
@@ -21,15 +21,15 @@ line level    source
   11   1        
   12   1        //                      P3M1   P3M0
   13   1        //P30(VCC_EN)->OD         1      1
-  14   1        //P31(LED)->CMOS          0      1
+  14   1        //P31(LED)->I             1      0
   15   1        //P32(SW)->I              1      0        
   16   1        //P33(USPRAY)->CMOS       0      1
   17   1        //P34(O3H2O)->CMOS        0      1
   18   1        //P35(USB)->I             1      0
   19   1        
   20   1        
-  21   1        P3M1 = 0x45;
-  22   1        P3M0 = 0x1b;                                                                                            
+  21   1        P3M1 = 0x27;
+  22   1        P3M0 = 0x19;                                                                                            
              -                                                               ;
   23   1        
   24   1      }
@@ -56,13 +56,13 @@ line level    source
   45   1      
   46   1        AUXR|=0X14;    //enable timer2, set to full speed
   47   1        
-  48   1        IE2|=0X04;       //enable timer2 interrupt                                                           
+  48   1                                                                 
   49   1          
   50   1      }
   51           
   52          
   53          
-C51 COMPILER V9.54   INIT                                                                  03/10/2021 05:06:41 PAGE 2   
+C51 COMPILER V9.54   INIT                                                                  03/12/2021 01:42:55 PAGE 2   
 
   54          
   55          
@@ -106,7 +106,7 @@ line level    source
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    102    ----
+   CODE SIZE        =     99    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

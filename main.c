@@ -51,14 +51,17 @@ void Check_switch()
 				case 0:			
 									
 										state=standby_mode;
+										LED_type=0;
 										break;
 				case 1:			
 										
 										state=O3H2O_mode;
+										LED_type=2;
 										break;
 				case 2:			
 										
 										state=USPRAY_mode;
+										LED_type=1 ;
 										break;
 					}	
 	
@@ -95,7 +98,7 @@ void State_process()
 										O3H2O_on=0;
 										USPRAY_on  = 0;
 										switch_state=0;
-										LED_type=0;
+									
 										next_state=standby_mode;
 	
 										 
@@ -106,7 +109,7 @@ void State_process()
 	 	case USPRAY_mode:				
 										
 										DCDC_enable();	
-										LED_type=1 ;
+										
 										O3H2O_on=0;
 										USPRAY_on=1;
 										
@@ -122,9 +125,9 @@ void State_process()
 		case O3H2O_mode:				
 										
 										DCDC_enable();	
-										LED_type=2;
+										
 										O3H2O_on=1;
-										USPRAY_on=0;
+										USPRAY_on=1;
 										
 									
 										next_state=O3H2O_mode;
@@ -156,30 +159,25 @@ void main(void)
 
 	InitParameter()	;
 	
-O3H2O =1;
+
 
 	while(1) 
 	{ 
 	
-
+		if (USPRAY_on==0) USPRAY=0;
 		if (status_update==1)
-		{
+			{
+				SET_INPUT(IO_LED);
 				Check_switch();
 				State_process();
-		
-
-			
-	 
-		Process_USPRAY();
-		Process_LED();
-	 
-	  Process_O3H2O(); 
-		Process_sleep();
-		EX0=1;                   //complete the process and enable external SW interrupt
-	
-		}
+				Process_USPRAY();
+				Process_O3H2O(); 
+				Process_sleep();
+				EX0=1;                   //complete the process and enable external SW interrupt
+			}
 		
 		Process_Timer();
+		Process_LED();
 		
 	} 
 }

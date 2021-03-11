@@ -55,11 +55,16 @@ void Process_USPRAY()
 	{
 	
 //		if((Time_us%2)==0) USPRAY=0;
-		 EX0=0;
-		 USPRAY=1;
+		IE2|=0X04;       //enable timer2 interrupt  
+		
 	
 	}
-	else USPRAY=0;;
+	else 
+	{	
+		IE2&=0xfb;        //disable timer2 interrupt
+	USPRAY=0;
+		
+	}
 
 }
 
@@ -97,8 +102,21 @@ if (Beep==0)
 										LED=1;
 										break;
 				case 2:			
+										if ((Time_ms%2)==0)
+										{
+											SET_CMOS(IO_LED);
+											LED=1;
+										}
+										else 
+										{
 										SET_CMOS(IO_LED);
 										LED=0;
+										}
+				
+				
+				
+				
+				
 										break;
 				case 3: 		
 										 
@@ -135,6 +153,7 @@ void Process_sleep()
 		SET_INPUT(IO_LED);
 		VCC_EN=1;
 		switch_state=0;
+		IE2&=0xf4; 
 		PCON|=0x02;
 		_nop_ ();
 		

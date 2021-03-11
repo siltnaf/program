@@ -19,7 +19,7 @@
 #define IO_USB		      P3_5
 
 
-#define MAIN_Fosc   35000000L
+#define MAIN_Fosc   12000000L
 #define T0_25MS        (65536- MAIN_Fosc/4000)     //1T mode Timer0
 #define T113KHz     (65536- MAIN_Fosc/113000/2)     //Timer2
 
