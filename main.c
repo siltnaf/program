@@ -10,7 +10,7 @@
 volatile uint8 state,next_state,switch_state;
 volatile uint8   LED_type;
 volatile uint16 process_time,buz_time,key_holdtime;
-volatile uint16 Time_us, Time_ms,Time_sec,Time_min,Time_cnt;
+volatile uint16 Time_us, Time_ms,Time_sec,Time_min,Time_cnt,power_refresh;
 volatile bit Timer_update,Beep, USPRAY_on, O3H2O_on,switch_update,status_update;
 
 
@@ -19,11 +19,11 @@ void DCDC_enable(void)
 {
 
 	
-	
-//	
-//	SET_INPUT(IO_VCC_det);								
-//	if ((VCC_det==0)&&(Time_ms<500)==0) VCC_EN=0; else 	VCC_EN=1;
-//		
+	if (((power_refresh%20)==0)&&((Time_ms<500)==0)) 
+	{
+		
+		VCC_EN=0;
+	} else VCC_EN=1;
 	
 }
 
@@ -56,11 +56,13 @@ void Check_switch()
 				case 1:			
 										
 										state=O3H2O_mode;
+										power_refresh=0;
 										LED_type=2;
 										break;
 				case 2:			
 										
 										state=USPRAY_mode;
+										power_refresh=0;
 										LED_type=1 ;
 										break;
 					}	
@@ -108,7 +110,7 @@ void State_process()
 	
 	 	case USPRAY_mode:				
 										
-										DCDC_enable();	
+									
 										
 										O3H2O_on=0;
 										USPRAY_on=1;
@@ -124,7 +126,7 @@ void State_process()
 	
 		case O3H2O_mode:				
 										
-										DCDC_enable();	
+									
 										
 										O3H2O_on=1;
 										USPRAY_on=1;
@@ -175,7 +177,7 @@ void main(void)
 				Process_sleep();
 				EX0=1;                   //complete the process and enable external SW interrupt
 			}
-		
+		if  (switch_state==1) DCDC_enable();
 		Process_Timer();
 		Process_LED();
 		

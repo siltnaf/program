@@ -77,7 +77,7 @@ void InitParameter(void )
 	state=standby_mode;
 	switch_state=0;
 	process_time=0;
- 
+	power_refresh=0;
 	
 	Time_us=0;
   Time_ms=0;

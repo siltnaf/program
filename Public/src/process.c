@@ -29,6 +29,7 @@ void Process_Timer()
 				
 				Time_ms=0;
 				Time_sec++;
+				power_refresh++;
 			}
 		if (Time_sec>=60)
 			{

@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   MAIN                                                                  03/12/2021 01:42:55 PAGE 1   
+C51 COMPILER V9.54   MAIN                                                                  03/12/2021 02:10:21 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
@@ -19,7 +19,7 @@ line level    source
   10          volatile uint8 state,next_state,switch_state;
   11          volatile uint8   LED_type;
   12          volatile uint16 process_time,buz_time,key_holdtime;
-  13          volatile uint16 Time_us, Time_ms,Time_sec,Time_min,Time_cnt;
+  13          volatile uint16 Time_us, Time_ms,Time_sec,Time_min,Time_cnt,power_refresh;
   14          volatile bit Timer_update,Beep, USPRAY_on, O3H2O_on,switch_update,status_update;
   15          
   16          
@@ -28,11 +28,11 @@ line level    source
   19          {
   20   1      
   21   1        
-  22   1        
-  23   1      //  
-  24   1      //  SET_INPUT(IO_VCC_det);                
-  25   1      //  if ((VCC_det==0)&&(Time_ms<500)==0) VCC_EN=0; else  VCC_EN=1;
-  26   1      //    
+  22   1        if (((power_refresh%20)==0)&&((Time_ms<500)==0)) 
+  23   1        {
+  24   2          
+  25   2          VCC_EN=0;
+  26   2        } else VCC_EN=1;
   27   1        
   28   1      }
   29          
@@ -62,205 +62,207 @@ line level    source
   53   4                          state=standby_mode;
   54   4                          LED_type=0;
   55   4                          break;
-C51 COMPILER V9.54   MAIN                                                                  03/12/2021 01:42:55 PAGE 2   
+C51 COMPILER V9.54   MAIN                                                                  03/12/2021 02:10:21 PAGE 2   
 
   56   4              case 1:     
   57   4                          
   58   4                          state=O3H2O_mode;
-  59   4                          LED_type=2;
-  60   4                          break;
-  61   4              case 2:     
-  62   4                          
-  63   4                          state=USPRAY_mode;
-  64   4                          LED_type=1 ;
-  65   4                          break;
-  66   4                } 
-  67   3        
-  68   3            
-  69   3              EX0=0;
-  70   3              switch_update=0;
-  71   3              status_update=0;  
-  72   3              delay_ms(200);
-  73   3              key_holdtime=0;
-  74   3              }   
-  75   2            }
-  76   1         
-  77   1          
-  78   1      
-  79   1      
-  80   1        
-  81   1      }
-  82                
-  83              
-  84          
-  85            
-  86            
+  59   4                          power_refresh=0;
+  60   4                          LED_type=2;
+  61   4                          break;
+  62   4              case 2:     
+  63   4                          
+  64   4                          state=USPRAY_mode;
+  65   4                          power_refresh=0;
+  66   4                          LED_type=1 ;
+  67   4                          break;
+  68   4                } 
+  69   3        
+  70   3            
+  71   3              EX0=0;
+  72   3              switch_update=0;
+  73   3              status_update=0;  
+  74   3              delay_ms(200);
+  75   3              key_holdtime=0;
+  76   3              }   
+  77   2            }
+  78   1         
+  79   1          
+  80   1      
+  81   1      
+  82   1        
+  83   1      }
+  84                
+  85              
+  86          
   87            
-  88          
-  89          void State_process()
-  90          {
-  91   1          switch (state)
-  92   1          {
-  93   2        
-  94   2        case standby_mode:    
-  95   2                          
-  96   2                          VCC_EN=1;
-  97   2                       
-  98   2                          O3H2O_on=0;
-  99   2                          USPRAY_on  = 0;
- 100   2                          switch_state=0;
- 101   2                        
- 102   2                          next_state=standby_mode;
- 103   2        
- 104   2                           
+  88            
+  89            
+  90          
+  91          void State_process()
+  92          {
+  93   1          switch (state)
+  94   1          {
+  95   2        
+  96   2        case standby_mode:    
+  97   2                          
+  98   2                          VCC_EN=1;
+  99   2                       
+ 100   2                          O3H2O_on=0;
+ 101   2                          USPRAY_on  = 0;
+ 102   2                          switch_state=0;
+ 103   2                        
+ 104   2                          next_state=standby_mode;
  105   2        
- 106   2        
- 107   2                          break;
+ 106   2                           
+ 107   2        
  108   2        
- 109   2          case USPRAY_mode:       
- 110   2                          
- 111   2                          DCDC_enable();  
+ 109   2                          break;
+ 110   2        
+ 111   2          case USPRAY_mode:       
  112   2                          
- 113   2                          O3H2O_on=0;
- 114   2                          USPRAY_on=1;
- 115   2                          
- 116   2                          if (Time_min>=time_T0) 
- 117   2                          {
-C51 COMPILER V9.54   MAIN                                                                  03/12/2021 01:42:55 PAGE 3   
+ 113   2                        
+ 114   2                          
+ 115   2                          O3H2O_on=0;
+ 116   2                          USPRAY_on=1;
+ 117   2                          
+C51 COMPILER V9.54   MAIN                                                                  03/12/2021 02:10:21 PAGE 3   
 
- 118   3                            Time_min=0;
- 119   3                            next_state=standby_mode; 
- 120   3                          }else next_state=USPRAY_mode;
- 121   2                          if (USB==1) next_state=standby_mode;
- 122   2                          break;
- 123   2        
- 124   2        
- 125   2          case O3H2O_mode:        
- 126   2                          
- 127   2                          DCDC_enable();  
+ 118   2                          if (Time_min>=time_T0) 
+ 119   2                          {
+ 120   3                            Time_min=0;
+ 121   3                            next_state=standby_mode; 
+ 122   3                          }else next_state=USPRAY_mode;
+ 123   2                          if (USB==1) next_state=standby_mode;
+ 124   2                          break;
+ 125   2        
+ 126   2        
+ 127   2          case O3H2O_mode:        
  128   2                          
- 129   2                          O3H2O_on=1;
- 130   2                          USPRAY_on=1;
- 131   2                          
- 132   2                        
- 133   2                          next_state=O3H2O_mode;
- 134   2                          if (USB==1) next_state=standby_mode;
- 135   2                          break;
- 136   2          
- 137   2        
- 138   2          }
- 139   1          
- 140   1      state=next_state;
- 141   1      
- 142   1      
- 143   1      }
- 144          
- 145          
+ 129   2                        
+ 130   2                          
+ 131   2                          O3H2O_on=1;
+ 132   2                          USPRAY_on=1;
+ 133   2                          
+ 134   2                        
+ 135   2                          next_state=O3H2O_mode;
+ 136   2                          if (USB==1) next_state=standby_mode;
+ 137   2                          break;
+ 138   2          
+ 139   2        
+ 140   2          }
+ 141   1          
+ 142   1      state=next_state;
+ 143   1      
+ 144   1      
+ 145   1      }
  146          
  147          
  148          
  149          
  150          
  151          
- 152          void main(void) 
- 153          {
- 154   1        IO_Init();
- 155   1        InitTime0();
- 156   1        InitTime2();
- 157   1         
- 158   1        InitExtInterrupt();
- 159   1      
- 160   1        InitParameter() ;
- 161   1        
- 162   1      
- 163   1      
- 164   1        while(1) 
- 165   1        { 
- 166   2        
- 167   2          if (USPRAY_on==0) USPRAY=0;
- 168   2          if (status_update==1)
- 169   2            {
- 170   3              SET_INPUT(IO_LED);
- 171   3              Check_switch();
- 172   3              State_process();
- 173   3              Process_USPRAY();
- 174   3              Process_O3H2O(); 
- 175   3              Process_sleep();
- 176   3              EX0=1;                   //complete the process and enable external SW interrupt
- 177   3            }
- 178   2          
- 179   2          Process_Timer();
-C51 COMPILER V9.54   MAIN                                                                  03/12/2021 01:42:55 PAGE 4   
+ 152          
+ 153          
+ 154          void main(void) 
+ 155          {
+ 156   1        IO_Init();
+ 157   1        InitTime0();
+ 158   1        InitTime2();
+ 159   1         
+ 160   1        InitExtInterrupt();
+ 161   1      
+ 162   1        InitParameter() ;
+ 163   1        
+ 164   1      
+ 165   1      
+ 166   1        while(1) 
+ 167   1        { 
+ 168   2        
+ 169   2          if (USPRAY_on==0) USPRAY=0;
+ 170   2          if (status_update==1)
+ 171   2            {
+ 172   3              SET_INPUT(IO_LED);
+ 173   3              Check_switch();
+ 174   3              State_process();
+ 175   3              Process_USPRAY();
+ 176   3              Process_O3H2O(); 
+ 177   3              Process_sleep();
+ 178   3              EX0=1;                   //complete the process and enable external SW interrupt
+ 179   3            }
+C51 COMPILER V9.54   MAIN                                                                  03/12/2021 02:10:21 PAGE 4   
 
- 180   2          Process_LED();
- 181   2          
- 182   2        } 
- 183   1      }
- 184          
- 185          void int0() interrupt 0
- 186          {
- 187   1      
- 188   1         if ((switch_update==0)&&(SW==1)) 
- 189   1         {
- 190   2            Time_us=0;
- 191   2            Time_ms=0;
- 192   2            Time_sec=0;
- 193   2            Time_min=0;
- 194   2            
- 195   2            key_holdtime=0;
- 196   2            switch_update=1;
- 197   2            status_update=1;
- 198   2         }
- 199   1      }
- 200          
- 201          void int1() interrupt 2
- 202          {
- 203   1       
- 204   1      
- 205   1      }
- 206           
- 207          void timer0() interrupt 1
- 208          {
- 209   1      
- 210   1      if (switch_update==1) 
- 211   1      {
- 212   2        key_holdtime++;
- 213   2        if (key_holdtime>5000) status_update=0;
- 214   2        
- 215   2        
+ 180   2          if  (switch_state==1) DCDC_enable();
+ 181   2          Process_Timer();
+ 182   2          Process_LED();
+ 183   2          
+ 184   2        } 
+ 185   1      }
+ 186          
+ 187          void int0() interrupt 0
+ 188          {
+ 189   1      
+ 190   1         if ((switch_update==0)&&(SW==1)) 
+ 191   1         {
+ 192   2            Time_us=0;
+ 193   2            Time_ms=0;
+ 194   2            Time_sec=0;
+ 195   2            Time_min=0;
+ 196   2            
+ 197   2            key_holdtime=0;
+ 198   2            switch_update=1;
+ 199   2            status_update=1;
+ 200   2         }
+ 201   1      }
+ 202          
+ 203          void int1() interrupt 2
+ 204          {
+ 205   1       
+ 206   1      
+ 207   1      }
+ 208           
+ 209          void timer0() interrupt 1
+ 210          {
+ 211   1      
+ 212   1      if (switch_update==1) 
+ 213   1      {
+ 214   2        key_holdtime++;
+ 215   2        if (key_holdtime>5000) status_update=0;
  216   2        
- 217   2          
- 218   2          }
- 219   1         
- 220   1        Timer_update=1;
- 221   1      }
- 222          
- 223          
+ 217   2        
+ 218   2        
+ 219   2          
+ 220   2          }
+ 221   1         
+ 222   1        Timer_update=1;
+ 223   1      }
  224          
  225          
- 226          void timer2() interrupt 12  
- 227          {
- 228   1        
- 229   1      //  if (USPRAY_on==1)
- 230   1      //  {
- 231   1          USPRAY=~USPRAY;
- 232   1          
- 233   1      //  }
- 234   1      //  else USPRAY=0;
- 235   1        
- 236   1      }
- 237          
+ 226          
+ 227          
+ 228          void timer2() interrupt 12  
+ 229          {
+ 230   1        
+ 231   1      //  if (USPRAY_on==1)
+ 232   1      //  {
+ 233   1          USPRAY=~USPRAY;
+ 234   1          
+ 235   1      //  }
+ 236   1      //  else USPRAY=0;
+ 237   1        
+ 238   1      }
+ 239          
 
+
+C51 COMPILER V9.54   MAIN                                                                  03/12/2021 02:10:21 PAGE 5   
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    386    ----
-C51 COMPILER V9.54   MAIN                                                                  03/12/2021 01:42:55 PAGE 5   
-
+   CODE SIZE        =    443    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
    DATA SIZE        =   ----    ----
-   IDATA SIZE       =     20    ----
+   IDATA SIZE       =     22    ----
    BIT SIZE         =      6    ----
    EDATA SIZE       =   ----    ----
    HDATA SIZE       =   ----    ----
