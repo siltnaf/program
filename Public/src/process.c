@@ -19,7 +19,7 @@ void    LoadPWM(uint16 i)
     EA = 0;
     PWM_high = i;   //
     PWM_low  = j;   //
-		AUXR |=  (1<<4);    //start timer2
+		PWM_FAN=0;
 		EA=1;
 }
 

@@ -7,8 +7,8 @@
 #define LED       		(P31)           //DC output for LED
 #define SW 						(P32)
 #define USB_det			  (P33)
-#define PWM_FAN      			(P34)
-#define UVC						(P35)          //output for ION
+#define PWM_FAN      	(P34)
+#define TURBO					(P35)          //output for ION
 
 
 
@@ -16,8 +16,8 @@
 #define IO_LED          P3_1
 #define IO_SW						P3_2
 #define IO_USB_det		  P3_3
-#define IO_PWM_FAN      	  P3_4
-#define IO_UVC			    P3_5
+#define IO_PWM_FAN      P3_4
+#define IO_TURBO		    P3_5
 
 
 
@@ -28,7 +28,8 @@
 
 
 #define     PWM_DUTY        6000            //??PWM???,????????,????24.576MHZ???,?PWM???6000HZ?
-
+#define 		PWM_DUTY1				4000
+#define     PWM_DUTY2				5000
 #define     PWM_HIGH_MIN    32              //??PWM????????????????
 #define     PWM_HIGH_MAX    (PWM_DUTY-PWM_HIGH_MIN) //??PWM????????????????
 

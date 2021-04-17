@@ -18,13 +18,13 @@ void Enable_power()
 {
 	
 
-	if (((power_refresh%20)==0)&&((Time_ms<500)==0)) 
-	{
-		
-		VCC_EN=0;
-	} else VCC_EN=1;
-		 
+if (((power_refresh%20)==0)&&((Time_ms<500)==0)) 
+{
 	
+	VCC_EN=0;
+} else VCC_EN=1;
+		 
+ 
 	
 }
 
@@ -47,9 +47,9 @@ void Check_switch()
 				{
 				switch_state++;
 				if (switch_state>4) switch_state=0;
+				
 	
-	
-	
+			 
 	
 			switch (switch_state)
 			{
@@ -63,9 +63,20 @@ void Check_switch()
 
 				case 1:			power_refresh=0;
 										LED_type=4;
-										
-										PWM = (PWM_DUTY >>3);    // 12.5% duty
-										LoadPWM(PWM);          
+										if (USB_det==0)
+												{
+													PWM = 3000 ;    // 50% duty
+													LoadPWM(PWM);
+													SET_CMOS(IO_TURBO);
+													TURBO=1;
+												}
+											else 
+												{
+													PWM=2000;
+													LoadPWM(PWM);
+													SET_CMOS(IO_TURBO);
+													TURBO=0;
+												}
 				
 										state=quite_mode;
 										break;
@@ -73,25 +84,43 @@ void Check_switch()
 				case 2: 		
 										power_refresh=0;
 									 	LED_type=1;
-										PWM = (PWM_DUTY >>1);    // 25% duty
-										LoadPWM(PWM);     
+										if (USB_det==0)
+											{
+												PWM = 5000 ;    // 50% duty
+												LoadPWM(PWM);
+												SET_CMOS(IO_TURBO);
+												TURBO=1;
+											}
+											else
+											{
+												PWM = 4000 ;    // 50% duty
+												LoadPWM(PWM);
+												SET_CMOS(IO_TURBO);
+												TURBO=0;
+												
+											}
 										state=speed0_mode;
 										break;
 				case 3: 		
 										power_refresh=0;
 									 	LED_type=2;
-										PWM = (PWM_DUTY );    // 50% duty
-										LoadPWM(PWM);     
+				
+										 
+										AUXR &= ~(1<<4);    //stop counter
+										PWM_FAN=1;  
+										SET_INPUT(IO_TURBO);
+										 
 										state=speed1_mode;
 										break;
 				
 				case 4: 		
 										power_refresh=0;
-										 LED_type=3;
-										
-										AUXR &= ~(1<<4);    //stop timer2 counter PWM
+										LED_type=3;
+										AUXR &= ~(1<<4);    //stop counter
 										PWM_FAN=1;  
-				
+										SET_CMOS(IO_TURBO);
+										TURBO=0;
+										
 										state=speed2_mode;
 										break;
 				
@@ -130,7 +159,7 @@ void State_process()
 	
 	case standby_mode:    
 										LED_type=0;
-										UVC=0;
+									 
 										switch_state=0;
 										AUXR &= ~(1<<4);    //stop timer2 counter PWM
 										PWM_FAN=0;
@@ -140,9 +169,10 @@ void State_process()
 	
 	case quite_mode:
 										Enable_power();
-										if (USB_det==1) UVC=1;
-									
-								 
+	
+										AUXR |=  (1<<4);    //start timer2
+	
+	
 										next_state=quite_mode;
 										break;
 	
@@ -150,23 +180,26 @@ void State_process()
 	case speed0_mode:				
 										
 										Enable_power();
-										if (USB_det==1) UVC=1; 
 									 
+	
+										AUXR |=  (1<<4);    //start timer2
 										next_state=speed0_mode;
 										break;
 	
 	case speed1_mode:				
 										
 										Enable_power();
-										if (USB_det==1) UVC=1;
+									 
+									
+									
 										next_state=speed1_mode;
 										break;
 	
 	case speed2_mode:			
 										Enable_power();
-										if (USB_det==1) UVC=1;
+									 
 
-								 
+									 
 										
 									 next_state=speed2_mode;
 										break;
@@ -207,6 +240,7 @@ void main(void)
 	{ 
 	
 
+	 
 		
 		Check_switch();
 		State_process();

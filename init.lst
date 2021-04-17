@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   INIT                                                                  04/18/2021 00:22:15 PAGE 1   
+C51 COMPILER V9.54   INIT                                                                  04/18/2021 07:16:34 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE INIT
@@ -20,16 +20,16 @@ line level    source
   10          {
   11   1        
   12   1        //                      P3M1   P3M0
-  13   1        //P30(VCC_EN)->IO         0      0
+  13   1        //P30(VCC_EN)->IO         0      1
   14   1        //P31(LED)->CMOS          0      1
   15   1        //P32(SW)->I              1      0       
   16   1        //P33(USB_det)->I         1      0
-  17   1        //P34(PWM_FAN)->CMOS          0      1
+  17   1        //P34(PWM_FAN)->CMOS      0      1
   18   1        //P35(UVC)->CMOS          0      1
   19   1        
   20   1        
   21   1        P3M1 = 0x0c;
-  22   1        P3M0 = 0x32;
+  22   1        P3M0 = 0x33;
   23   1        
   24   1      }
   25          
@@ -52,7 +52,7 @@ line level    source
   42   1          IE2  |=  (1<<2);    //enable timer2 interrupt
   43   1          AUXR |=  (1<<2);    //set 1T
   44   1          AUXR &= ~(1<<3);    //set timer mode
-  45   1          INT_CLKO |=  0x04;  //output clock
+  45   1      //    INT_CLKO |=  0x04;  //output clock
   46   1      
   47   1          T2H = 0;
   48   1          T2L = 0;
@@ -62,7 +62,7 @@ line level    source
   52   1              
   53   1        
   54   1        
-C51 COMPILER V9.54   INIT                                                                  04/18/2021 00:22:15 PAGE 2   
+C51 COMPILER V9.54   INIT                                                                  04/18/2021 07:16:34 PAGE 2   
 
   55   1      }
   56          
@@ -98,16 +98,17 @@ line level    source
   86   1        Time_min=0;
   87   1      
   88   1        PWM_FAN=0;
-  89   1        
-  90   1        switch_update=0;
-  91   1        key_holdtime=0;
-  92   1        Timer_update=0;
-  93   1        EA=1;
-  94   1      }
+  89   1        SET_INPUT(IO_TURBO);
+  90   1        
+  91   1        switch_update=0;
+  92   1        key_holdtime=0;
+  93   1        Timer_update=0;
+  94   1        EA=1;
+  95   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    101    ----
+   CODE SIZE        =    104    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

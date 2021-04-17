@@ -10,16 +10,16 @@ void IO_Init(void)
 {
   
 	//               			  P3M1   P3M0
-	//P30(VCC_EN)->IO       	0      0
+	//P30(VCC_EN)->IO       	0      1
 	//P31(LED)->CMOS  				0      1
 	//P32(SW)->I	   					1			 0       
 	//P33(USB_det)->I	    		1      0
-	//P34(PWM_FAN)->CMOS      		0      1
+	//P34(PWM_FAN)->CMOS    	0      1
 	//P35(UVC)->CMOS       		0      1
 	
 	
 	P3M1 = 0x0c;
-  P3M0 = 0x32;
+  P3M0 = 0x33;
 	
 }
 
@@ -42,7 +42,7 @@ void InitTime2(void)
     IE2  |=  (1<<2);    //enable timer2 interrupt
     AUXR |=  (1<<2);    //set 1T
     AUXR &= ~(1<<3);    //set timer mode
-    INT_CLKO |=  0x04;  //output clock
+//    INT_CLKO |=  0x04;  //output clock
 
     T2H = 0;
     T2L = 0;
@@ -86,6 +86,7 @@ void InitParameter(void )
 	Time_min=0;
 
 	PWM_FAN=0;
+	SET_INPUT(IO_TURBO);
 	
 	switch_update=0;
 	key_holdtime=0;
