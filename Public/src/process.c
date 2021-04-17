@@ -8,6 +8,25 @@
 
 
 
+void    LoadPWM(uint16 i)
+{
+    uint16 j;
+		AUXR &= ~(1<<4);    //stop counter
+    if(i > PWM_HIGH_MAX)        i = PWM_HIGH_MAX;   //max range for PWM
+    if(i < PWM_HIGH_MIN)        i = PWM_HIGH_MIN;   //min range for PWM
+    j = 65536UL - PWM_DUTY + i; //low value for PWM
+    i = 65536UL - i;            //high value for PWM
+    EA = 0;
+    PWM_high = i;   //
+    PWM_low  = j;   //
+		AUXR |=  (1<<4);    //start timer2
+		EA=1;
+}
+
+
+
+
+
 
 void Process_Timer()
 {

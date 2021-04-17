@@ -1,9 +1,9 @@
-C51 COMPILER V9.54   INIT                                                                  01/25/2021 08:21:37 PAGE 1   
+C51 COMPILER V9.54   INIT                                                                  04/18/2021 00:22:15 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE INIT
 OBJECT MODULE PLACED IN init.obj
-COMPILER INVOKED BY: c:\Keil_v5\C51\BIN\C51.EXE Public\src\init.c OMF2 ROM(COMPACT) OPTIMIZE(8,SPEED) BROWSE DEBUG PRINT
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE Public\src\init.c OMF2 ROM(COMPACT) OPTIMIZE(8,SPEED) BROWSE DEBUG PRINT
                     -(.\init.lst) TABS(2) OBJECT(init.obj)
 
 line level    source
@@ -23,13 +23,13 @@ line level    source
   13   1        //P30(VCC_EN)->IO         0      0
   14   1        //P31(LED)->CMOS          0      1
   15   1        //P32(SW)->I              1      0       
-  16   1        //P33(SPEED0)->CMOS         0      1
-  17   1        //P34(SPEED1)->CMOS       0      1
-  18   1        //P35(SPEED2)->CMOS       0      0
+  16   1        //P33(USB_det)->I         1      0
+  17   1        //P34(PWM_FAN)->CMOS          0      1
+  18   1        //P35(UVC)->CMOS          0      1
   19   1        
   20   1        
-  21   1        P3M1 = 0x04;
-  22   1        P3M0 = 0x1a;
+  21   1        P3M1 = 0x0c;
+  22   1        P3M0 = 0x32;
   23   1        
   24   1      }
   25          
@@ -48,58 +48,66 @@ line level    source
   38              
   39          void InitTime2(void)
   40          {
-  41   1          T2L=T2KHZ;        
-  42   1          T2H=T2KHZ>>8;      
-  43   1      
-  44   1          AUXR|=0X10;     
-  45   1          IE2|=0X04;                                                                    
-  46   1              
-  47   1        
-  48   1        
-  49   1      }
-  50          
-  51          
-  52          
-  53          
-  54          void InitExtInterrupt (void)
-C51 COMPILER V9.54   INIT                                                                  01/25/2021 08:21:37 PAGE 2   
+  41   1          AUXR &= ~(1<<4);    //stop counter
+  42   1          IE2  |=  (1<<2);    //enable timer2 interrupt
+  43   1          AUXR |=  (1<<2);    //set 1T
+  44   1          AUXR &= ~(1<<3);    //set timer mode
+  45   1          INT_CLKO |=  0x04;  //output clock
+  46   1      
+  47   1          T2H = 0;
+  48   1          T2L = 0;
+  49   1          AUXR |=  (1<<4);    //start timer2
+  50   1      
+  51   1                                                             
+  52   1              
+  53   1        
+  54   1        
+C51 COMPILER V9.54   INIT                                                                  04/18/2021 00:22:15 PAGE 2   
 
-  55          {
-  56   1      
-  57   1        IT0=0;    //detect both falling and rising edge of signal (AC signal)
-  58   1        EX0=1;
-  59   1        PX0=1;
-  60   1      //  IT1=0;    //detect both falling and rising edge of signal  (H1 signal) only rising edge 
-  61   1      //  EX1=1;    //enable INT1
-  62   1      //  PX1=1;
-  63   1      //  INT_CLKO |= 0x10;  //enable INT2, falling edge 
-  64   1        
-  65   1      }
-  66          
-  67          
-  68          
-  69          
-  70          void InitParameter(void )
-  71          {
-  72   1       
-  73   1        state=standby_mode;
-  74   1        switch_state=0;
-  75   1        process_time=0;
-  76   1        
-  77   1        Time_us=0;
-  78   1        Time_ms=0;
-  79   1        Time_sec=0;
-  80   1        Time_min=0;
-  81   1      
-  82   1        switch_update=0;
-  83   1        key_holdtime=0;
-  84   1        Timer_update=0;
-  85   1        EA=1;
-  86   1      }
+  55   1      }
+  56          
+  57          
+  58          
+  59          
+  60          void InitExtInterrupt (void)
+  61          {
+  62   1      
+  63   1        IT0=0;    //detect both falling and rising edge of signal (AC signal)
+  64   1        EX0=1;
+  65   1        PX0=1;
+  66   1      //  IT1=0;    //detect both falling and rising edge of signal  (H1 signal) only rising edge 
+  67   1      //  EX1=1;    //enable INT1
+  68   1      //  PX1=1;
+  69   1      //  INT_CLKO |= 0x10;  //enable INT2, falling edge 
+  70   1        
+  71   1      }
+  72          
+  73          
+  74          
+  75          
+  76          void InitParameter(void )
+  77          {
+  78   1       
+  79   1        state=standby_mode;
+  80   1        switch_state=0;
+  81   1        process_time=0;
+  82   1        
+  83   1        Time_us=0;
+  84   1        Time_ms=0;
+  85   1        Time_sec=0;
+  86   1        Time_min=0;
+  87   1      
+  88   1        PWM_FAN=0;
+  89   1        
+  90   1        switch_update=0;
+  91   1        key_holdtime=0;
+  92   1        Timer_update=0;
+  93   1        EA=1;
+  94   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =     88    ----
+   CODE SIZE        =    101    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

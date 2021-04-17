@@ -10,7 +10,7 @@
 volatile uint8 state,next_state,switch_state;
 volatile uint8   LED_type;
 volatile uint16 process_time,buz_time,key_holdtime;
-volatile uint16 Time_us, Time_ms,Time_sec,Time_min,power_refresh;
+volatile uint16 Time_us, Time_ms,Time_sec,Time_min,power_refresh,PWM_low,PWM_high,PWM;
 volatile bit Timer_update,UV_on,switch_update,refresh;
 
 
@@ -56,29 +56,42 @@ void Check_switch()
 				case 0:			
 					
 										LED_type=0;
+										AUXR &= ~(1<<4);    //stop timer2 counter PWM
+										PWM_FAN=0;
 										state=standby_mode;
 										break;
 
 				case 1:			power_refresh=0;
 										LED_type=4;
+										
+										PWM = (PWM_DUTY >>3);    // 12.5% duty
+										LoadPWM(PWM);          
+				
 										state=quite_mode;
 										break;
 				
 				case 2: 		
 										power_refresh=0;
 									 	LED_type=1;
+										PWM = (PWM_DUTY >>1);    // 25% duty
+										LoadPWM(PWM);     
 										state=speed0_mode;
 										break;
 				case 3: 		
 										power_refresh=0;
 									 	LED_type=2;
-				
+										PWM = (PWM_DUTY );    // 50% duty
+										LoadPWM(PWM);     
 										state=speed1_mode;
 										break;
 				
 				case 4: 		
 										power_refresh=0;
 										 LED_type=3;
+										
+										AUXR &= ~(1<<4);    //stop timer2 counter PWM
+										PWM_FAN=1;  
+				
 										state=speed2_mode;
 										break;
 				
@@ -116,34 +129,20 @@ void State_process()
 		{
 	
 	case standby_mode:    
-										
-										SPEED0=0;
 										LED_type=0;
-									  SPEED0=0;
-										SPEED1=0;
+										UVC=0;
 										switch_state=0;
-										SET_INPUT(IO_SPEED2);
+										AUXR &= ~(1<<4);    //stop timer2 counter PWM
+										PWM_FAN=0;
 										next_state=standby_mode;
-	
-										 
-	
-	
 										break;
 	
 	
 	case quite_mode:
-									Enable_power();
+										Enable_power();
+										if (USB_det==1) UVC=1;
 									
-										if (Time_min%2==0) 
-											{
-											SPEED0=1;
-											
-											}
-												else SPEED0=0;
-										
-									
-										SPEED1=0;
-										SET_INPUT(IO_SPEED2);
+								 
 										next_state=quite_mode;
 										break;
 	
@@ -151,10 +150,7 @@ void State_process()
 	case speed0_mode:				
 										
 										Enable_power();
-										 
-										SPEED0=1;
-										SPEED1=0;
-										SET_INPUT(IO_SPEED2);
+										if (USB_det==1) UVC=1; 
 									 
 										next_state=speed0_mode;
 										break;
@@ -162,19 +158,13 @@ void State_process()
 	case speed1_mode:				
 										
 										Enable_power();
-										SPEED0=1;
-										SPEED1=1;
-										SET_INPUT(IO_SPEED2);
-									 
+										if (USB_det==1) UVC=1;
 										next_state=speed1_mode;
 										break;
 	
 	case speed2_mode:			
 										Enable_power();
-									 	SPEED0=1;
-										SPEED1=1;
-										SET_CMOS(IO_SPEED2);
-										SPEED2=0;
+										if (USB_det==1) UVC=1;
 
 								 
 										
@@ -210,6 +200,9 @@ void main(void)
 
 	InitParameter()	;
 
+	
+  
+	
 	while(1) 
 	{ 
 	
@@ -273,7 +266,19 @@ if (switch_update==1)
 
 void timer2() interrupt 12  
 {
-
+	PWM_FAN =~PWM_FAN;
+ if(PWM_FAN==1)
+    {
+				
+        T2H = (PWM_low >> 8);   //LED on time is 10% 
+        T2L =  PWM_low;
+    }
+    else
+    {
+			
+        T2H = (PWM_high >> 8);  //LED off time is 90%
+        T2L = PWM_high;
+    }
 		 
 }
 

@@ -6,24 +6,32 @@
 #define VCC_EN			  (P30)           //relay normal open 
 #define LED       		(P31)           //DC output for LED
 #define SW 						(P32)
-#define SPEED0			   		(P33)
-#define SPEED1      	(P34)
-#define SPEED2				(P35)          //output for ION
+#define USB_det			  (P33)
+#define PWM_FAN      			(P34)
+#define UVC						(P35)          //output for ION
 
 
 
 #define IO_VCC_EN       P3_0
 #define IO_LED          P3_1
 #define IO_SW						P3_2
-#define IO_SPEED0		    P3_3
-#define IO_SPEED1       P3_4
-#define IO_SPEED2       P3_5
+#define IO_USB_det		  P3_3
+#define IO_PWM_FAN      	  P3_4
+#define IO_UVC			    P3_5
 
 
 
 #define MAIN_Fosc   12000000L
 #define T0_25MS        (65536- MAIN_Fosc/4000)     //1T mode Timer0
 #define T2KHZ       (65536- MAIN_Fosc/12/6000)     //Timer2
+
+
+
+#define     PWM_DUTY        6000            //??PWM???,????????,????24.576MHZ???,?PWM???6000HZ?
+
+#define     PWM_HIGH_MIN    32              //??PWM????????????????
+#define     PWM_HIGH_MAX    (PWM_DUTY-PWM_HIGH_MIN) //??PWM????????????????
+
 
 
 #define uint8 unsigned char idata
@@ -69,7 +77,7 @@
 extern volatile uint8 state,next_state,switch_state ;
 extern volatile uint16 process_time,key_holdtime;
 extern volatile uint8  LED_type ;
-extern volatile uint16 Time_us,Time_ms,Time_sec,Time_min,power_refresh;
+extern volatile uint16 Time_us,Time_ms,Time_sec,Time_min,power_refresh,PWM_low,PWM_high,PWM;
 extern volatile bit Timer_update,UV_on,switch_update;
 
 #endif
