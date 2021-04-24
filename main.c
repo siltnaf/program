@@ -170,6 +170,15 @@ void State_process()
 	case quite_mode:
 										Enable_power();
 	
+										if (USB_det==1)
+											{
+													PWM=2000;
+													LoadPWM(PWM);
+													SET_CMOS(IO_TURBO);
+													TURBO=0;
+											}
+				
+										
 										AUXR |=  (1<<4);    //start timer2
 	
 	
@@ -180,7 +189,18 @@ void State_process()
 	case speed0_mode:				
 										
 										Enable_power();
-									 
+									  if (USB_det==1)
+										{
+											
+												PWM = 4000 ;    // 50% duty
+												LoadPWM(PWM);
+												SET_CMOS(IO_TURBO);
+												TURBO=0;
+												
+											
+										}
+				
+										
 	
 										AUXR |=  (1<<4);    //start timer2
 										next_state=speed0_mode;
