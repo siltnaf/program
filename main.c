@@ -108,7 +108,7 @@ void State_process()
 										
 										DCDC_enable();	
 									
-										O3_level=1;
+										O3_level=0;
 										UV_on=1;
 										
 										if (Time_min>=time_T0) 
@@ -137,15 +137,18 @@ void State_process()
 										
 										DCDC_enable();
 										
-										O3_level=1;
 										UV_on=0;
 										
 										if (Time_min>=time_T2) 
 										{
-											LED_type=0;
-											Time_min=0;
-											next_state=O3_off_mode; 
-										}else next_state=O3_saving_mode;
+										  O3_level=1;
+											 
+										}else 
+										{
+											O3_level=0;
+										}
+										
+										next_state=O3_saving_mode;
 										
 										break;
 			

@@ -1,9 +1,9 @@
-C51 COMPILER V9.54   MAIN                                                                  03/02/2021 17:52:08 PAGE 1   
+C51 COMPILER V9.54   MAIN                                                                  05/04/2021 09:42:34 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
 OBJECT MODULE PLACED IN Main.OBJ
-COMPILER INVOKED BY: c:\Keil_v5\C51\BIN\C51.EXE Main.c OMF2 ROM(COMPACT) OPTIMIZE(8,SPEED) BROWSE DEBUG TABS(2)
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE Main.c OMF2 ROM(COMPACT) OPTIMIZE(8,SPEED) BROWSE DEBUG TABS(2)
 
 line level    source
 
@@ -62,7 +62,7 @@ line level    source
   53   3                          
   54   3                          state=O3_mode;
   55   3                          LED_type=1;   
-C51 COMPILER V9.54   MAIN                                                                  03/02/2021 17:52:08 PAGE 2   
+C51 COMPILER V9.54   MAIN                                                                  05/04/2021 09:42:34 PAGE 2   
 
   56   3              
   57   3                          break;
@@ -119,14 +119,14 @@ line level    source
  108   2                          
  109   2                          DCDC_enable();  
  110   2                        
- 111   2                          O3_level=1;
+ 111   2                          O3_level=0;
  112   2                          UV_on=1;
  113   2                          
  114   2                          if (Time_min>=time_T0) 
  115   2                          {
  116   3                            Time_min=0;
  117   3                            next_state=standby_mode; 
-C51 COMPILER V9.54   MAIN                                                                  03/02/2021 17:52:08 PAGE 3   
+C51 COMPILER V9.54   MAIN                                                                  05/04/2021 09:42:34 PAGE 3   
 
  118   3                          }else next_state=uv_mode;
  119   2                          break;
@@ -150,152 +150,155 @@ line level    source
  137   2                          
  138   2                          DCDC_enable();
  139   2                          
- 140   2                          O3_level=1;
- 141   2                          UV_on=0;
- 142   2                          
- 143   2                          if (Time_min>=time_T2) 
- 144   2                          {
- 145   3                            LED_type=0;
- 146   3                            Time_min=0;
- 147   3                            next_state=O3_off_mode; 
- 148   3                          }else next_state=O3_saving_mode;
- 149   2                          
- 150   2                          break;
- 151   2            
- 152   2          
- 153   2          
- 154   2          
- 155   2          case O3_off_mode:
- 156   2                          UV_on=0;
- 157   2                          
- 158   2                          O3_level=0;
- 159   2                         next_state=O3_off_mode;
+ 140   2                          UV_on=0;
+ 141   2                          
+ 142   2                          if (Time_min>=time_T2) 
+ 143   2                          {
+ 144   3                            O3_level=1;
+ 145   3                             
+ 146   3                          }else 
+ 147   2                          {
+ 148   3                            O3_level=0;
+ 149   3                          }
+ 150   2                          
+ 151   2                          next_state=O3_saving_mode;
+ 152   2                          
+ 153   2                          break;
+ 154   2            
+ 155   2          
+ 156   2          
+ 157   2          
+ 158   2          case O3_off_mode:
+ 159   2                          UV_on=0;
  160   2                          
- 161   2                          break;                
- 162   2           
- 163   2        
- 164   2      //    case O3_LED_mode:
- 165   2      //                    UV_on=0;
- 166   2      //                    LED_type=2;
- 167   2      //                    O3_level=0;
- 168   2      //                    
- 169   2      //                    if (Time_sec>=1)
- 170   2      //                      {
- 171   2      //                      LED_type=0;
- 172   2      //                      next_state=O3_off_mode;
- 173   2      //                      } else next_state=O3_LED_mode;
- 174   2      //                    if (Time_min>=time_T3) 
- 175   2      //                      {
- 176   2      //                      Time_min=0;
- 177   2      //                      next_state=O3_saving_mode; 
- 178   2      //                      }
- 179   2          }
-C51 COMPILER V9.54   MAIN                                                                  03/02/2021 17:52:08 PAGE 4   
+ 161   2                          O3_level=0;
+ 162   2                         next_state=O3_off_mode;
+ 163   2                          
+ 164   2                          break;                
+ 165   2           
+ 166   2        
+ 167   2      //    case O3_LED_mode:
+ 168   2      //                    UV_on=0;
+ 169   2      //                    LED_type=2;
+ 170   2      //                    O3_level=0;
+ 171   2      //                    
+ 172   2      //                    if (Time_sec>=1)
+ 173   2      //                      {
+ 174   2      //                      LED_type=0;
+ 175   2      //                      next_state=O3_off_mode;
+ 176   2      //                      } else next_state=O3_LED_mode;
+ 177   2      //                    if (Time_min>=time_T3) 
+ 178   2      //                      {
+ 179   2      //                      Time_min=0;
+C51 COMPILER V9.54   MAIN                                                                  05/04/2021 09:42:34 PAGE 4   
 
- 180   1          
- 181   1      state=next_state;
- 182   1      
- 183   1      
- 184   1      }
- 185          
- 186          
- 187          
+ 180   2      //                      next_state=O3_saving_mode; 
+ 181   2      //                      }
+ 182   2          }
+ 183   1          
+ 184   1      state=next_state;
+ 185   1      
+ 186   1      
+ 187   1      }
  188          
  189          
  190          
  191          
  192          
- 193          void main(void) 
- 194          {
- 195   1        IO_Init();
- 196   1        InitTime0();
- 197   1         
- 198   1        InitExtInterrupt();
- 199   1      
- 200   1        InitParameter() ;
- 201   1        
+ 193          
+ 194          
+ 195          
+ 196          void main(void) 
+ 197          {
+ 198   1        IO_Init();
+ 199   1        InitTime0();
+ 200   1         
+ 201   1        InitExtInterrupt();
  202   1      
- 203   1      
- 204   1        while(1) 
- 205   1        { 
- 206   2        
- 207   2      
- 208   2        
- 209   2          Check_switch();
- 210   2          State_process();
- 211   2          
- 212   2      
- 213   2          Process_Timer();
- 214   2         
- 215   2          Process_UV();
- 216   2          Process_LED();
+ 203   1        InitParameter() ;
+ 204   1        
+ 205   1      
+ 206   1      
+ 207   1        while(1) 
+ 208   1        { 
+ 209   2        
+ 210   2      
+ 211   2        
+ 212   2          Check_switch();
+ 213   2          State_process();
+ 214   2          
+ 215   2      
+ 216   2          Process_Timer();
  217   2         
- 218   2          Process_O3();
- 219   2          Process_sleep();
- 220   2      
- 221   2      
- 222   2          
- 223   2        } 
- 224   1      }
- 225          
- 226          void int0() interrupt 0
- 227          {
- 228   1      
- 229   1         if ((switch_update==0)&&(SW==1)) 
- 230   1         {
- 231   2            Time_us=0;
- 232   2            Time_ms=0;
- 233   2            Time_sec=0;
- 234   2            Time_min=0;
- 235   2            
- 236   2            key_holdtime=0;
- 237   2            switch_update=1;
- 238   2         }
- 239   1      }
- 240          
- 241          void int1() interrupt 2
-C51 COMPILER V9.54   MAIN                                                                  03/02/2021 17:52:08 PAGE 5   
+ 218   2          Process_UV();
+ 219   2          Process_LED();
+ 220   2         
+ 221   2          Process_O3();
+ 222   2          Process_sleep();
+ 223   2      
+ 224   2      
+ 225   2          
+ 226   2        } 
+ 227   1      }
+ 228          
+ 229          void int0() interrupt 0
+ 230          {
+ 231   1      
+ 232   1         if ((switch_update==0)&&(SW==1)) 
+ 233   1         {
+ 234   2            Time_us=0;
+ 235   2            Time_ms=0;
+ 236   2            Time_sec=0;
+ 237   2            Time_min=0;
+ 238   2            
+ 239   2            key_holdtime=0;
+ 240   2            switch_update=1;
+ 241   2         }
+C51 COMPILER V9.54   MAIN                                                                  05/04/2021 09:42:34 PAGE 5   
 
- 242          {
- 243   1       if (RC==0) 
- 244   1       {
- 245   2         Time_cnt++;
- 246   2         if (Time_cnt>=3)
- 247   2          {
- 248   3            Time_cnt=0;
- 249   3            Time_min++;
- 250   3          }
- 251   2       }
- 252   1      
- 253   1      }
- 254           
- 255          void timer0() interrupt 1
- 256          {
- 257   1      
- 258   1      if (switch_update==1) 
- 259   1      {
- 260   2        key_holdtime++;
- 261   2        
- 262   2        
- 263   2        
- 264   2          
- 265   2          }
- 266   1         
- 267   1        Timer_update=1;
- 268   1      }
- 269          
- 270          
- 271          
+ 242   1      }
+ 243          
+ 244          void int1() interrupt 2
+ 245          {
+ 246   1       if (RC==0) 
+ 247   1       {
+ 248   2         Time_cnt++;
+ 249   2         if (Time_cnt>=3)
+ 250   2          {
+ 251   3            Time_cnt=0;
+ 252   3            Time_min++;
+ 253   3          }
+ 254   2       }
+ 255   1      
+ 256   1      }
+ 257           
+ 258          void timer0() interrupt 1
+ 259          {
+ 260   1      
+ 261   1      if (switch_update==1) 
+ 262   1      {
+ 263   2        key_holdtime++;
+ 264   2        
+ 265   2        
+ 266   2        
+ 267   2          
+ 268   2          }
+ 269   1         
+ 270   1        Timer_update=1;
+ 271   1      }
  272          
- 273          void timer2() interrupt 12  
- 274          {
- 275   1        
- 276   1      }
- 277          
+ 273          
+ 274          
+ 275          
+ 276          void timer2() interrupt 12  
+ 277          {
+ 278   1        
+ 279   1      }
+ 280          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    429    ----
+   CODE SIZE        =    423    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

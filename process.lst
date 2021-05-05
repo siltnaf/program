@@ -1,9 +1,9 @@
-C51 COMPILER V9.54   PROCESS                                                               03/02/2021 17:52:08 PAGE 1   
+C51 COMPILER V9.54   PROCESS                                                               05/04/2021 09:42:34 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE PROCESS
 OBJECT MODULE PLACED IN process.obj
-COMPILER INVOKED BY: c:\Keil_v5\C51\BIN\C51.EXE Public\src\process.c OMF2 ROM(COMPACT) OPTIMIZE(8,SPEED) BROWSE DEBUG PR
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE Public\src\process.c OMF2 ROM(COMPACT) OPTIMIZE(8,SPEED) BROWSE DEBUG PR
                     -INT(.\process.lst) TABS(2) OBJECT(process.obj)
 
 line level    source
@@ -62,7 +62,7 @@ line level    source
   52          void Process_UV()
   53          {
   54   1        if (UV_on==1)
-C51 COMPILER V9.54   PROCESS                                                               03/02/2021 17:52:08 PAGE 2   
+C51 COMPILER V9.54   PROCESS                                                               05/04/2021 09:42:34 PAGE 2   
 
   55   1        {
   56   2          UV=1;
@@ -126,7 +126,7 @@ line level    source
  114   4                            SET_CMOS(IO_LED);
  115   4                            LED=0;
  116   4                          }
-C51 COMPILER V9.54   PROCESS                                                               03/02/2021 17:52:08 PAGE 3   
+C51 COMPILER V9.54   PROCESS                                                               05/04/2021 09:42:34 PAGE 3   
 
  117   3                          else 
  118   3                          {
@@ -190,7 +190,7 @@ line level    source
  176   2          
  177   2          SET_INPUT(IO_RC);
  178   2          
-C51 COMPILER V9.54   PROCESS                                                               03/02/2021 17:52:08 PAGE 4   
+C51 COMPILER V9.54   PROCESS                                                               05/04/2021 09:42:34 PAGE 4   
 
  179   2          PCON|=0x02;
  180   2          _nop_ ();
