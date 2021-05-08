@@ -16,11 +16,11 @@ void    LoadPWM(uint16 i)
     if(i < PWM_HIGH_MIN)        i = PWM_HIGH_MIN;   //min range for PWM
     j = 65536UL - PWM_DUTY + i; //low value for PWM
     i = 65536UL - i;            //high value for PWM
-    EA = 0;
+//    EA = 0;
     PWM_high = i;   //
     PWM_low  = j;   //
 		PWM_FAN=0;
-		EA=1;
+//		EA=1;
 }
 
 

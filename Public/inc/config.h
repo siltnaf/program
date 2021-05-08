@@ -79,6 +79,6 @@ extern volatile uint8 state,next_state,switch_state ;
 extern volatile uint16 process_time,key_holdtime;
 extern volatile uint8  LED_type ;
 extern volatile uint16 Time_us,Time_ms,Time_sec,Time_min,power_refresh,PWM_low,PWM_high,PWM;
-extern volatile bit Timer_update,UV_on,switch_update;
+extern volatile bit Timer_update,UV_on,switch_update,USB_check,USB_prev;
 
 #endif

@@ -11,7 +11,7 @@ volatile uint8 state,next_state,switch_state;
 volatile uint8   LED_type;
 volatile uint16 process_time,buz_time,key_holdtime;
 volatile uint16 Time_us, Time_ms,Time_sec,Time_min,power_refresh,PWM_low,PWM_high,PWM;
-volatile bit Timer_update,UV_on,switch_update,refresh;
+volatile bit Timer_update,UV_on,switch_update,refresh,USB_check,USB_prev;
 
 
 void Enable_power()
@@ -63,20 +63,9 @@ void Check_switch()
 
 				case 1:			power_refresh=0;
 										LED_type=4;
-										if (USB_det==0)
-												{
-													PWM = 3000 ;    // 50% duty
-													LoadPWM(PWM);
-													SET_CMOS(IO_TURBO);
-													TURBO=1;
-												}
-											else 
-												{
-													PWM=2000;
-													LoadPWM(PWM);
-													SET_CMOS(IO_TURBO);
-													TURBO=0;
-												}
+										USB_check=1;		
+				
+				
 				
 										state=quite_mode;
 										break;
@@ -84,21 +73,8 @@ void Check_switch()
 				case 2: 		
 										power_refresh=0;
 									 	LED_type=1;
-										if (USB_det==0)
-											{
-												PWM = 5000 ;    // 50% duty
-												LoadPWM(PWM);
-												SET_CMOS(IO_TURBO);
-												TURBO=1;
-											}
-											else
-											{
-												PWM = 4000 ;    // 50% duty
-												LoadPWM(PWM);
-												SET_CMOS(IO_TURBO);
-												TURBO=0;
-												
-											}
+										USB_check=1;		
+				
 										state=speed0_mode;
 										break;
 				case 3: 		
@@ -170,13 +146,34 @@ void State_process()
 	case quite_mode:
 										Enable_power();
 	
-										if (USB_det==1)
+										if ((USB_det!=USB_prev)&&(USB_check==0))
+										{
+											USB_check=1;
+											USB_prev=USB_det;
+										}
+											
+										if (USB_check==1)
+										{
+											USB_check=0;
+										
+											if (USB_det==1)
 											{
-													PWM=2000;
-													LoadPWM(PWM);
-													SET_CMOS(IO_TURBO);
-													TURBO=0;
+												PWM=2500;
+												LoadPWM(PWM);
+												SET_CMOS(IO_TURBO);
+												TURBO=0;
 											}
+											else
+											{
+												PWM=3750;
+												LoadPWM(PWM);
+												SET_CMOS(IO_TURBO);
+												TURBO=1;
+											}
+										}
+											
+					
+												
 				
 										
 										AUXR |=  (1<<4);    //start timer2
@@ -189,20 +186,36 @@ void State_process()
 	case speed0_mode:				
 										
 										Enable_power();
-									  if (USB_det==1)
+	
+										if ((USB_det!=USB_prev)&&(USB_check==0))
 										{
+											USB_check=1;
+											USB_prev=USB_det;
+										}
 											
-												PWM = 4000 ;    // 50% duty
+										if (USB_check==1)
+										{
+											USB_check=0;
+										
+											if (USB_det==1)
+											{
+												PWM=3600;
 												LoadPWM(PWM);
 												SET_CMOS(IO_TURBO);
 												TURBO=0;
-												
-											
+												AUXR |=  (1<<4);    //start timer2
+											}
+											else
+											{
+												AUXR &= ~(1<<4);    //stop counter
+												PWM_FAN=1;  
+												SET_CMOS(IO_TURBO);
+												TURBO=1;
+											}
 										}
-				
 										
 	
-										AUXR |=  (1<<4);    //start timer2
+								
 										next_state=speed0_mode;
 										break;
 	
