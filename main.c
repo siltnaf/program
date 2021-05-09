@@ -158,14 +158,14 @@ void State_process()
 										
 											if (USB_det==1)
 											{
-												PWM=2500;
+												PWM=3000;
 												LoadPWM(PWM);
 												SET_CMOS(IO_TURBO);
 												TURBO=0;
 											}
 											else
 											{
-												PWM=3750;
+												PWM=4500;
 												LoadPWM(PWM);
 												SET_CMOS(IO_TURBO);
 												TURBO=1;
@@ -197,21 +197,12 @@ void State_process()
 										{
 											USB_check=0;
 										
-											if (USB_det==1)
-											{
-												PWM=3600;
+						
+												PWM=5000;
 												LoadPWM(PWM);
-												SET_CMOS(IO_TURBO);
-												TURBO=0;
+												SET_INPUT(IO_TURBO);
 												AUXR |=  (1<<4);    //start timer2
-											}
-											else
-											{
-												AUXR &= ~(1<<4);    //stop counter
-												PWM_FAN=1;  
-												SET_CMOS(IO_TURBO);
-												TURBO=1;
-											}
+										
 										}
 										
 	
